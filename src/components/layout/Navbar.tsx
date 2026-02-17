@@ -1,67 +1,114 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import { NAV_LINKS, SECONDARY_LINKS } from "@/constants/site";
 import { cn } from "@/lib/utils";
 
+/* ------------------------------------------------
+   Animation variants
+   ------------------------------------------------ */
+const overlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.4, when: "beforeChildren", staggerChildren: 0.07 } },
+  exit: { opacity: 0, transition: { duration: 0.3, when: "afterChildren" } },
+};
+
+const menuItemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.2 } },
+};
+
+const dropdownVariants = {
+  hidden: { opacity: 0, y: 10, scale: 0.97 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+  exit: { opacity: 0, y: 8, scale: 0.97, transition: { duration: 0.18 } },
+};
+
+/* ------------------------------------------------
+   Helper: check if a pathname matches a link
+   ------------------------------------------------ */
+function isActive(pathname: string, href: string, children?: { href: string }[]): boolean {
+  if (href === "/") return pathname === "/";
+  if (pathname === href) return true;
+  if (children?.some((c) => pathname === c.href)) return true;
+  return pathname.startsWith(href + "/");
+}
+
+/* ------------------------------------------------
+   Navbar Component
+   ------------------------------------------------ */
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
 
+  /* Scroll listener */
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /* Lock body scroll when overlay is open */
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
 
+  /* Close overlay on route change */
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+
   return (
     <>
+      {/* ---- Top navigation bar ---- */}
       <nav
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out",
           scrolled
-            ? "bg-background/95 backdrop-blur-md border-b border-border"
-            : "bg-transparent"
+            ? "bg-background/90 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-black/20"
+            : "bg-transparent border-b border-transparent"
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
           {/* Logo */}
-          <Link href="/" className="group relative z-10">
-            <span className="font-heading text-2xl font-semibold tracking-[0.15em] text-text-primary uppercase">
+          <Link href="/" className="group relative z-10" onClick={closeMenu}>
+            <span className="font-heading text-2xl font-semibold tracking-[0.15em] text-text-primary uppercase transition-colors duration-300 group-hover:text-accent">
               Karsen Koltun
             </span>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop Nav — hidden below lg */}
           <div className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => {
+              const active = isActive(pathname, link.href, "children" in link ? link.children : undefined);
+
+              /* CTA button link */
               if (link.isButton) {
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="ml-4 rounded-none border border-accent bg-accent px-6 py-2.5 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+                    className={cn(
+                      "ml-4 rounded-none border border-accent px-6 py-2.5 text-xs font-medium tracking-[0.2em] uppercase transition-all duration-300",
+                      active
+                        ? "bg-accent text-background"
+                        : "bg-accent text-background hover:bg-transparent hover:text-accent"
+                    )}
                   >
                     {link.label}
                   </Link>
                 );
               }
 
+              /* Dropdown (About Karsen) */
               if ("children" in link && link.children) {
                 return (
                   <div
@@ -70,7 +117,12 @@ export default function Navbar() {
                     onMouseEnter={() => setAboutOpen(true)}
                     onMouseLeave={() => setAboutOpen(false)}
                   >
-                    <button className="flex items-center gap-1.5 px-4 py-2 text-xs font-medium tracking-[0.15em] text-text-secondary uppercase transition-colors duration-300 hover:text-text-primary">
+                    <button
+                      className={cn(
+                        "flex items-center gap-1.5 px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300",
+                        active ? "text-accent" : "text-text-secondary hover:text-text-primary"
+                      )}
+                    >
                       {link.label}
                       <ChevronDown
                         className={cn(
@@ -83,21 +135,27 @@ export default function Navbar() {
                     <AnimatePresence>
                       {aboutOpen && (
                         <motion.div
-                          initial={{ opacity: 0, y: 8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 8 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute left-0 top-full mt-1 min-w-[240px] border border-border bg-background-secondary/95 backdrop-blur-md p-2"
+                          variants={dropdownVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className="absolute left-0 top-full mt-1 min-w-[260px] border border-border bg-background-secondary/95 backdrop-blur-xl p-2 shadow-xl shadow-black/30"
                         >
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className="block px-4 py-3 text-xs tracking-[0.1em] text-text-secondary uppercase transition-colors duration-200 hover:text-accent hover:bg-background/50"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
+                          {link.children.map((child) => {
+                            const childActive = pathname === child.href;
+                            return (
+                              <Link
+                                key={child.href}
+                                href={child.href}
+                                className={cn(
+                                  "block px-4 py-3 text-xs tracking-[0.1em] uppercase transition-colors duration-200 hover:bg-background/50",
+                                  childActive ? "text-accent" : "text-text-secondary hover:text-accent"
+                                )}
+                              >
+                                {child.label}
+                              </Link>
+                            );
+                          })}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -105,22 +163,35 @@ export default function Navbar() {
                 );
               }
 
+              /* Standard link */
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 text-xs font-medium tracking-[0.15em] text-text-secondary uppercase transition-colors duration-300 hover:text-text-primary"
+                  className={cn(
+                    "px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300",
+                    active ? "text-accent" : "text-text-secondary hover:text-text-primary"
+                  )}
                 >
                   {link.label}
                 </Link>
               );
             })}
+
+            {/* Desktop phone number */}
+            <a
+              href="tel:+12501234567"
+              className="ml-5 flex items-center gap-2 text-xs tracking-[0.1em] text-text-muted transition-colors duration-300 hover:text-accent"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              <span>(250) 123-4567</span>
+            </a>
           </div>
 
-          {/* Hamburger */}
+          {/* Hamburger — visible only below lg */}
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="relative z-[60] p-2 text-text-primary transition-colors hover:text-accent"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="relative z-[60] p-2 text-text-primary transition-colors hover:text-accent lg:hidden"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -128,75 +199,110 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Full-screen overlay menu */}
+      {/* ---- Full-screen overlay menu (mobile / tablet) ---- */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             className="fixed inset-0 z-[55] bg-background/98 backdrop-blur-xl"
           >
-            <div className="flex h-full flex-col items-center justify-center">
+            <div className="flex h-full flex-col items-center justify-center overflow-y-auto py-24">
               <nav className="flex flex-col items-center gap-2">
-                {/* Primary Links */}
+                {/* Primary Links with staggered animation */}
                 {NAV_LINKS.map((link) => {
+                  const active = isActive(pathname, link.href, "children" in link ? link.children : undefined);
+
                   if ("children" in link && link.children) {
                     return (
-                      <div key={link.href} className="flex flex-col items-center">
+                      <motion.div
+                        key={link.href}
+                        variants={menuItemVariants}
+                        className="flex flex-col items-center"
+                      >
                         <Link
                           href={link.href}
-                          onClick={() => setMenuOpen(false)}
-                          className="py-3 font-heading text-4xl font-light tracking-wider text-text-primary transition-colors hover:text-accent md:text-5xl"
+                          onClick={closeMenu}
+                          className={cn(
+                            "py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-accent md:text-5xl",
+                            active ? "text-accent" : "text-text-primary"
+                          )}
                         >
                           {link.label}
                         </Link>
-                        <div className="flex flex-col items-center gap-1 mt-1 mb-2">
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              onClick={() => setMenuOpen(false)}
-                              className="py-1 text-sm tracking-[0.15em] text-text-muted uppercase transition-colors hover:text-accent"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
+                        <div className="mt-1 mb-2 flex flex-col items-center gap-1">
+                          {link.children.map((child) => {
+                            const childActive = pathname === child.href;
+                            return (
+                              <Link
+                                key={child.href}
+                                href={child.href}
+                                onClick={closeMenu}
+                                className={cn(
+                                  "py-1 text-sm tracking-[0.15em] uppercase transition-colors hover:text-accent",
+                                  childActive ? "text-accent" : "text-text-muted"
+                                )}
+                              >
+                                {child.label}
+                              </Link>
+                            );
+                          })}
                         </div>
-                      </div>
+                      </motion.div>
                     );
                   }
 
                   return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className={cn(
-                        "py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-accent md:text-5xl",
-                        link.isButton ? "text-accent" : "text-text-primary"
-                      )}
-                    >
-                      {link.label}
-                    </Link>
+                    <motion.div key={link.href} variants={menuItemVariants}>
+                      <Link
+                        href={link.href}
+                        onClick={closeMenu}
+                        className={cn(
+                          "block py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-accent md:text-5xl",
+                          link.isButton
+                            ? "text-accent"
+                            : active
+                              ? "text-accent"
+                              : "text-text-primary"
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
                   );
                 })}
 
                 {/* Divider */}
-                <div className="my-6 h-px w-16 bg-border" />
+                <motion.div variants={menuItemVariants} className="my-6 h-px w-16 bg-border" />
 
-                {/* Secondary Links */}
+                {/* Secondary Links with stagger */}
                 {SECONDARY_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="py-2 text-sm tracking-[0.2em] text-text-muted uppercase transition-colors hover:text-accent"
-                  >
-                    {link.label}
-                  </Link>
+                  <motion.div key={link.href} variants={menuItemVariants}>
+                    <Link
+                      href={link.href}
+                      onClick={closeMenu}
+                      className={cn(
+                        "block py-2 text-sm tracking-[0.2em] uppercase transition-colors hover:text-accent",
+                        pathname === link.href ? "text-accent" : "text-text-muted"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 ))}
+
+                {/* Phone in overlay */}
+                <motion.div variants={menuItemVariants} className="mt-8">
+                  <a
+                    href="tel:+12501234567"
+                    className="flex items-center gap-2 text-sm tracking-[0.1em] text-text-muted transition-colors hover:text-accent"
+                  >
+                    <Phone className="h-4 w-4" />
+                    (250) 123-4567
+                  </a>
+                </motion.div>
               </nav>
             </div>
           </motion.div>

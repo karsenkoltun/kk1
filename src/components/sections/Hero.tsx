@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const rotatingWords = [
@@ -20,6 +20,15 @@ const ctaButtons = [
 
 export default function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const headingY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.8], [0.6, 0.9]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,21 +38,50 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
-      {/* Background — placeholder gradient until real video/photos */}
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+    >
+      {/* Video background placeholder */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-background-tertiary via-background to-background" />
-        {/* Subtle animated grain overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-background-tertiary via-background to-background" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-xs tracking-[0.3em] text-text-muted/20 uppercase select-none">
+            Video Background
+          </span>
+        </div>
+        {/* Dark gradient overlay */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/60 to-background"
+          style={{ opacity: overlayOpacity }}
+        />
       </div>
+
+      {/* Faint grid pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(201,168,76,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.3) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Subtle animated grain overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+      />
 
       {/* Decorative gradient orbs */}
       <div className="absolute top-1/4 left-1/4 h-[500px] w-[500px] rounded-full bg-accent/5 blur-[120px]" />
       <div className="absolute bottom-1/4 right-1/3 h-[400px] w-[400px] rounded-full bg-accent/3 blur-[100px]" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
+      <motion.div
+        style={{ y: headingY }}
+        className="relative z-10 mx-auto max-w-5xl px-6 text-center"
+      >
         {/* Subtle top label */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -63,15 +101,15 @@ export default function Hero() {
           <h1 className="font-heading text-5xl font-light leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl lg:text-8xl">
             Kelowna Real Estate
           </h1>
-          <div className="mt-2 h-[1.2em] overflow-hidden sm:mt-4">
+          <div className="relative mt-2 h-[50px] overflow-hidden sm:mt-4 sm:h-[65px] md:h-[80px] lg:h-[95px]">
             <AnimatePresence mode="wait">
               <motion.span
                 key={wordIndex}
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -40, opacity: 0 }}
-                transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
-                className="block font-heading text-4xl font-light italic tracking-tight text-accent sm:text-5xl md:text-6xl lg:text-7xl"
+                initial={{ y: 50, opacity: 0, filter: "blur(4px)" }}
+                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                exit={{ y: -50, opacity: 0, filter: "blur(4px)" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-x-0 block font-heading text-4xl font-light italic tracking-tight text-accent sm:text-5xl md:text-6xl lg:text-7xl"
               >
                 {rotatingWords[wordIndex]}
               </motion.span>
@@ -79,12 +117,20 @@ export default function Hero() {
           </div>
         </motion.div>
 
+        {/* Thin horizontal line divider above CTA */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto mt-10 h-px w-48 origin-center bg-gradient-to-r from-transparent via-accent/40 to-transparent"
+        />
+
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-5"
+          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-5"
         >
           {ctaButtons.map((cta) => (
             <Link
@@ -102,25 +148,38 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Thin horizontal line divider below CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2"
-          >
-            <span className="text-[10px] tracking-[0.3em] text-text-muted uppercase">
-              Scroll
-            </span>
-            <div className="h-8 w-px bg-gradient-to-b from-text-muted to-transparent" />
-          </motion.div>
-        </motion.div>
-      </div>
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto mt-10 h-px w-48 origin-center bg-gradient-to-r from-transparent via-accent/40 to-transparent"
+        />
+      </motion.div>
+
+      {/* Elegant scroll indicator with thin animated line */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.5 }}
+        className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2"
+      >
+        <div className="flex flex-col items-center gap-3">
+          <span className="text-[10px] font-medium tracking-[0.4em] text-text-muted/60 uppercase">
+            Scroll
+          </span>
+          <div className="relative h-12 w-px">
+            {/* Static faint track */}
+            <div className="absolute inset-0 bg-text-muted/10" />
+            {/* Animated traveling line */}
+            <motion.div
+              animate={{ y: [0, 32, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-0 h-4 w-px bg-gradient-to-b from-accent/60 to-transparent"
+            />
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
