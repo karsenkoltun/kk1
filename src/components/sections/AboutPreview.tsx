@@ -20,7 +20,7 @@ export default function AboutPreview() {
     <section ref={sectionRef} className="bg-background py-16 md:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
-          {/* Photo placeholder with gold border offset */}
+          {/* Photo placeholder with accent border offset */}
           <AnimateIn direction="left">
             <div className="relative mx-auto max-w-sm overflow-hidden md:mx-0 md:max-w-md md:overflow-visible">
               <div className="relative aspect-[3/4]">
@@ -34,18 +34,18 @@ export default function AboutPreview() {
                   </span>
                 </div>
 
-                {/* Gold border offset - bottom right (hidden on mobile to prevent overflow) */}
+                {/* Accent border offset - bottom right (hidden on mobile to prevent overflow) */}
                 <div className="absolute -bottom-4 -right-4 hidden h-full w-full border border-accent/30 md:block" />
 
-                {/* Second gold offset - top left for framing */}
+                {/* Second accent offset - top left for framing */}
                 <div className="absolute -top-4 -left-4 hidden h-24 w-24 border-t border-l border-accent/20 md:block" />
 
-                {/* Mobile-friendly gold corners */}
+                {/* Mobile-friendly accent corners */}
                 <div className="absolute top-0 left-0 h-12 w-12 border-t-2 border-l-2 border-accent/30 md:hidden" />
                 <div className="absolute right-0 bottom-0 h-12 w-12 border-r-2 border-b-2 border-accent/30 md:hidden" />
               </div>
 
-              {/* Small gold accent dot (hidden on mobile) */}
+              {/* Small accent dot (hidden on mobile) */}
               <div className="absolute -bottom-8 -right-8 hidden h-3 w-3 bg-accent/40 md:block" />
             </div>
           </AnimateIn>

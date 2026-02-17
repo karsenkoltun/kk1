@@ -16,7 +16,7 @@ export default function JoinForm() {
       />
       <button
         type="submit"
-        className="group flex items-center justify-center gap-2 border border-accent bg-accent px-6 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+        className="group flex items-center justify-center gap-2 border border-warm bg-warm px-6 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
       >
         Join
         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

@@ -103,7 +103,7 @@ function ListingCard({ listing, index }: { listing: Listing; index: number }) {
 
           {/* Featured badge */}
           {listing.featured && (
-            <div className="absolute top-3 left-3 z-10 bg-accent px-3 py-1">
+            <div className="absolute top-3 left-3 z-10 bg-warm px-3 py-1">
               <span className="text-[10px] font-semibold tracking-[0.2em] text-background uppercase">
                 Featured
               </span>
@@ -122,7 +122,7 @@ function ListingCard({ listing, index }: { listing: Listing; index: number }) {
 
           {/* Price tag */}
           <div className="absolute bottom-0 left-0 bg-background/90 px-4 py-2 backdrop-blur-sm">
-            <p className="font-heading text-lg font-semibold text-accent">
+            <p className="font-heading text-lg font-semibold text-warm">
               {formatPrice(listing.price)}
             </p>
           </div>
@@ -203,7 +203,7 @@ export default function FeaturedListings() {
           <div className="mt-12 text-center">
             <Link
               href="/search"
-              className="group inline-flex items-center gap-3 border border-accent px-8 py-4 text-xs font-medium tracking-[0.2em] text-accent uppercase transition-all duration-300 hover:bg-accent hover:text-background"
+              className="group inline-flex items-center gap-3 border border-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-warm uppercase transition-all duration-300 hover:bg-warm hover:text-background"
             >
               View All Listings
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

@@ -416,7 +416,7 @@ export default function ContactPageClient() {
                       className="absolute inset-0 opacity-5"
                       style={{
                         backgroundImage:
-                          "linear-gradient(rgba(201,168,76,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.3) 1px, transparent 1px)",
+                          "linear-gradient(rgba(96,165,250,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.3) 1px, transparent 1px)",
                         backgroundSize: "40px 40px",
                       }}
                     />
@@ -630,7 +630,7 @@ export default function ContactPageClient() {
                       {/* Submit */}
                       <button
                         type="submit"
-                        className="group flex w-full items-center justify-center gap-3 border border-accent bg-accent px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+                        className="group flex w-full items-center justify-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
                       >
                         Send Message
                         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

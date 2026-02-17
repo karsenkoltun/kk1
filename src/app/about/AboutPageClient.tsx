@@ -170,7 +170,7 @@ export default function AboutPageClient() {
               >
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center gap-3 border border-accent bg-accent px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+                  className="group inline-flex items-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
                 >
                   Get in Touch
                   <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -196,7 +196,7 @@ export default function AboutPageClient() {
               </motion.div>
             </div>
 
-            {/* Photo placeholder with gold corner accents */}
+            {/* Photo placeholder with accent corner accents */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -209,7 +209,7 @@ export default function AboutPageClient() {
                     Photo Coming Soon
                   </span>
                 </div>
-                {/* Gold corner accents */}
+                {/* Corner accents */}
                 <div className="absolute top-0 left-0 h-20 w-20 border-t-2 border-l-2 border-accent" />
                 <div className="absolute top-0 right-0 h-20 w-20 border-t-2 border-r-2 border-accent" />
                 <div className="absolute bottom-0 left-0 h-20 w-20 border-b-2 border-l-2 border-accent" />
@@ -227,7 +227,7 @@ export default function AboutPageClient() {
             {stats.map((stat, i) => (
               <AnimateIn key={stat.label} delay={i * 0.1}>
                 <div className="text-center">
-                  <p className="font-heading text-4xl font-light tracking-tight text-accent md:text-5xl">
+                  <p className="font-heading text-4xl font-light tracking-tight text-warm md:text-5xl">
                     {stat.value}
                   </p>
                   <p className="mt-2 text-xs font-medium tracking-[0.2em] text-text-muted uppercase">
@@ -353,7 +353,7 @@ export default function AboutPageClient() {
                         <div
                           className={`border border-border bg-background p-8 transition-all duration-500 ${
                             activeTimeline === i
-                              ? "border-accent/40 shadow-[0_0_40px_rgba(201,168,76,0.08)]"
+                              ? "border-accent/40 shadow-[0_0_40px_rgba(96,165,250,0.08)]"
                               : ""
                           }`}
                         >
@@ -456,7 +456,7 @@ export default function AboutPageClient() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
               <AnimateIn key={value.title} delay={i * 0.1}>
-                <div className="group flex h-full flex-col border border-border bg-background p-8 transition-all duration-500 hover:border-accent/30 hover:shadow-[0_0_40px_rgba(201,168,76,0.06)]">
+                <div className="group flex h-full flex-col border border-border bg-background p-8 transition-all duration-500 hover:border-accent/30 hover:shadow-[0_0_40px_rgba(96,165,250,0.06)]">
                   <div className="mb-6 flex h-14 w-14 items-center justify-center border border-accent/20 bg-accent/5 transition-all duration-500 group-hover:border-accent/40 group-hover:bg-accent/10">
                     <value.icon className="h-6 w-6 text-accent" />
                   </div>
@@ -548,7 +548,7 @@ export default function AboutPageClient() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-3 border border-accent bg-accent px-10 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+                className="group inline-flex items-center gap-3 border border-warm bg-warm px-10 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
               >
                 Let&apos;s Talk
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

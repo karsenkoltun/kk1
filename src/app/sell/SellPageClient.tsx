@@ -274,7 +274,7 @@ export default function SellPageClient() {
           >
             <a
               href="#cma-form"
-              className="group inline-flex items-center gap-3 border border-accent bg-accent px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+              className="group inline-flex items-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
             >
               Get a Free Marketing Plan
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -298,7 +298,7 @@ export default function SellPageClient() {
             {sellerStats.map((stat, i) => (
               <AnimateIn key={stat.label} delay={i * 0.1} direction="none">
                 <div className="flex flex-col items-center justify-center py-10 text-center sm:py-12">
-                  <span className="font-heading text-4xl font-light tracking-tight text-accent md:text-5xl">
+                  <span className="font-heading text-4xl font-light tracking-tight text-warm md:text-5xl">
                     {stat.value}
                   </span>
                   <span className="mt-2 text-xs font-medium tracking-[0.2em] text-text-secondary uppercase">
@@ -742,7 +742,7 @@ export default function SellPageClient() {
 
                     <button
                       type="submit"
-                      className="group flex w-full items-center justify-center gap-3 border border-accent bg-accent px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+                      className="group flex w-full items-center justify-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
                     >
                       Request My Free Marketing Plan
                       <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

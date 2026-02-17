@@ -9,7 +9,7 @@ export default function NotFound() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 60% 40% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 40% at 50% 40%, rgba(96,165,250,0.07) 0%, transparent 70%)",
         }}
       />
 
@@ -35,7 +35,7 @@ export default function NotFound() {
       <div className="mt-10 flex flex-col gap-4 sm:flex-row">
         <Link
           href="/"
-          className="inline-flex items-center justify-center rounded-sm bg-accent px-8 py-3 text-sm font-medium tracking-wide text-background transition-colors hover:bg-accent-hover"
+          className="inline-flex items-center justify-center rounded-sm bg-warm px-8 py-3 text-sm font-medium tracking-wide text-background transition-colors hover:bg-warm-hover"
         >
           Go Home
         </Link>

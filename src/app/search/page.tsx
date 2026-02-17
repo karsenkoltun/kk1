@@ -169,7 +169,7 @@ export default function SearchPage() {
                 key={tab.label}
                 className={
                   i === 0
-                    ? "flex items-center gap-2 border border-accent bg-accent px-5 py-3 text-xs font-medium tracking-[0.15em] text-background uppercase"
+                    ? "flex items-center gap-2 border border-warm bg-warm px-5 py-3 text-xs font-medium tracking-[0.15em] text-background uppercase"
                     : "flex items-center gap-2 border border-border bg-background-secondary px-5 py-3 text-xs font-medium tracking-[0.15em] text-text-muted uppercase transition-colors duration-300 hover:border-accent/40 hover:text-text-primary cursor-pointer"
                 }
               >
@@ -188,7 +188,7 @@ export default function SearchPage() {
                   Search by address, neighborhood, or MLS number...
                 </span>
               </div>
-              <span className="flex items-center justify-center gap-2 border border-accent bg-accent px-8 py-3.5 text-xs font-medium tracking-[0.2em] text-background uppercase cursor-pointer transition-all duration-300 hover:bg-transparent hover:text-accent">
+              <span className="flex items-center justify-center gap-2 border border-warm bg-warm px-8 py-3.5 text-xs font-medium tracking-[0.2em] text-background uppercase cursor-pointer transition-all duration-300 hover:bg-warm-hover">
                 <Search className="h-3.5 w-3.5" />
                 Search
               </span>
@@ -275,7 +275,7 @@ export default function SearchPage() {
 
                   {/* Price tag */}
                   <div className="absolute bottom-0 left-0 bg-background/90 px-4 py-2 backdrop-blur-sm">
-                    <p className="font-heading text-lg font-semibold text-accent">
+                    <p className="font-heading text-lg font-semibold text-warm">
                       {formatPrice(listing.price)}
                     </p>
                   </div>
@@ -374,7 +374,7 @@ export default function SearchPage() {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 border border-accent bg-accent px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+              className="group inline-flex items-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
             >
               Contact Karsen
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

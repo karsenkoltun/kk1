@@ -295,7 +295,7 @@ export default function BuyPageClient() {
           >
             <Link
               href="/search"
-              className="group inline-flex items-center gap-3 border border-accent bg-accent px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-accent"
+              className="group inline-flex items-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-warm-hover"
             >
               <Search className="h-4 w-4" />
               Browse Listings
@@ -320,7 +320,7 @@ export default function BuyPageClient() {
             {buyerStats.map((stat, i) => (
               <AnimateIn key={stat.label} delay={i * 0.1} direction="none">
                 <div className="flex flex-col items-center justify-center py-10 text-center sm:py-12">
-                  <span className="font-heading text-4xl font-light tracking-tight text-accent md:text-5xl">
+                  <span className="font-heading text-4xl font-light tracking-tight text-warm md:text-5xl">
                     {stat.value}
                   </span>
                   <span className="mt-2 text-xs font-medium tracking-[0.2em] text-text-secondary uppercase">
@@ -436,7 +436,7 @@ export default function BuyPageClient() {
                   onClick={() => setActiveFilter(filter.value)}
                   className={`border px-6 py-3 text-xs font-medium tracking-[0.15em] uppercase transition-all duration-300 ${
                     activeFilter === filter.value
-                      ? "border-accent bg-accent text-background"
+                      ? "border-warm bg-warm text-background"
                       : "border-border bg-transparent text-text-secondary hover:border-accent/50 hover:text-text-primary"
                   }`}
                 >
@@ -465,7 +465,7 @@ export default function BuyPageClient() {
                     {/* Popular badge */}
                     {hood.popular && (
                       <div className="absolute top-0 right-0">
-                        <div className="flex items-center gap-1.5 bg-accent px-4 py-1.5">
+                        <div className="flex items-center gap-1.5 bg-warm px-4 py-1.5">
                           <Star className="h-3 w-3 fill-background text-background" />
                           <span className="text-[10px] font-semibold tracking-[0.15em] text-background uppercase">
                             Most Popular
@@ -491,7 +491,7 @@ export default function BuyPageClient() {
                         <span className="text-xs font-medium uppercase tracking-[0.15em] text-text-muted">
                           Price Range
                         </span>
-                        <span className="text-sm font-medium text-accent">
+                        <span className="text-sm font-medium text-warm">
                           {hood.priceRange}
                         </span>
                       </div>
@@ -796,7 +796,7 @@ export default function BuyPageClient() {
                     {/* Submit */}
                     <button
                       type="submit"
-                      className="group inline-flex w-full items-center justify-center gap-3 border border-accent bg-accent px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-accent"
+                      className="group inline-flex w-full items-center justify-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-warm-hover"
                     >
                       Request Consultation
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

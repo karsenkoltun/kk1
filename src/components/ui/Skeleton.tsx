@@ -21,7 +21,7 @@ export default function Skeleton({
   return (
     <div
       className={cn(
-        "animate-pulse bg-background-secondary",
+        "animate-shimmer bg-background-secondary",
         variantStyles[variant],
         className
       )}

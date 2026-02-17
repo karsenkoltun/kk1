@@ -512,7 +512,7 @@ export default function HomeValueClient() {
                       <button
                         type="button"
                         onClick={goNext}
-                        className="group flex items-center gap-3 border border-accent bg-accent px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+                        className="group flex items-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
                       >
                         Next Step
                         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -520,7 +520,7 @@ export default function HomeValueClient() {
                     ) : (
                       <button
                         type="submit"
-                        className="group flex items-center gap-3 border border-accent bg-accent px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+                        className="group flex items-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
                       >
                         Get My Valuation
                         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -539,7 +539,7 @@ export default function HomeValueClient() {
             {trustElements.map((item) => (
               <div key={item.label} className="text-center">
                 <item.icon className="mx-auto h-5 w-5 text-accent" />
-                <p className="mt-3 font-heading text-2xl font-light text-text-primary">
+                <p className="mt-3 font-heading text-2xl font-light text-warm">
                   {item.value}
                 </p>
                 <p className="mt-1 text-xs tracking-wide text-text-muted">

@@ -96,7 +96,7 @@ export default function Footer() {
             <button
               type="submit"
               className={cn(
-                "flex items-center gap-2 border border-l-0 border-accent bg-accent px-5 py-3 text-xs font-medium tracking-[0.15em] text-background uppercase transition-all duration-300 hover:bg-accent-hover",
+                "flex items-center gap-2 border border-l-0 border-warm bg-warm px-5 py-3 text-xs font-medium tracking-[0.15em] text-background uppercase transition-all duration-300 hover:bg-warm-hover",
                 submitted && "bg-green-600 border-green-600 hover:bg-green-600"
               )}
             >

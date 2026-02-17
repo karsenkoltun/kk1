@@ -33,13 +33,13 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: cn(
-    "border border-accent bg-accent text-background",
-    "hover:bg-transparent hover:text-accent",
+    "border border-warm bg-warm text-background",
+    "hover:bg-transparent hover:text-warm hover:border-warm",
     "disabled:opacity-40 disabled:pointer-events-none"
   ),
   secondary: cn(
-    "border border-border text-text-primary",
-    "hover:border-accent hover:text-accent",
+    "border border-accent text-accent",
+    "hover:bg-accent/10 hover:text-accent-hover",
     "disabled:opacity-40 disabled:pointer-events-none"
   ),
   ghost: cn(

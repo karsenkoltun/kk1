@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type BadgeVariant = "accent" | "muted" | "success" | "new";
+type BadgeVariant = "accent" | "warm" | "muted" | "success" | "new";
 type BadgeSize = "sm" | "md";
 
 interface BadgeProps {
@@ -11,9 +11,10 @@ interface BadgeProps {
 
 const variantStyles: Record<BadgeVariant, string> = {
   accent: "border-accent/30 bg-accent/10 text-accent",
+  warm: "border-warm/30 bg-warm/10 text-warm",
   muted: "border-border bg-background text-text-secondary",
   success: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-  new: "border-accent bg-accent text-background",
+  new: "border-warm bg-warm text-background",
 };
 
 const sizeStyles: Record<BadgeSize, string> = {

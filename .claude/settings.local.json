@@ -9,7 +9,13 @@
       "WebFetch(domain:www.ajhazzi.com)",
       "Bash(git status:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nBuild full premium real estate website for Karsen Koltun\n\nComplete site with 13 routes: Homepage \\(8 sections\\), Sell, Buy, Home Value,\nAbout, Founders Club, Marketing, Contact, Search, Blog, Privacy, Terms.\nDark luxury design system, Tailwind CSS v4, framer-motion animations,\nresponsive layouts, and form components throughout.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nBuild full premium real estate website for Karsen Koltun\n\nComplete site with 13 routes: Homepage \\(8 sections\\), Sell, Buy, Home Value,\nAbout, Founders Club, Marketing, Contact, Search, Blog, Privacy, Terms.\nDark luxury design system, Tailwind CSS v4, framer-motion animations,\nresponsive layouts, and form components throughout.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(timeout:*)",
+      "Bash(taskkill:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

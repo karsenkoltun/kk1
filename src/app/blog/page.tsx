@@ -152,7 +152,7 @@ export default function BlogPage() {
                 key={cat}
                 className={
                   i === 0
-                    ? "border border-accent bg-accent px-5 py-2.5 text-xs font-medium tracking-[0.15em] text-background uppercase"
+                    ? "border border-warm bg-warm px-5 py-2.5 text-xs font-medium tracking-[0.15em] text-background uppercase"
                     : "border border-border bg-background-secondary px-5 py-2.5 text-xs font-medium tracking-[0.15em] text-text-muted uppercase transition-colors duration-300 hover:border-accent/40 hover:text-text-primary cursor-pointer"
                 }
               >
@@ -178,7 +178,7 @@ export default function BlogPage() {
                 <div className="absolute inset-0 bg-accent/0 transition-all duration-500 group-hover:bg-accent/5" />
 
                 {/* Featured Badge */}
-                <div className="absolute top-4 left-4 bg-accent px-4 py-1.5">
+                <div className="absolute top-4 left-4 bg-warm px-4 py-1.5">
                   <span className="text-[10px] font-semibold tracking-[0.2em] text-background uppercase">
                     Featured
                   </span>
@@ -328,7 +328,7 @@ export default function BlogPage() {
                       Enter your email
                     </span>
                   </div>
-                  <span className="flex items-center justify-center gap-2 border border-accent bg-accent px-5 py-3 text-xs font-medium tracking-[0.2em] text-background uppercase cursor-pointer transition-all duration-300 hover:bg-transparent hover:text-accent">
+                  <span className="flex items-center justify-center gap-2 border border-warm bg-warm px-5 py-3 text-xs font-medium tracking-[0.2em] text-background uppercase cursor-pointer transition-all duration-300 hover:bg-warm-hover">
                     Subscribe
                   </span>
                 </div>

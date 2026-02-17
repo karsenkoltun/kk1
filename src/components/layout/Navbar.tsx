@@ -13,26 +13,45 @@ import { cn } from "@/lib/utils";
    ------------------------------------------------ */
 const overlayVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.4, when: "beforeChildren", staggerChildren: 0.07 } },
-  exit: { opacity: 0, transition: { duration: 0.3, when: "afterChildren" } },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.4, when: "beforeChildren" as const, staggerChildren: 0.07 },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.3, when: "afterChildren" as const },
+  },
 };
 
 const menuItemVariants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  },
   exit: { opacity: 0, y: -12, transition: { duration: 0.2 } },
 };
 
 const dropdownVariants = {
-  hidden: { opacity: 0, y: 10, scale: 0.97 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] as const } },
-  exit: { opacity: 0, y: 8, scale: 0.97, transition: { duration: 0.18 } },
+  hidden: { opacity: 0, y: 8, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  },
+  exit: { opacity: 0, y: 6, scale: 0.97, transition: { duration: 0.18 } },
 };
 
 /* ------------------------------------------------
-   Helper: check if a pathname matches a link
+   Helper: check if pathname matches a link
    ------------------------------------------------ */
-function isActive(pathname: string, href: string, children?: { href: string }[]): boolean {
+function isActive(
+  pathname: string,
+  href: string,
+  children?: { href: string }[]
+): boolean {
   if (href === "/") return pathname === "/";
   if (pathname === href) return true;
   if (children?.some((c) => pathname === c.href)) return true;
@@ -73,14 +92,14 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out",
           scrolled
-            ? "bg-background/90 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-black/20"
+            ? "glass border-b border-accent/[0.06] shadow-lg shadow-black/20"
             : "bg-transparent border-b border-transparent"
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
           {/* Logo */}
           <Link href="/" className="group relative z-10" onClick={closeMenu}>
-            <span className="font-heading text-2xl font-semibold tracking-[0.15em] text-text-primary uppercase transition-colors duration-300 group-hover:text-accent">
+            <span className="font-heading text-2xl font-semibold tracking-[0.2em] text-text-primary uppercase transition-colors duration-300 group-hover:text-accent">
               Karsen Koltun
             </span>
           </Link>
@@ -88,19 +107,23 @@ export default function Navbar() {
           {/* Desktop Nav — hidden below lg */}
           <div className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => {
-              const active = isActive(pathname, link.href, "children" in link ? link.children : undefined);
+              const active = isActive(
+                pathname,
+                link.href,
+                "children" in link ? link.children : undefined
+              );
 
-              /* CTA button link */
+              /* CTA button — "Let's Talk" */
               if (link.isButton) {
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "ml-4 rounded-none border border-accent px-6 py-2.5 text-xs font-medium tracking-[0.2em] uppercase transition-all duration-300",
+                      "ml-4 rounded-sm border px-6 py-2.5 text-xs font-medium tracking-[0.2em] uppercase transition-all duration-300",
                       active
-                        ? "bg-accent text-background"
-                        : "bg-accent text-background hover:bg-transparent hover:text-accent"
+                        ? "border-warm bg-warm text-background"
+                        : "border-warm bg-transparent text-warm hover:bg-warm hover:text-background"
                     )}
                   >
                     {link.label}
@@ -108,7 +131,7 @@ export default function Navbar() {
                 );
               }
 
-              /* Dropdown (About Karsen) */
+              /* Dropdown — About Karsen */
               if ("children" in link && link.children) {
                 return (
                   <div
@@ -120,7 +143,9 @@ export default function Navbar() {
                     <button
                       className={cn(
                         "flex items-center gap-1.5 px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300",
-                        active ? "text-accent" : "text-text-secondary hover:text-text-primary"
+                        active
+                          ? "text-accent"
+                          : "text-text-secondary hover:text-accent"
                       )}
                     >
                       {link.label}
@@ -139,7 +164,7 @@ export default function Navbar() {
                           initial="hidden"
                           animate="visible"
                           exit="exit"
-                          className="absolute left-0 top-full mt-1 min-w-[260px] border border-border bg-background-secondary/95 backdrop-blur-xl p-2 shadow-xl shadow-black/30"
+                          className="absolute left-0 top-full mt-1 min-w-[260px] rounded-lg border border-border bg-background-secondary/95 p-2 shadow-xl shadow-black/40 backdrop-blur-xl"
                         >
                           {link.children.map((child) => {
                             const childActive = pathname === child.href;
@@ -148,8 +173,10 @@ export default function Navbar() {
                                 key={child.href}
                                 href={child.href}
                                 className={cn(
-                                  "block px-4 py-3 text-xs tracking-[0.1em] uppercase transition-colors duration-200 hover:bg-background/50",
-                                  childActive ? "text-accent" : "text-text-secondary hover:text-accent"
+                                  "block rounded-md px-4 py-3 text-xs tracking-[0.1em] uppercase transition-colors duration-200 hover:bg-background/50",
+                                  childActive
+                                    ? "text-accent"
+                                    : "text-text-secondary hover:text-accent"
                                 )}
                               >
                                 {child.label}
@@ -170,7 +197,9 @@ export default function Navbar() {
                   href={link.href}
                   className={cn(
                     "px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300",
-                    active ? "text-accent" : "text-text-secondary hover:text-text-primary"
+                    active
+                      ? "text-accent"
+                      : "text-text-secondary hover:text-accent"
                   )}
                 >
                   {link.label}
@@ -194,7 +223,11 @@ export default function Navbar() {
             className="relative z-[60] p-2 text-text-primary transition-colors hover:text-accent lg:hidden"
             aria-label="Toggle menu"
           >
-            {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {menuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
       </nav>
@@ -207,13 +240,21 @@ export default function Navbar() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-[55] bg-background/98 backdrop-blur-xl"
+            className="fixed inset-0 z-[55] bg-background/[0.97] backdrop-blur-2xl"
           >
+            {/* Subtle background glow orbs in overlay */}
+            <div className="absolute top-[20%] left-[10%] h-[300px] w-[300px] rounded-full bg-accent/[0.03] blur-[100px]" />
+            <div className="absolute bottom-[20%] right-[10%] h-[250px] w-[250px] rounded-full bg-warm/[0.03] blur-[100px]" />
+
             <div className="flex h-full flex-col items-center justify-center overflow-y-auto py-24">
               <nav className="flex flex-col items-center gap-2">
                 {/* Primary Links with staggered animation */}
                 {NAV_LINKS.map((link) => {
-                  const active = isActive(pathname, link.href, "children" in link ? link.children : undefined);
+                  const active = isActive(
+                    pathname,
+                    link.href,
+                    "children" in link ? link.children : undefined
+                  );
 
                   if ("children" in link && link.children) {
                     return (
@@ -242,7 +283,9 @@ export default function Navbar() {
                                 onClick={closeMenu}
                                 className={cn(
                                   "py-1 text-sm tracking-[0.15em] uppercase transition-colors hover:text-accent",
-                                  childActive ? "text-accent" : "text-text-muted"
+                                  childActive
+                                    ? "text-accent"
+                                    : "text-text-muted"
                                 )}
                               >
                                 {child.label}
@@ -262,7 +305,7 @@ export default function Navbar() {
                         className={cn(
                           "block py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-accent md:text-5xl",
                           link.isButton
-                            ? "text-accent"
+                            ? "text-warm"
                             : active
                               ? "text-accent"
                               : "text-text-primary"
@@ -275,9 +318,12 @@ export default function Navbar() {
                 })}
 
                 {/* Divider */}
-                <motion.div variants={menuItemVariants} className="my-6 h-px w-16 bg-border" />
+                <motion.div
+                  variants={menuItemVariants}
+                  className="my-6 h-px w-16 bg-gradient-to-r from-transparent via-border to-transparent"
+                />
 
-                {/* Secondary Links with stagger */}
+                {/* Secondary Links */}
                 {SECONDARY_LINKS.map((link) => (
                   <motion.div key={link.href} variants={menuItemVariants}>
                     <Link
@@ -285,7 +331,9 @@ export default function Navbar() {
                       onClick={closeMenu}
                       className={cn(
                         "block py-2 text-sm tracking-[0.2em] uppercase transition-colors hover:text-accent",
-                        pathname === link.href ? "text-accent" : "text-text-muted"
+                        pathname === link.href
+                          ? "text-accent"
+                          : "text-text-muted"
                       )}
                     >
                       {link.label}

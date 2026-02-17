@@ -48,7 +48,7 @@ function StarRating({ rating }: { rating: number }) {
           key={i}
           className={`h-4 w-4 ${
             i < rating
-              ? "fill-accent text-accent"
+              ? "fill-warm text-warm"
               : "fill-transparent text-border"
           }`}
         />

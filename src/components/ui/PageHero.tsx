@@ -41,8 +41,9 @@ export default function PageHero({
         }} />
       </div>
 
-      {/* Subtle glow orb */}
+      {/* Subtle glow orbs */}
       <div className="absolute top-1/3 left-1/2 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-accent/5 blur-[120px]" />
+      <div className="absolute top-1/2 left-1/3 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-warm/3 blur-[100px]" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 py-32 text-center">

@@ -89,7 +89,7 @@ function StatItem({
       <div ref={ref} className="relative flex items-center justify-center">
         <div className="text-center">
           <stat.icon className="mx-auto mb-3 h-5 w-5 text-accent/50" strokeWidth={1.5} />
-          <p className="font-heading text-4xl font-semibold tracking-tight text-accent md:text-5xl">
+          <p className="font-heading text-4xl font-semibold tracking-tight text-warm md:text-5xl">
             {stat.prefix ?? ""}
             {stat.decimals > 0 ? count.toFixed(stat.decimals) : count}
             {stat.suffix}

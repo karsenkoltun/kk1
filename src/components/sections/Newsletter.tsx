@@ -22,7 +22,7 @@ export default function Newsletter() {
       <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(201,168,76,0.4) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(96,165,250,0.4) 1px, transparent 0)`,
           backgroundSize: "40px 40px",
         }}
       />
@@ -90,7 +90,7 @@ export default function Newsletter() {
                       />
                       <button
                         type="submit"
-                        className="group flex w-full items-center justify-center gap-2 border border-accent bg-accent px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-accent"
+                        className="group flex w-full items-center justify-center gap-2 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-transparent hover:text-warm"
                       >
                         Subscribe
                         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
