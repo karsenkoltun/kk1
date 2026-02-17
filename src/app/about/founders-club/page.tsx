@@ -24,7 +24,7 @@ export default function FoundersClubPage() {
           <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
             Community
           </p>
-          <h1 className="mt-4 font-heading text-5xl font-light tracking-tight text-text-primary md:text-6xl">
+          <h1 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary sm:text-5xl md:text-6xl">
             Kelowna{" "}
             <span className="italic text-accent">Founders Club</span>
           </h1>

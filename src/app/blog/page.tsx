@@ -133,7 +133,7 @@ export default function BlogPage() {
           <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
             Insights &amp; Guides
           </p>
-          <h1 className="mt-4 font-heading text-5xl font-light tracking-tight text-text-primary md:text-6xl">
+          <h1 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary sm:text-5xl md:text-6xl">
             The <span className="italic text-accent">Blog</span>
           </h1>
           <p className="mx-auto mt-4 max-w-lg text-text-secondary">
@@ -187,7 +187,7 @@ export default function BlogPage() {
 
               {/* Content */}
               <div className="flex flex-col justify-center p-8 md:p-10 lg:p-12">
-                <div className="flex items-center gap-4 text-xs text-text-muted">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-text-muted sm:gap-4">
                   <span className="border border-accent/30 bg-accent/5 px-3 py-1 tracking-[0.15em] text-accent uppercase">
                     {featuredPost.category}
                   </span>

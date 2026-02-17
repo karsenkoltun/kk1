@@ -400,43 +400,82 @@ export default function SellPageClient() {
           </AnimateIn>
 
           <AnimateIn delay={0.15}>
-            <div className="mt-16 overflow-hidden border border-border">
-              {/* Header row */}
-              <div className="grid grid-cols-2">
-                <div className="border-b border-r border-border bg-background-secondary px-6 py-5 sm:px-8">
+            <div className="mt-12 overflow-hidden border border-border sm:mt-16">
+              {/* Mobile: stacked cards / Desktop: side-by-side grid */}
+              <div className="hidden sm:block">
+                {/* Header row — desktop */}
+                <div className="grid grid-cols-2">
+                  <div className="border-b border-r border-border bg-background-secondary px-6 py-5 sm:px-8">
+                    <span className="text-xs font-medium tracking-[0.2em] text-text-muted uppercase">
+                      Traditional Agent
+                    </span>
+                  </div>
+                  <div className="border-b border-border bg-accent/5 px-6 py-5 sm:px-8">
+                    <span className="text-xs font-medium tracking-[0.2em] text-accent uppercase">
+                      With Karsen
+                    </span>
+                  </div>
+                </div>
+
+                {/* Comparison rows — desktop */}
+                {comparisonItems.map((item, i) => (
+                  <div
+                    key={i}
+                    className={`grid grid-cols-2 ${
+                      i < comparisonItems.length - 1 ? "border-b border-border" : ""
+                    }`}
+                  >
+                    <div className="flex items-start gap-3 border-r border-border bg-background-secondary px-6 py-5 sm:px-8">
+                      <X className="mt-0.5 h-4 w-4 shrink-0 text-text-muted/60" />
+                      <span className="text-sm leading-relaxed text-text-secondary">
+                        {item.traditional}
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-3 bg-accent/5 px-6 py-5 sm:px-8">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                      <span className="text-sm leading-relaxed text-text-primary">
+                        {item.karsen}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Mobile: stacked layout */}
+              <div className="space-y-0 sm:hidden">
+                <div className="border-b border-border bg-background-secondary px-5 py-4">
                   <span className="text-xs font-medium tracking-[0.2em] text-text-muted uppercase">
                     Traditional Agent
                   </span>
                 </div>
-                <div className="border-b border-border bg-accent/5 px-6 py-5 sm:px-8">
-                  <span className="text-xs font-medium tracking-[0.2em] text-accent uppercase">
-                    With Karsen
-                  </span>
-                </div>
-              </div>
-
-              {/* Comparison rows */}
-              {comparisonItems.map((item, i) => (
-                <div
-                  key={i}
-                  className={`grid grid-cols-2 ${
-                    i < comparisonItems.length - 1 ? "border-b border-border" : ""
-                  }`}
-                >
-                  <div className="flex items-start gap-3 border-r border-border bg-background-secondary px-6 py-5 sm:px-8">
+                {comparisonItems.map((item, i) => (
+                  <div
+                    key={`trad-${i}`}
+                    className="flex items-start gap-3 border-b border-border bg-background-secondary px-5 py-4"
+                  >
                     <X className="mt-0.5 h-4 w-4 shrink-0 text-text-muted/60" />
                     <span className="text-sm leading-relaxed text-text-secondary">
                       {item.traditional}
                     </span>
                   </div>
-                  <div className="flex items-start gap-3 bg-accent/5 px-6 py-5 sm:px-8">
+                ))}
+                <div className="border-b border-border bg-accent/5 px-5 py-4">
+                  <span className="text-xs font-medium tracking-[0.2em] text-accent uppercase">
+                    With Karsen
+                  </span>
+                </div>
+                {comparisonItems.map((item, i) => (
+                  <div
+                    key={`karsen-${i}`}
+                    className="flex items-start gap-3 bg-accent/5 px-5 py-4 border-b border-border last:border-b-0"
+                  >
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                     <span className="text-sm leading-relaxed text-text-primary">
                       {item.karsen}
                     </span>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </AnimateIn>
         </div>

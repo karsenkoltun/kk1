@@ -311,7 +311,7 @@ export default function ContactPageClient() {
       {/* ───────── Contact Content ───────── */}
       <section className="bg-background py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid gap-16 lg:grid-cols-5">
+          <div className="grid gap-10 lg:gap-16 lg:grid-cols-5">
             {/* ── Left Column ── */}
             <div className="lg:col-span-2">
               {/* Contact Info */}

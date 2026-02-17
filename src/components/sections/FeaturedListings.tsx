@@ -88,7 +88,7 @@ const activeCount = placeholderListings.filter((l) => l.status === "Active").len
 function ListingCard({ listing, index }: { listing: Listing; index: number }) {
   return (
     <AnimateIn delay={index * 0.1}>
-      <div className="group min-w-[280px] cursor-pointer border border-border bg-background transition-all duration-500 hover:border-accent/30 sm:min-w-0">
+      <div className="group min-w-[85vw] cursor-pointer border border-border bg-background transition-all duration-500 hover:border-accent/30 sm:min-w-[280px] md:min-w-0">
         {/* Image placeholder */}
         <div className="relative aspect-[4/3] overflow-hidden bg-background-tertiary">
           {/* Hover zoom effect on placeholder */}
@@ -166,7 +166,7 @@ export default function FeaturedListings() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="bg-background-secondary py-24 md:py-32">
+    <section className="bg-background-secondary py-16 md:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <AnimateIn>
           <div className="flex flex-col items-center text-center">

@@ -149,7 +149,7 @@ export default function SearchPage() {
           <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
             MLS Listings
           </p>
-          <h1 className="mt-4 font-heading text-5xl font-light tracking-tight text-text-primary md:text-6xl">
+          <h1 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary sm:text-5xl md:text-6xl">
             Search <span className="italic text-accent">Properties</span>
           </h1>
           <p className="mx-auto mt-4 max-w-lg text-text-secondary">

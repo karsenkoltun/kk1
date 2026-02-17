@@ -113,7 +113,7 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="bg-background py-24 md:py-32">
+    <section className="bg-background py-16 md:py-24 lg:py-32">
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <AnimateIn>
           <div className="text-center">

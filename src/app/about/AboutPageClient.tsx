@@ -241,9 +241,9 @@ export default function AboutPageClient() {
       </section>
 
       {/* ───────── Story — The Beginning ───────── */}
-      <section className="bg-background py-28 md:py-36">
+      <section className="bg-background py-16 md:py-28 lg:py-36">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid items-center gap-20 lg:grid-cols-2">
+          <div className="grid items-center gap-12 lg:gap-20 lg:grid-cols-2">
             {/* Text */}
             <AnimateIn direction="left">
               <div className="space-y-8">
@@ -306,10 +306,10 @@ export default function AboutPageClient() {
       </section>
 
       {/* ───────── Timeline — The Journey ───────── */}
-      <section className="bg-background-secondary py-28 md:py-36">
+      <section className="bg-background-secondary py-16 md:py-28 lg:py-36">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <AnimateIn>
-            <div className="mb-20 text-center">
+            <div className="mb-12 text-center md:mb-20">
               <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
                 The Journey
               </p>
@@ -396,7 +396,7 @@ export default function AboutPageClient() {
       </section>
 
       {/* ───────── Story Continued — Building With Intention ───────── */}
-      <section className="bg-background py-28 md:py-36">
+      <section className="bg-background py-16 md:py-28 lg:py-36">
         <div className="mx-auto max-w-4xl px-6 lg:px-10">
           <AnimateIn>
             <div className="text-center">
@@ -440,10 +440,10 @@ export default function AboutPageClient() {
       </section>
 
       {/* ───────── Core Values ───────── */}
-      <section className="bg-background-secondary py-28 md:py-36">
+      <section className="bg-background-secondary py-16 md:py-28 lg:py-36">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <AnimateIn>
-            <div className="mb-20 text-center">
+            <div className="mb-12 text-center md:mb-20">
               <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
                 What I Stand For
               </p>
@@ -474,7 +474,7 @@ export default function AboutPageClient() {
       </section>
 
       {/* ───────── Ventures ───────── */}
-      <section className="bg-background py-28 md:py-36">
+      <section className="bg-background py-16 md:py-28 lg:py-36">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <AnimateIn>
             <div className="text-center">
@@ -528,7 +528,7 @@ export default function AboutPageClient() {
       </section>
 
       {/* ───────── Let's Connect CTA ───────── */}
-      <section className="relative overflow-hidden bg-background-secondary py-28 md:py-36">
+      <section className="relative overflow-hidden bg-background-secondary py-16 md:py-28 lg:py-36">
         {/* Ambient accent glow */}
         <div className="absolute top-1/2 left-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/5 blur-[150px]" />
 

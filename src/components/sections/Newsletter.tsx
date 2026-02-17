@@ -17,7 +17,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-background-tertiary py-24 md:py-32">
+    <section className="relative overflow-hidden bg-background-tertiary py-16 md:py-24 lg:py-32">
       {/* Subtle background pattern */}
       <div
         className="absolute inset-0 opacity-[0.02]"

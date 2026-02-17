@@ -257,24 +257,23 @@ export default function BuyPageClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25 }}
           >
-            <h1 className="font-heading text-5xl font-light leading-[1.1] tracking-tight md:text-7xl">
+            <h1 className="font-heading text-4xl font-light leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               Buy a Home
-              <br />
-              <span className="relative inline-block h-[1.2em] w-full overflow-hidden align-bottom">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={rotatingPhrases[phraseIndex]}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -30 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="absolute inset-0 text-accent"
-                  >
-                    {rotatingPhrases[phraseIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </span>
             </h1>
+            <div className="relative mt-2 h-[45px] overflow-hidden sm:mt-3 sm:h-[55px] md:h-[70px] lg:h-[85px]">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={rotatingPhrases[phraseIndex]}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="absolute inset-x-0 block font-heading text-3xl font-light italic tracking-tight text-accent sm:text-4xl md:text-5xl lg:text-6xl"
+                >
+                  {rotatingPhrases[phraseIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </div>
           </motion.div>
 
           <motion.p

@@ -58,7 +58,7 @@ export default function MarketingPage() {
           <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
             Agency
           </p>
-          <h1 className="mt-4 font-heading text-5xl font-light tracking-tight text-text-primary md:text-6xl">
+          <h1 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary sm:text-5xl md:text-6xl">
             Marketing with{" "}
             <span className="italic text-accent">Karsen Koltun</span>
           </h1>

@@ -114,8 +114,8 @@ export default function Footer() {
       </div>
 
       {/* ---- Main Footer Content — 4 Column Grid ---- */}
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-6 py-10 md:py-16 lg:px-10">
+        <div className="grid gap-8 sm:grid-cols-2 sm:gap-12 lg:grid-cols-4">
           {/* Column 1: Brand / Description */}
           <div>
             <Link href="/" className="inline-block">
