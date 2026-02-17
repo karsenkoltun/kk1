@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* ========================================
+   KARSEN KOLTUN — Luxury Dark Design System
+   Tailwind CSS v4 Theme Configuration
+   ======================================== */
+
+@theme inline {
+  /* Colors — Dark Luxury Palette */
+  --color-background: #0A0A0A;
+  --color-background-secondary: #141414;
+  --color-background-tertiary: #1A1A2E;
+
+  --color-accent: #C9A84C;
+  --color-accent-hover: #D4B95E;
+  --color-accent-muted: #C9A84C33;
+
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #A0A0A0;
+  --color-text-muted: #6B6B6B;
+
+  --color-border: #2A2A2A;
+  --color-border-light: #3A3A3A;
+
+  /* Fonts */
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* Base Styles */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+}
