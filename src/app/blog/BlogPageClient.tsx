@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Search, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { getAllPosts } from "@/lib/blog";
 
 /* ─── Categories ─── */
 const categories = [
@@ -15,81 +16,8 @@ const categories = [
   "Lifestyle",
 ];
 
-/* ─── Blog posts data ─── */
-const allPosts = [
-  {
-    slug: "kelowna-market-update-spring-2024",
-    title: "Kelowna Real Estate Market Update: Spring 2024",
-    excerpt:
-      "An in-depth analysis of latest trends shaping the Kelowna real estate market this spring.",
-    date: "April 10, 2024",
-    category: "Market Trends",
-  },
-  {
-    slug: "top-closing-costs-buyers",
-    title: "The Top Closing Costs Buyers Should Prepare For",
-    excerpt:
-      "Learn about the often-overlooked closing costs and fees you need to budget for when buying a home in Kelowna.",
-    date: "March 2, 2024",
-    category: "Home Buying",
-  },
-  {
-    slug: "sell-kelowna-home-highest-price",
-    title: "How to Sell Your Kelowna Home for the Highest Price",
-    excerpt:
-      "Expert tips and proven strategies to maximize the sale price of your property.",
-    date: "March 25, 2024",
-    category: "Home Selling",
-  },
-  {
-    slug: "best-neighborhoods-families",
-    title: "Best Neighborhoods in Kelowna for Families",
-    excerpt:
-      "From Glenmore to Upper Mission, here are the top neighborhoods for families looking to settle in the Okanagan.",
-    date: "February 18, 2024",
-    category: "Neighborhoods",
-  },
-  {
-    slug: "first-time-buyer-guide",
-    title: "The Ultimate First-Time Buyer's Guide to Kelowna",
-    excerpt:
-      "Everything you need to know about buying your first home in Kelowna — from pre-approval to closing day.",
-    date: "February 5, 2024",
-    category: "Home Buying",
-  },
-  {
-    slug: "preparing-home-for-sale",
-    title: "How to Prepare Your Home for Sale in 2024",
-    excerpt:
-      "The steps that actually matter when getting your home ready for the market. Staging, pricing, and first impressions.",
-    date: "January 20, 2024",
-    category: "Home Selling",
-  },
-  {
-    slug: "okanagan-lifestyle-guide",
-    title: "The Okanagan Lifestyle: Why Kelowna Is Canada's Best-Kept Secret",
-    excerpt:
-      "Wine country, lakefront living, and year-round recreation. Discover what makes Kelowna one of Canada's most desirable places to live.",
-    date: "January 8, 2024",
-    category: "Lifestyle",
-  },
-  {
-    slug: "mortgage-rate-forecast",
-    title: "Mortgage Rates in 2024: What Buyers Should Expect",
-    excerpt:
-      "An overview of where mortgage rates are headed and what that means for your purchasing power in the Kelowna market.",
-    date: "December 15, 2023",
-    category: "Market Trends",
-  },
-  {
-    slug: "spring-market-seller-tips",
-    title: "5 Things Every Seller Should Do Before Spring",
-    excerpt:
-      "Spring is historically the busiest season for real estate in the Okanagan. Here is how to position your home to sell quickly and for top dollar.",
-    date: "December 1, 2023",
-    category: "Home Selling",
-  },
-];
+/* ─── Blog posts data (single source of truth) ─── */
+const allPosts = getAllPosts();
 
 const POSTS_PER_PAGE = 3;
 

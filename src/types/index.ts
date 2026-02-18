@@ -23,6 +23,11 @@ export interface Testimonial {
   role?: string;
 }
 
+export interface BlogStat {
+  value: string;
+  label: string;
+}
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -30,4 +35,9 @@ export interface BlogPost {
   date: string;
   image?: string;
   category: string;
+  /* Full blog post fields — optional so listing-only posts still work */
+  metaDescription?: string;
+  readTime?: string;
+  content?: string;
+  stats?: BlogStat[];
 }

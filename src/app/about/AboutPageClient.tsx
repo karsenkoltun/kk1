@@ -19,42 +19,41 @@ import AnimateIn from "@/components/ui/AnimateIn";
    Data
    ────────────────────────────────────────────── */
 
-const timeline = [
+const journeyMilestones = [
   {
-    year: "2016",
-    title: "Started in Marketing",
+    label: "Born in Kelowna",
     description:
-      "Entered the digital marketing space and began learning the craft of storytelling, content strategy, and brand building from the ground up.",
+      "Raised around the business, I learned the value of real estate and hard work at a young age.",
+  },
+  {
+    year: "2015",
+    label: "Entered Real Estate",
+    description:
+      "Started my career, sold over $10 million in home sales in my first year.",
   },
   {
     year: "2018",
-    title: "Founded Agency",
+    label: "Founded Marketing Agency",
     description:
       "Launched a full-service marketing agency, partnering with premium brands to create campaigns that drive real results.",
   },
   {
-    year: "2020",
-    title: "Moved to Kelowna",
-    description:
-      "Relocated to the Okanagan and fell in love with Kelowna — its mountains, lake lifestyle, and tight-knit community.",
-  },
-  {
     year: "2022",
-    title: "Got Real Estate License",
+    label: "Top Producer",
     description:
-      "Earned my real estate license and brought a marketing-first approach to an industry ready for disruption.",
+      "Recognized as one of Kelowna's top-producing agents with over $150M+ in career volume.",
   },
   {
     year: "2023",
-    title: "Founded Kelowna Founders Club",
+    label: "Kelowna Founders Club",
     description:
-      "Created a curated community for ambitious entrepreneurs, founders, and professionals building in the Okanagan.",
+      "Created a curated community for ambitious entrepreneurs, founders, and professionals in the Okanagan.",
   },
   {
     year: "2024",
-    title: "Launched KK Real Estate Brand",
+    label: "KK Real Estate Brand",
     description:
-      "Brought together real estate, marketing, and community under one premium brand — Karsen Koltun Real Estate.",
+      "Brought together real estate, marketing, and community under one premium brand.",
   },
 ];
 
@@ -125,103 +124,176 @@ export default function AboutPageClient() {
 
   return (
     <>
-      {/* ───────── Hero ───────── */}
-      <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-background">
-        {/* Ambient blurs */}
-        <div className="absolute top-1/4 left-1/3 h-[600px] w-[600px] rounded-full bg-accent/5 blur-[140px]" />
-        <div className="absolute right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-accent/3 blur-[100px]" />
+      {/* ───────── Hero — Full-width cinematic ───────── */}
+      <section className="relative flex min-h-[85vh] items-end overflow-hidden bg-background">
+        {/* Background */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, #0C1220 0%, #1a2744 30%, #1e293b 60%, #111827 100%)",
+          }}
+        />
+        <div className="absolute top-0 right-0 h-[500px] w-[600px] rounded-full bg-warm/4 blur-[150px]" />
+        <div className="absolute bottom-0 left-1/3 h-[400px] w-[500px] rounded-full bg-accent/3 blur-[120px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-10">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            {/* Text */}
-            <div>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="mb-6 text-xs font-medium tracking-[0.3em] text-accent uppercase"
-              >
-                About Karsen
-              </motion.p>
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="font-heading text-5xl font-light leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl"
-              >
-                Here&apos;s My{" "}
-                <em className="italic text-accent">Story</em>
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.6 }}
-                className="mt-6 max-w-lg text-lg leading-relaxed text-text-secondary"
-              >
-                Real estate agent, marketer, and community builder based in
-                Kelowna, BC. I bring a marketing-first approach to everything
-                I do.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.8 }}
-                className="mt-8 flex flex-wrap items-center gap-4"
-              >
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
-                >
-                  Get in Touch
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-                <div className="flex items-center gap-3">
-                  <a
-                    href="https://www.instagram.com/karsenkoltun/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-11 w-11 items-center justify-center border border-border transition-all duration-300 hover:border-accent hover:text-accent"
-                  >
-                    <Instagram className="h-4 w-4 text-text-secondary" />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/karsenkoltun/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-11 w-11 items-center justify-center border border-border transition-all duration-300 hover:border-accent hover:text-accent"
-                  >
-                    <Linkedin className="h-4 w-4 text-text-secondary" />
-                  </a>
-                </div>
-              </motion.div>
+        {/* Navbar placeholder: subtle warm glow line at bottom */}
+        <div
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, rgba(232,213,163,0.2) 30%, rgba(232,213,163,0.3) 50%, rgba(232,213,163,0.2) 70%, transparent)",
+          }}
+        />
+
+        {/* Right side: Photo placeholder */}
+        <div className="absolute top-0 right-0 hidden h-full w-1/2 lg:block">
+          <div className="flex h-full items-center justify-center">
+            <div className="text-center">
+              <div className="mx-auto h-32 w-32 rounded-full border border-warm/15 bg-warm/5" />
+              <p className="mt-4 text-xs tracking-widest text-text-muted uppercase">
+                Photo Coming Soon
+              </p>
             </div>
+          </div>
+        </div>
 
-            {/* Photo placeholder with accent corner accents */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden border border-accent/20 bg-background-secondary lg:max-w-none">
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                  <div className="h-20 w-20 rounded-full border border-accent/30 bg-accent/5" />
-                  <span className="text-sm tracking-widest text-text-muted uppercase">
-                    Photo Coming Soon
-                  </span>
-                </div>
-                {/* Corner accents */}
-                <div className="absolute top-0 left-0 h-20 w-20 border-t-2 border-l-2 border-accent" />
-                <div className="absolute top-0 right-0 h-20 w-20 border-t-2 border-r-2 border-accent" />
-                <div className="absolute bottom-0 left-0 h-20 w-20 border-b-2 border-l-2 border-accent" />
-                <div className="absolute right-0 bottom-0 h-20 w-20 border-r-2 border-b-2 border-accent" />
+        {/* Text content */}
+        <div className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-10">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="font-heading text-sm tracking-[0.2em] text-warm/80 uppercase"
+          >
+            Karsen Koltun
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="mt-4 max-w-lg font-heading text-5xl font-light italic leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl"
+          >
+            Guiding You to Strategic Real Estate Success.
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+            className="mt-6 text-sm tracking-wider text-text-secondary"
+          >
+            Luxury Real Estate Broker &middot; Entrepreneur &middot; Kelowna
+            Native
+          </motion.p>
+        </div>
+      </section>
+
+      {/* ───────── Meet Karsen Koltun ───────── */}
+      <section className="bg-background py-16 md:py-28 lg:py-36">
+        <div className="mx-auto max-w-4xl px-6 text-center lg:px-10">
+          <AnimateIn>
+            <h2 className="font-heading text-4xl font-light tracking-tight text-text-primary md:text-5xl">
+              Meet Karsen Koltun
+            </h2>
+            <p className="mt-4 text-text-secondary italic">
+              A blend of luxury real estate expertise &amp; entrepreneurial drive
+            </p>
+            <div className="mx-auto mt-10 max-w-3xl space-y-6">
+              <p className="text-base leading-[1.9] text-text-secondary">
+                I&apos;m Karsen Koltun, and I live and breathe Kelowna. As a
+                top-producing real estate broker and entrepreneur, I help clients
+                and investors successfully navigate the competitive Okanagan
+                market with a level of strategy you won&apos;t find anywhere
+                else.
+              </p>
+            </div>
+          </AnimateIn>
+        </div>
+      </section>
+
+      {/* ───────── Photo Grid + Journey Timeline ───────── */}
+      <section className="bg-background-secondary py-16 md:py-28 lg:py-36">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Left: Photo grid (2x2) */}
+            <AnimateIn direction="left">
+              <div className="grid grid-cols-2 gap-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="relative aspect-square overflow-hidden border border-warm/10 bg-background"
+                  >
+                    <div className="flex h-full items-center justify-center">
+                      <span className="text-xs tracking-widest text-text-muted/40 uppercase">
+                        Photo {i}
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </motion.div>
+              <p className="mt-8 text-base leading-[1.8] text-text-secondary">
+                Born and raised in Kelowna, I&apos;ve been immersed in the world
+                of real estate since I was young. Inspired by the landscape and
+                growth of this incredible area.
+              </p>
+            </AnimateIn>
+
+            {/* Right: Journey Timeline */}
+            <AnimateIn direction="right">
+              <div>
+                <p className="font-heading text-2xl font-light italic text-warm">
+                  From Kelowna, For Kelowna
+                </p>
+
+                <h3 className="mt-6 font-heading text-3xl font-light text-text-primary">
+                  My Journey
+                </h3>
+
+                {/* Timeline */}
+                <div className="relative mt-8 space-y-0">
+                  <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-warm/40 via-warm/20 to-warm/5" />
+
+                  {journeyMilestones.map((milestone, i) => (
+                    <div
+                      key={i}
+                      className="relative pl-8 pb-8 last:pb-0"
+                      onMouseEnter={() => setActiveTimeline(i)}
+                      onMouseLeave={() => setActiveTimeline(null)}
+                    >
+                      {/* Dot */}
+                      <div
+                        className={`absolute left-0 top-1 h-2.5 w-2.5 -translate-x-1/2 rounded-full border transition-all duration-300 ${
+                          activeTimeline === i
+                            ? "border-warm bg-warm"
+                            : "border-warm/50 bg-background-secondary"
+                        }`}
+                      />
+
+                      {milestone.year && (
+                        <p className="mb-1 text-xs font-medium tracking-wider text-text-muted">
+                          {milestone.year}
+                        </p>
+                      )}
+                      <h4 className="font-heading text-lg font-medium text-text-primary">
+                        {milestone.label}
+                      </h4>
+                      <p className="mt-1 text-sm leading-relaxed text-text-secondary">
+                        {milestone.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </AnimateIn>
           </div>
         </div>
       </section>
 
       {/* ───────── By The Numbers ───────── */}
-      <section className="border-y border-border bg-background-secondary py-16">
+      <section className="border-y border-border bg-background py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat, i) => (
@@ -236,161 +308,6 @@ export default function AboutPageClient() {
                 </div>
               </AnimateIn>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ───────── Story — The Beginning ───────── */}
-      <section className="bg-background py-16 md:py-28 lg:py-36">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid items-center gap-12 lg:gap-20 lg:grid-cols-2">
-            {/* Text */}
-            <AnimateIn direction="left">
-              <div className="space-y-8">
-                <div>
-                  <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
-                    The Beginning
-                  </p>
-                  <h2 className="mt-4 font-heading text-4xl font-light leading-[1.15] tracking-tight text-text-primary md:text-5xl">
-                    Built Different
-                  </h2>
-                </div>
-                <div className="space-y-6">
-                  <p className="text-base leading-[1.8] text-text-secondary">
-                    I grew up in British Columbia — small towns, big mountains,
-                    and an environment that taught me the value of hard work
-                    early on. I went to university at UBCO in Kelowna, where I
-                    fell in love with the Okanagan and decided this was the
-                    place I wanted to build my life.
-                  </p>
-                  <p className="text-base leading-[1.8] text-text-secondary">
-                    Before real estate, I built a marketing agency from the
-                    ground up. Over 8 years in digital marketing, I&apos;ve
-                    helped brands tell their stories, generate demand, and
-                    grow — producing content and campaigns for 300+ homes
-                    across British Columbia. That experience shaped everything
-                    about how I approach selling real estate today.
-                  </p>
-                  <p className="text-base leading-[1.8] text-text-secondary">
-                    When I got my real estate license, I didn&apos;t leave
-                    marketing behind — I brought it with me. Every listing I
-                    take on gets the full agency treatment: professional media,
-                    strategic positioning, and distribution that actually
-                    reaches buyers.
-                  </p>
-                </div>
-                {/* Decorative line */}
-                <div className="flex items-center gap-4 pt-2">
-                  <div className="h-px w-12 bg-accent" />
-                  <p className="text-xs font-medium tracking-[0.2em] text-accent uppercase">
-                    Marketing Meets Real Estate
-                  </p>
-                </div>
-              </div>
-            </AnimateIn>
-
-            {/* Second Photo Placeholder */}
-            <AnimateIn direction="right">
-              <div className="relative aspect-square w-full overflow-hidden border border-accent/20 bg-background-secondary">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-sm tracking-widest text-text-muted uppercase">
-                    Photo Coming Soon
-                  </span>
-                </div>
-                <div className="absolute top-0 left-0 h-16 w-16 border-t-2 border-l-2 border-accent" />
-                <div className="absolute right-0 bottom-0 h-16 w-16 border-r-2 border-b-2 border-accent" />
-              </div>
-            </AnimateIn>
-          </div>
-        </div>
-      </section>
-
-      {/* ───────── Timeline — The Journey ───────── */}
-      <section className="bg-background-secondary py-16 md:py-28 lg:py-36">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <AnimateIn>
-            <div className="mb-12 text-center md:mb-20">
-              <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
-                The Journey
-              </p>
-              <h2 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary md:text-5xl">
-                Key Milestones
-              </h2>
-              <p className="mx-auto mt-6 max-w-xl text-text-secondary">
-                From marketing to real estate to community building — every
-                step has been intentional.
-              </p>
-            </div>
-          </AnimateIn>
-
-          {/* Timeline Grid */}
-          <div className="relative">
-            {/* Center line (desktop) */}
-            <div className="absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-border lg:block" />
-
-            <div className="space-y-8 lg:space-y-16">
-              {timeline.map((item, i) => {
-                const isLeft = i % 2 === 0;
-                return (
-                  <AnimateIn
-                    key={item.year}
-                    delay={i * 0.1}
-                    direction={isLeft ? "left" : "right"}
-                  >
-                    <div
-                      className="relative lg:grid lg:grid-cols-2 lg:gap-12"
-                      onMouseEnter={() => setActiveTimeline(i)}
-                      onMouseLeave={() => setActiveTimeline(null)}
-                    >
-                      {/* Content — alternates left/right on desktop */}
-                      <div
-                        className={`${
-                          isLeft
-                            ? "lg:col-start-1 lg:text-right lg:pr-16"
-                            : "lg:col-start-2 lg:pl-16"
-                        }`}
-                      >
-                        <div
-                          className={`border border-border bg-background p-8 transition-all duration-500 ${
-                            activeTimeline === i
-                              ? "border-accent/40 shadow-[0_0_40px_rgba(96,165,250,0.08)]"
-                              : ""
-                          }`}
-                        >
-                          <span className="font-heading text-3xl font-light text-accent">
-                            {item.year}
-                          </span>
-                          <h3 className="mt-3 font-heading text-xl font-medium text-text-primary">
-                            {item.title}
-                          </h3>
-                          <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Empty column for the other side */}
-                      {isLeft ? (
-                        <div className="hidden lg:col-start-2 lg:block" />
-                      ) : (
-                        <div className="hidden lg:col-start-1 lg:row-start-1 lg:block" />
-                      )}
-
-                      {/* Center dot */}
-                      <div className="absolute top-8 left-1/2 hidden h-4 w-4 -translate-x-1/2 lg:block">
-                        <div
-                          className={`h-full w-full rounded-full border-2 transition-all duration-500 ${
-                            activeTimeline === i
-                              ? "border-accent bg-accent"
-                              : "border-accent/50 bg-background-secondary"
-                          }`}
-                        />
-                      </div>
-                    </div>
-                  </AnimateIn>
-                );
-              })}
-            </div>
           </div>
         </div>
       </section>
@@ -431,9 +348,9 @@ export default function AboutPageClient() {
             </div>
             {/* Decorative divider */}
             <div className="mt-12 flex items-center justify-center gap-4">
-              <div className="h-px w-16 bg-accent/40" />
-              <div className="h-2 w-2 rotate-45 border border-accent/40" />
-              <div className="h-px w-16 bg-accent/40" />
+              <div className="h-px w-16 bg-warm/40" />
+              <div className="h-2 w-2 rotate-45 border border-warm/40" />
+              <div className="h-px w-16 bg-warm/40" />
             </div>
           </AnimateIn>
         </div>
@@ -456,9 +373,9 @@ export default function AboutPageClient() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
               <AnimateIn key={value.title} delay={i * 0.1}>
-                <div className="group flex h-full flex-col border border-border bg-background p-8 transition-all duration-500 hover:border-accent/30 hover:shadow-[0_0_40px_rgba(96,165,250,0.06)]">
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center border border-accent/20 bg-accent/5 transition-all duration-500 group-hover:border-accent/40 group-hover:bg-accent/10">
-                    <value.icon className="h-6 w-6 text-accent" />
+                <div className="group flex h-full flex-col border border-border bg-background p-8 transition-all duration-500 hover:border-warm/30 hover:shadow-[0_0_40px_rgba(232,213,163,0.06)]">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center border border-warm/20 bg-warm/5 transition-all duration-500 group-hover:border-warm/40 group-hover:bg-warm/10">
+                    <value.icon className="h-6 w-6 text-warm" />
                   </div>
                   <h3 className="font-heading text-xl font-medium text-text-primary">
                     {value.title}
@@ -495,14 +412,14 @@ export default function AboutPageClient() {
             {ventures.map((venture, i) => (
               <AnimateIn key={venture.title} delay={i * 0.12}>
                 <Link href={venture.href} className="group block h-full">
-                  <div className="flex h-full flex-col overflow-hidden border border-border bg-background-secondary transition-all duration-500 hover:border-accent/30">
+                  <div className="flex h-full flex-col overflow-hidden border border-border bg-background-secondary transition-all duration-500 hover:border-warm/30">
                     {/* Image Placeholder */}
                     <div className="relative flex h-56 items-center justify-center bg-background">
                       <span className="text-xs tracking-widest text-text-muted uppercase">
                         Image Coming Soon
                       </span>
                       {/* Tag */}
-                      <div className="absolute top-4 left-4 border border-accent/30 bg-background/80 px-3 py-1 text-[10px] font-medium tracking-[0.2em] text-accent uppercase backdrop-blur-sm">
+                      <div className="absolute top-4 left-4 border border-warm/30 bg-background/80 px-3 py-1 text-[10px] font-medium tracking-[0.2em] text-warm uppercase backdrop-blur-sm">
                         {venture.tag}
                       </div>
                     </div>
@@ -514,7 +431,7 @@ export default function AboutPageClient() {
                       <p className="mt-4 flex-1 text-sm leading-relaxed text-text-secondary">
                         {venture.description}
                       </p>
-                      <div className="mt-8 inline-flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-accent uppercase">
+                      <div className="mt-8 inline-flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-warm uppercase">
                         Learn More
                         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                       </div>
@@ -529,16 +446,16 @@ export default function AboutPageClient() {
 
       {/* ───────── Let's Connect CTA ───────── */}
       <section className="relative overflow-hidden bg-background-secondary py-16 md:py-28 lg:py-36">
-        {/* Ambient accent glow */}
-        <div className="absolute top-1/2 left-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/5 blur-[150px]" />
+        {/* Ambient warm glow */}
+        <div className="absolute top-1/2 left-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-warm/5 blur-[150px]" />
 
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-10">
           <AnimateIn>
-            <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
+            <p className="text-xs font-medium tracking-[0.3em] text-warm uppercase">
               Next Step
             </p>
             <h2 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary md:text-5xl lg:text-6xl">
-              Let&apos;s <em className="italic text-accent">Connect</em>
+              Let&apos;s <em className="italic text-warm">Connect</em>
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
               Whether you&apos;re looking to buy, sell, or just want to
@@ -548,14 +465,14 @@ export default function AboutPageClient() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-3 border border-warm bg-warm px-10 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
+                className="group inline-flex items-center gap-3 border border-warm bg-warm px-10 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover hover:shadow-[0_0_20px_rgba(232,213,163,0.2)]"
               >
                 Let&apos;s Talk
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <a
                 href="mailto:karsen@karsenkoltun.com"
-                className="group inline-flex items-center gap-3 border border-border px-10 py-4 text-xs font-medium tracking-[0.2em] text-text-primary uppercase transition-all duration-300 hover:border-accent hover:text-accent"
+                className="group inline-flex items-center gap-3 border border-border px-10 py-4 text-xs font-medium tracking-[0.2em] text-text-primary uppercase transition-all duration-300 hover:border-warm hover:text-warm"
               >
                 <Mail className="h-3.5 w-3.5" />
                 Email Me

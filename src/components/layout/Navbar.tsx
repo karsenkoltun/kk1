@@ -92,14 +92,26 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out",
           scrolled
-            ? "glass border-b border-accent/[0.06] shadow-lg shadow-black/20"
-            : "bg-transparent border-b border-transparent"
+            ? "border-b border-warm/15 bg-background/60 shadow-[0_4px_30px_rgba(232,213,163,0.06)] backdrop-blur-2xl"
+            : "border-b border-warm/8 bg-background/20 backdrop-blur-sm"
         )}
       >
+        {/* Warm glow line at bottom of navbar */}
+        <div
+          className={cn(
+            "absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500",
+            scrolled ? "opacity-100" : "opacity-50"
+          )}
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, rgba(232,213,163,0.3) 20%, rgba(232,213,163,0.5) 50%, rgba(232,213,163,0.3) 80%, transparent)",
+          }}
+        />
+
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
           {/* Logo */}
           <Link href="/" className="group relative z-10" onClick={closeMenu}>
-            <span className="font-heading text-2xl font-semibold tracking-[0.2em] text-text-primary uppercase transition-colors duration-300 group-hover:text-accent">
+            <span className="font-heading text-2xl font-semibold tracking-[0.3em] text-text-primary uppercase transition-colors duration-300 group-hover:text-warm">
               Karsen Koltun
             </span>
           </Link>
@@ -113,7 +125,7 @@ export default function Navbar() {
                 "children" in link ? link.children : undefined
               );
 
-              /* CTA button — "Let's Talk" */
+              /* CTA button — "Get in Touch" */
               if (link.isButton) {
                 return (
                   <Link
@@ -122,8 +134,8 @@ export default function Navbar() {
                     className={cn(
                       "ml-4 rounded-sm border px-6 py-2.5 text-xs font-medium tracking-[0.2em] uppercase transition-all duration-300",
                       active
-                        ? "border-warm bg-warm text-background"
-                        : "border-warm bg-transparent text-warm hover:bg-warm hover:text-background"
+                        ? "border-warm bg-warm text-background shadow-[0_0_15px_rgba(232,213,163,0.2)]"
+                        : "border-warm/60 bg-transparent text-warm hover:border-warm hover:bg-warm hover:text-background hover:shadow-[0_0_15px_rgba(232,213,163,0.2)]"
                     )}
                   >
                     {link.label}
@@ -144,8 +156,8 @@ export default function Navbar() {
                       className={cn(
                         "flex items-center gap-1.5 px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300",
                         active
-                          ? "text-accent"
-                          : "text-text-secondary hover:text-accent"
+                          ? "text-warm"
+                          : "text-text-secondary hover:text-warm"
                       )}
                     >
                       {link.label}
@@ -164,7 +176,7 @@ export default function Navbar() {
                           initial="hidden"
                           animate="visible"
                           exit="exit"
-                          className="absolute left-0 top-full mt-1 min-w-[260px] rounded-lg border border-border bg-background-secondary/95 p-2 shadow-xl shadow-black/40 backdrop-blur-xl"
+                          className="absolute left-0 top-full mt-1 min-w-[260px] rounded-lg border border-warm/15 bg-background-secondary/95 p-2 shadow-xl shadow-black/40 backdrop-blur-xl"
                         >
                           {link.children.map((child) => {
                             const childActive = pathname === child.href;
@@ -175,8 +187,8 @@ export default function Navbar() {
                                 className={cn(
                                   "block rounded-md px-4 py-3 text-xs tracking-[0.1em] uppercase transition-colors duration-200 hover:bg-background/50",
                                   childActive
-                                    ? "text-accent"
-                                    : "text-text-secondary hover:text-accent"
+                                    ? "text-warm"
+                                    : "text-text-secondary hover:text-warm"
                                 )}
                               >
                                 {child.label}
@@ -198,8 +210,8 @@ export default function Navbar() {
                   className={cn(
                     "px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300",
                     active
-                      ? "text-accent"
-                      : "text-text-secondary hover:text-accent"
+                      ? "text-warm"
+                      : "text-text-secondary hover:text-warm"
                   )}
                 >
                   {link.label}
@@ -210,7 +222,7 @@ export default function Navbar() {
             {/* Desktop phone number */}
             <a
               href="tel:+12501234567"
-              className="ml-5 flex items-center gap-2 text-xs tracking-[0.1em] text-text-muted transition-colors duration-300 hover:text-accent"
+              className="ml-5 flex items-center gap-2 text-xs tracking-[0.1em] text-text-muted transition-colors duration-300 hover:text-warm"
             >
               <Phone className="h-3.5 w-3.5" />
               <span>(250) 123-4567</span>
@@ -220,7 +232,7 @@ export default function Navbar() {
           {/* Hamburger — visible only below lg */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="relative z-[60] p-2 text-text-primary transition-colors hover:text-accent lg:hidden"
+            className="relative z-[60] p-2 text-text-primary transition-colors hover:text-warm lg:hidden"
             aria-label="Toggle menu"
           >
             {menuOpen ? (
@@ -243,8 +255,8 @@ export default function Navbar() {
             className="fixed inset-0 z-[55] bg-background/[0.97] backdrop-blur-2xl"
           >
             {/* Subtle background glow orbs in overlay */}
-            <div className="absolute top-[20%] left-[10%] h-[300px] w-[300px] rounded-full bg-accent/[0.03] blur-[100px]" />
-            <div className="absolute bottom-[20%] right-[10%] h-[250px] w-[250px] rounded-full bg-warm/[0.03] blur-[100px]" />
+            <div className="absolute top-[20%] left-[10%] h-[300px] w-[300px] rounded-full bg-warm/[0.04] blur-[100px]" />
+            <div className="absolute bottom-[20%] right-[10%] h-[250px] w-[250px] rounded-full bg-accent/[0.03] blur-[100px]" />
 
             <div className="flex h-full flex-col items-center justify-center overflow-y-auto py-24">
               <nav className="flex flex-col items-center gap-2">
@@ -267,8 +279,8 @@ export default function Navbar() {
                           href={link.href}
                           onClick={closeMenu}
                           className={cn(
-                            "py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-accent md:text-5xl",
-                            active ? "text-accent" : "text-text-primary"
+                            "py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-warm md:text-5xl",
+                            active ? "text-warm" : "text-text-primary"
                           )}
                         >
                           {link.label}
@@ -282,9 +294,9 @@ export default function Navbar() {
                                 href={child.href}
                                 onClick={closeMenu}
                                 className={cn(
-                                  "py-1 text-sm tracking-[0.15em] uppercase transition-colors hover:text-accent",
+                                  "py-1 text-sm tracking-[0.15em] uppercase transition-colors hover:text-warm",
                                   childActive
-                                    ? "text-accent"
+                                    ? "text-warm"
                                     : "text-text-muted"
                                 )}
                               >
@@ -303,11 +315,11 @@ export default function Navbar() {
                         href={link.href}
                         onClick={closeMenu}
                         className={cn(
-                          "block py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-accent md:text-5xl",
+                          "block py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-warm md:text-5xl",
                           link.isButton
                             ? "text-warm"
                             : active
-                              ? "text-accent"
+                              ? "text-warm"
                               : "text-text-primary"
                         )}
                       >
@@ -320,7 +332,7 @@ export default function Navbar() {
                 {/* Divider */}
                 <motion.div
                   variants={menuItemVariants}
-                  className="my-6 h-px w-16 bg-gradient-to-r from-transparent via-border to-transparent"
+                  className="my-6 h-px w-16 bg-gradient-to-r from-transparent via-warm/40 to-transparent"
                 />
 
                 {/* Secondary Links */}
@@ -330,9 +342,9 @@ export default function Navbar() {
                       href={link.href}
                       onClick={closeMenu}
                       className={cn(
-                        "block py-2 text-sm tracking-[0.2em] uppercase transition-colors hover:text-accent",
+                        "block py-2 text-sm tracking-[0.2em] uppercase transition-colors hover:text-warm",
                         pathname === link.href
-                          ? "text-accent"
+                          ? "text-warm"
                           : "text-text-muted"
                       )}
                     >
@@ -345,7 +357,7 @@ export default function Navbar() {
                 <motion.div variants={menuItemVariants} className="mt-8">
                   <a
                     href="tel:+12501234567"
-                    className="flex items-center gap-2 text-sm tracking-[0.1em] text-text-muted transition-colors hover:text-accent"
+                    className="flex items-center gap-2 text-sm tracking-[0.1em] text-text-muted transition-colors hover:text-warm"
                   >
                     <Phone className="h-4 w-4" />
                     (250) 123-4567

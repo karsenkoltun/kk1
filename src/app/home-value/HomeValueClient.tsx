@@ -2,70 +2,23 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowRight,
-  ArrowLeft,
-  Star,
-  Home,
-  TrendingUp,
-  CheckCircle,
-  MapPin,
-  User,
-  ClipboardList,
-} from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import AnimateIn from "@/components/ui/AnimateIn";
-import { cn } from "@/lib/utils";
-
-const trustElements = [
-  { icon: Home, value: "300+", label: "Homes Marketed" },
-  { icon: Star, value: "5.0", label: "Google Rating" },
-  { icon: TrendingUp, value: "8+", label: "Years Experience" },
-];
-
-const steps = [
-  { number: 1, title: "Property Info", icon: MapPin },
-  { number: 2, title: "Property Details", icon: ClipboardList },
-  { number: 3, title: "Contact Info", icon: User },
-];
 
 const inputClasses =
-  "w-full border border-border bg-background-secondary px-5 py-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-accent focus:bg-background-secondary/80";
-
-const selectClasses =
-  "w-full border border-border bg-background-secondary px-5 py-4 text-sm text-text-muted outline-none transition-all duration-300 focus:border-accent appearance-none cursor-pointer";
-
-const slideVariants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 80 : -80,
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction: number) => ({
-    x: direction > 0 ? -80 : 80,
-    opacity: 0,
-  }),
-};
+  "w-full border border-border bg-background-secondary/50 px-5 py-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-warm focus:bg-background-secondary/80";
 
 export default function HomeValueClient() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [direction, setDirection] = useState(1);
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    neighborhood: "",
+    phone: "",
+  });
   const [submitted, setSubmitted] = useState(false);
 
-  const goNext = () => {
-    if (currentStep < 3) {
-      setDirection(1);
-      setCurrentStep((prev) => prev + 1);
-    }
-  };
-
-  const goPrev = () => {
-    if (currentStep > 1) {
-      setDirection(-1);
-      setCurrentStep((prev) => prev - 1);
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -74,481 +27,205 @@ export default function HomeValueClient() {
   };
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background">
-      {/* Accent glow orbs */}
-      <div className="absolute top-1/4 left-1/3 h-[500px] w-[500px] rounded-full bg-accent/5 blur-[120px]" />
-      <div className="absolute bottom-1/4 right-1/4 h-[300px] w-[300px] rounded-full bg-accent/3 blur-[100px]" />
+    <section className="relative min-h-screen overflow-hidden bg-background">
+      {/* Background effects */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(135deg, #070B14 0%, #0C1220 20%, #1a2744 45%, #1e293b 65%, #111827 85%, #070B14 100%)",
+        }}
+      />
+      <div className="absolute top-1/4 right-1/3 h-[500px] w-[600px] rounded-full bg-warm/5 blur-[150px]" />
+      <div className="absolute bottom-1/3 left-0 h-[400px] w-[500px] rounded-full bg-accent/4 blur-[120px]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/20" />
 
-      <div className="relative z-10 mx-auto w-full max-w-3xl px-6 py-32 lg:px-10">
-        {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-center"
-        >
-          <p className="mb-6 text-xs font-medium tracking-[0.3em] text-accent uppercase">
-            Free Home Valuation
-          </p>
-          <h1 className="font-heading text-5xl font-light leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl">
-            What&apos;s Your Home{" "}
-            <span className="italic text-accent">Worth?</span>
-          </h1>
-        </motion.div>
-
-        {/* Subtitle */}
+      {/* KARSEN KOLTUN branding top center */}
+      <div className="relative z-10 flex justify-center pt-28 pb-4">
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="mx-auto mt-6 max-w-xl text-center text-text-secondary"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="font-heading text-sm font-semibold tracking-[0.35em] text-text-primary uppercase"
         >
-          No obligations. No commitments. No pressure. Just real market data
-          from someone who knows Kelowna.
+          Karsen Koltun
         </motion.p>
+      </div>
 
-        {/* Form Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.7 }}
-          className="mt-12"
-        >
-          <AnimatePresence mode="wait">
-            {submitted ? (
-              /* Success Screen */
-              <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="border border-border bg-background-secondary p-10 text-center md:p-14"
-              >
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-accent/30 bg-accent/10">
-                  <CheckCircle className="h-8 w-8 text-accent" />
-                </div>
-                <h2 className="mt-6 font-heading text-3xl font-light text-text-primary md:text-4xl">
-                  Thank You!
-                </h2>
-                <p className="mx-auto mt-4 max-w-md text-text-secondary">
-                  I&apos;ll send your personalized home valuation within 24
-                  hours. Keep an eye on your inbox.
-                </p>
-                <div className="mt-8 inline-block border border-accent/20 bg-accent/5 px-6 py-3">
-                  <p className="text-xs tracking-[0.2em] text-accent uppercase">
-                    Estimated Response Time: Within 24 Hours
-                  </p>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="form"
-                initial={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="border border-border bg-background-secondary"
-              >
-                {/* Step Indicator */}
-                <div className="border-b border-border px-6 py-6 md:px-10">
-                  <div className="flex items-center justify-between">
-                    {steps.map((step, i) => (
-                      <div key={step.number} className="flex items-center">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={cn(
-                              "flex h-9 w-9 items-center justify-center border transition-all duration-300",
-                              currentStep >= step.number
-                                ? "border-accent bg-accent text-background"
-                                : "border-border bg-background text-text-muted"
-                            )}
-                          >
-                            {currentStep > step.number ? (
-                              <CheckCircle className="h-4 w-4" />
-                            ) : (
-                              <step.icon className="h-4 w-4" />
-                            )}
-                          </div>
-                          <div className="hidden sm:block">
-                            <p
-                              className={cn(
-                                "text-[10px] font-medium tracking-[0.2em] uppercase transition-colors duration-300",
-                                currentStep >= step.number
-                                  ? "text-accent"
-                                  : "text-text-muted"
-                              )}
-                            >
-                              Step {step.number}
-                            </p>
-                            <p
-                              className={cn(
-                                "text-xs transition-colors duration-300",
-                                currentStep >= step.number
-                                  ? "text-text-primary"
-                                  : "text-text-muted"
-                              )}
-                            >
-                              {step.title}
-                            </p>
-                          </div>
-                        </div>
-                        {i < steps.length - 1 && (
-                          <div
-                            className={cn(
-                              "mx-3 h-px w-8 transition-colors duration-300 sm:mx-4 sm:w-12 md:w-16",
-                              currentStep > step.number
-                                ? "bg-accent"
-                                : "bg-border"
-                            )}
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </div>
+      {/* Warm glow line */}
+      <div className="relative z-10 mx-auto max-w-5xl px-6">
+        <div
+          className="h-px"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, rgba(232,213,163,0.3) 20%, rgba(232,213,163,0.5) 50%, rgba(232,213,163,0.3) 80%, transparent)",
+          }}
+        />
+      </div>
 
-                  {/* Progress Bar */}
-                  <div className="mt-5 h-px w-full bg-border">
-                    <motion.div
-                      className="h-full bg-accent"
-                      initial={{ width: "0%" }}
-                      animate={{
-                        width: `${((currentStep - 1) / (steps.length - 1)) * 100}%`,
+      {/* Main content */}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-12 pb-20 lg:px-10">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Left column */}
+          <div>
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="font-heading text-5xl font-light leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl"
+            >
+              Get a Free Home Valuation
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="mt-6 max-w-lg text-text-secondary leading-relaxed"
+            >
+              Get an expert assessment of what your home is really worth in
+              today&apos;s market.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.6 }}
+              className="mt-4 max-w-lg text-text-secondary leading-relaxed"
+            >
+              Book a no-obligation visit with me and I&apos;ll personally
+              evaluate your home&apos;s value and selling potential.
+            </motion.p>
+
+            {/* Form card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.7 }}
+              className="mt-10"
+            >
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="border border-warm/15 bg-background/70 p-10 text-center backdrop-blur-xl"
+                  >
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-accent/30 bg-accent/10">
+                      <CheckCircle className="h-8 w-8 text-accent" />
+                    </div>
+                    <h2 className="mt-6 font-heading text-3xl font-light text-text-primary">
+                      Thank You!
+                    </h2>
+                    <p className="mx-auto mt-4 max-w-md text-text-secondary">
+                      I&apos;ll review your property details and reach out
+                      within 24 hours to schedule your free evaluation.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormData({
+                          name: "",
+                          address: "",
+                          neighborhood: "",
+                          phone: "",
+                        });
                       }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                    />
-                  </div>
-                </div>
+                      className="mt-8 text-xs font-medium tracking-[0.15em] text-warm uppercase transition-colors hover:text-warm-hover"
+                    >
+                      Submit Another Request
+                    </button>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="form"
+                    initial={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="border border-warm/15 bg-background/70 p-8 backdrop-blur-xl sm:p-10"
+                  >
+                    <h3 className="font-heading text-2xl font-light text-text-primary">
+                      Get a Free Home Valuation
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                      Book a no-obligation visit with me and I&apos;ll
+                      personally evaluate your home&apos;s value and selling
+                      potential.
+                    </p>
 
-                {/* Form Content */}
-                <form onSubmit={handleSubmit}>
-                  <div className="overflow-hidden px-6 py-8 md:px-10 md:py-10">
-                    <AnimatePresence mode="wait" custom={direction}>
-                      {/* Step 1: Property Info */}
-                      {currentStep === 1 && (
-                        <motion.div
-                          key="step1"
-                          custom={direction}
-                          variants={slideVariants}
-                          initial="enter"
-                          animate="center"
-                          exit="exit"
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="space-y-5"
+                    <form onSubmit={handleSubmit} className="mt-8 space-y-1">
+                      <input
+                        name="name"
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Full Name"
+                        className={inputClasses}
+                      />
+                      <input
+                        name="address"
+                        type="text"
+                        required
+                        value={formData.address}
+                        onChange={handleChange}
+                        placeholder="Address"
+                        className={inputClasses}
+                      />
+                      <input
+                        name="neighborhood"
+                        type="text"
+                        value={formData.neighborhood}
+                        onChange={handleChange}
+                        placeholder="Neighborhood"
+                        className={inputClasses}
+                      />
+                      <input
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Phone Number"
+                        className={inputClasses}
+                      />
+
+                      <div className="pt-4">
+                        <button
+                          type="submit"
+                          className="w-full border border-warm bg-warm py-4 text-sm font-semibold tracking-wide text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-[0_0_20px_rgba(232,213,163,0.2)]"
                         >
-                          <div>
-                            <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                              Property Address *
-                            </label>
-                            <input
-                              type="text"
-                              placeholder="123 Lakeshore Road, Kelowna, BC"
-                              className={inputClasses}
-                              required
-                            />
-                          </div>
+                          Schedule My Free Evaluation
+                        </button>
+                      </div>
 
-                          <div className="grid gap-5 sm:grid-cols-2">
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Property Type *
-                              </label>
-                              <select
-                                className={selectClasses}
-                                defaultValue=""
-                              >
-                                <option value="" disabled>
-                                  Select type
-                                </option>
-                                <option value="detached">
-                                  Detached House
-                                </option>
-                                <option value="semi">Semi-Detached</option>
-                                <option value="townhome">Townhome</option>
-                                <option value="condo">
-                                  Condo / Apartment
-                                </option>
-                                <option value="duplex">Duplex</option>
-                                <option value="acreage">
-                                  Acreage / Rural
-                                </option>
-                                <option value="land">Vacant Land</option>
-                                <option value="other">Other</option>
-                              </select>
-                            </div>
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Year Built
-                              </label>
-                              <input
-                                type="text"
-                                placeholder="e.g. 2005"
-                                className={inputClasses}
-                              />
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-
-                      {/* Step 2: Property Details */}
-                      {currentStep === 2 && (
-                        <motion.div
-                          key="step2"
-                          custom={direction}
-                          variants={slideVariants}
-                          initial="enter"
-                          animate="center"
-                          exit="exit"
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="space-y-5"
-                        >
-                          <div className="grid gap-5 sm:grid-cols-2">
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Bedrooms
-                              </label>
-                              <select
-                                className={selectClasses}
-                                defaultValue=""
-                              >
-                                <option value="" disabled>
-                                  Select
-                                </option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6+">6+</option>
-                              </select>
-                            </div>
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Bathrooms
-                              </label>
-                              <select
-                                className={selectClasses}
-                                defaultValue=""
-                              >
-                                <option value="" disabled>
-                                  Select
-                                </option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5+">5+</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div className="grid gap-5 sm:grid-cols-2">
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Square Footage
-                              </label>
-                              <input
-                                type="text"
-                                placeholder="e.g. 2,400"
-                                className={inputClasses}
-                              />
-                            </div>
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Lot Size
-                              </label>
-                              <input
-                                type="text"
-                                placeholder="e.g. 6,000 sqft or 0.25 acres"
-                                className={inputClasses}
-                              />
-                            </div>
-                          </div>
-
-                          <div className="grid gap-5 sm:grid-cols-2">
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Recent Renovations
-                              </label>
-                              <select
-                                className={selectClasses}
-                                defaultValue=""
-                              >
-                                <option value="" disabled>
-                                  Select
-                                </option>
-                                <option value="none">None</option>
-                                <option value="minor">Minor Updates</option>
-                                <option value="moderate">
-                                  Moderate Renovations
-                                </option>
-                                <option value="major">
-                                  Major Renovations
-                                </option>
-                                <option value="full">Full Renovation</option>
-                              </select>
-                            </div>
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Garage
-                              </label>
-                              <select
-                                className={selectClasses}
-                                defaultValue=""
-                              >
-                                <option value="" disabled>
-                                  Select
-                                </option>
-                                <option value="none">No Garage</option>
-                                <option value="single">Single</option>
-                                <option value="double">Double</option>
-                                <option value="triple">Triple</option>
-                                <option value="carport">Carport</option>
-                              </select>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-
-                      {/* Step 3: Contact Info */}
-                      {currentStep === 3 && (
-                        <motion.div
-                          key="step3"
-                          custom={direction}
-                          variants={slideVariants}
-                          initial="enter"
-                          animate="center"
-                          exit="exit"
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="space-y-5"
-                        >
-                          <div className="grid gap-5 sm:grid-cols-2">
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Full Name *
-                              </label>
-                              <input
-                                type="text"
-                                placeholder="Your full name"
-                                className={inputClasses}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Email Address *
-                              </label>
-                              <input
-                                type="email"
-                                placeholder="you@email.com"
-                                className={inputClasses}
-                                required
-                              />
-                            </div>
-                          </div>
-
-                          <div className="grid gap-5 sm:grid-cols-2">
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Phone Number
-                              </label>
-                              <input
-                                type="tel"
-                                placeholder="(250) 000-0000"
-                                className={inputClasses}
-                              />
-                            </div>
-                            <div>
-                              <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                                Timeline to Sell
-                              </label>
-                              <select
-                                className={selectClasses}
-                                defaultValue=""
-                              >
-                                <option value="" disabled>
-                                  Select timeline
-                                </option>
-                                <option value="asap">As soon as possible</option>
-                                <option value="1-3">1 - 3 months</option>
-                                <option value="3-6">3 - 6 months</option>
-                                <option value="6-12">6 - 12 months</option>
-                                <option value="12+">12+ months</option>
-                                <option value="curious">
-                                  Just curious about value
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div>
-                            <label className="mb-2 block text-[11px] font-medium tracking-[0.2em] text-text-muted uppercase">
-                              Anything else I should know?
-                            </label>
-                            <textarea
-                              placeholder="Special features, recent upgrades, unique selling points..."
-                              rows={4}
-                              className={cn(inputClasses, "resize-none")}
-                            />
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Navigation Buttons */}
-                  <div className="flex items-center justify-between border-t border-border px-6 py-6 md:px-10">
-                    {currentStep > 1 ? (
-                      <button
-                        type="button"
-                        onClick={goPrev}
-                        className="group flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-text-muted uppercase transition-colors duration-300 hover:text-text-primary"
-                      >
-                        <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-x-1" />
-                        Previous Step
-                      </button>
-                    ) : (
-                      <div />
-                    )}
-
-                    {currentStep < 3 ? (
-                      <button
-                        type="button"
-                        onClick={goNext}
-                        className="group flex items-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
-                      >
-                        Next Step
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                      </button>
-                    ) : (
-                      <button
-                        type="submit"
-                        className="group flex items-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
-                      >
-                        Get My Valuation
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                      </button>
-                    )}
-                  </div>
-                </form>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Trust Elements */}
-        <AnimateIn delay={0.9}>
-          <div className="mt-16 grid grid-cols-3 gap-6">
-            {trustElements.map((item) => (
-              <div key={item.label} className="text-center">
-                <item.icon className="mx-auto h-5 w-5 text-accent" />
-                <p className="mt-3 font-heading text-2xl font-light text-warm">
-                  {item.value}
-                </p>
-                <p className="mt-1 text-xs tracking-wide text-text-muted">
-                  {item.label}
-                </p>
-              </div>
-            ))}
+                      <p className="pt-3 text-center text-xs text-text-muted">
+                        100% confidential. No pressure. Let&apos;s see what your
+                        property is worth.
+                      </p>
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           </div>
-        </AnimateIn>
+
+          {/* Right column: Karsen photo placeholder */}
+          <AnimateIn direction="right" delay={0.4}>
+            <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden border border-warm/10 bg-background-secondary lg:max-w-none">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                <div className="h-24 w-24 rounded-full border border-warm/20 bg-warm/5" />
+                <span className="text-sm tracking-widest text-text-muted uppercase">
+                  Photo Coming Soon
+                </span>
+              </div>
+              {/* Warm corner accents */}
+              <div className="absolute top-0 left-0 h-16 w-16 border-t border-l border-warm/30" />
+              <div className="absolute right-0 bottom-0 h-16 w-16 border-r border-b border-warm/30" />
+            </div>
+          </AnimateIn>
+        </div>
       </div>
     </section>
   );

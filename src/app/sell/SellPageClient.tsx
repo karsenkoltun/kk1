@@ -93,43 +93,31 @@ const comparisonItems = [
   },
 ];
 
-/* ─── 6-step selling process ─── */
+/* ─── 4-step marketing process ─── */
 const processSteps = [
   {
     step: "01",
-    title: "Initial Consultation",
+    title: "Consultation & Pricing Strategy",
     description:
-      "We meet to discuss your goals, timeline, and expectations. I tour your home and begin building a strategy tailored to your property.",
+      "We start with an in-depth consultation and market analysis to determine the optimal pricing strategy for your home.",
   },
   {
     step: "02",
-    title: "Pricing & Preparation",
+    title: "Luxury Marketing & Staging",
     description:
-      "Deep market analysis determines the optimal price. I advise on staging, repairs, and updates that deliver the highest return on investment.",
+      "Your home is professionally staged and showcased through high-end photography, cinematic videography, and sophisticated marketing collateral.",
   },
   {
     step: "03",
-    title: "Media Production",
+    title: "Maximum Exposure",
     description:
-      "Professional photographers, videographers, and drone operators capture your home at its absolute best. A custom property website goes live.",
+      "We leverage targeted digital advertising, social media, email campaigns, and our exclusive network to attract qualified buyers.",
   },
   {
     step: "04",
-    title: "Launch & Marketing",
+    title: "Strategic Negotiation",
     description:
-      "Your home hits the market with a coordinated multi-channel campaign: MLS, social media, paid ads, email blasts, and agent networking.",
-  },
-  {
-    step: "05",
-    title: "Showings & Offers",
-    description:
-      "I manage all inquiries, coordinate private and open showings, and present every offer with clear analysis so you can make informed decisions.",
-  },
-  {
-    step: "06",
-    title: "Negotiation & Close",
-    description:
-      "Expert negotiation ensures you achieve the best possible price and terms. I coordinate inspections, appraisals, and closing logistics seamlessly.",
+      "I'll negotiate on your behalf, presenting you with the best offers and guiding you through a seamless closing process.",
   },
 ];
 
@@ -568,50 +556,128 @@ export default function SellPageClient() {
       </section>
 
       {/* ════════════════════════════════════════
-          6-STEP PROCESS — Vertical Timeline
+          MY PROVEN MARKETING PROCESS — 4-Step Cards
           ════════════════════════════════════════ */}
       <section className="bg-background-secondary py-24 md:py-32">
-        <div className="mx-auto max-w-4xl px-6 lg:px-10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <AnimateIn>
             <div className="text-center">
-              <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
-                The Process
-              </p>
-              <h2 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary md:text-5xl">
-                Six Steps to Sold
+              <h2 className="font-heading text-4xl font-light italic tracking-tight text-text-primary md:text-5xl">
+                My Proven Marketing Process
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-                A proven, systematic approach that takes the stress out of selling and
-                puts more money in your pocket.
+                A strategic, step-by-step approach to sell your home for top dollar.
               </p>
             </div>
           </AnimateIn>
 
-          <div className="relative mt-16">
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-accent/40 via-accent/20 to-accent/5 sm:left-8" />
+          {/* Downward chevron */}
+          <div className="mt-10 flex justify-center">
+            <ChevronDown className="h-6 w-6 text-text-muted/40" />
+          </div>
 
-            <div className="space-y-0">
-              {processSteps.map((step, i) => (
-                <AnimateIn key={step.step} delay={i * 0.08}>
-                  <div className="relative flex gap-6 pb-12 last:pb-0 sm:gap-8">
-                    <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center border border-accent/30 bg-background-secondary sm:h-16 sm:w-16">
-                      <span className="font-heading text-lg font-light text-accent sm:text-xl">
-                        {step.step}
-                      </span>
-                    </div>
-
-                    <div className="pt-1 sm:pt-3">
-                      <h3 className="font-heading text-xl font-medium text-text-primary sm:text-2xl">
-                        {step.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-text-secondary sm:text-base">
-                        {step.description}
-                      </p>
+          {/* Top row: 3 numbered cards + Karsen photo placeholder */}
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {processSteps.slice(0, 3).map((step, i) => (
+              <AnimateIn key={step.step} delay={i * 0.1}>
+                <div className="group relative flex h-full flex-col overflow-hidden border border-warm/10 bg-background/60 backdrop-blur-sm transition-all duration-500 hover:border-warm/30 hover:shadow-[0_0_30px_rgba(232,213,163,0.06)]">
+                  {/* Image placeholder */}
+                  <div className="relative flex h-40 items-center justify-center bg-background-secondary">
+                    <span className="text-xs tracking-widest text-text-muted/40 uppercase">
+                      Image
+                    </span>
+                    {/* Step number badge */}
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-warm/30 bg-background/80 backdrop-blur-sm">
+                        <span className="text-xs font-medium text-text-secondary">
+                          {step.step}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </AnimateIn>
-              ))}
+                  {/* Content */}
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="font-heading text-lg font-medium leading-tight text-text-primary">
+                      {step.title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-text-secondary">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </AnimateIn>
+            ))}
+
+            {/* 4th card: Karsen photo placeholder with step 4 */}
+            <AnimateIn delay={0.3}>
+              <div className="relative flex h-full flex-col overflow-hidden border border-warm/10 bg-background-secondary">
+                <div className="flex flex-1 items-center justify-center bg-background-secondary p-4">
+                  <div className="text-center">
+                    <div className="mx-auto h-24 w-24 rounded-full border border-warm/20 bg-warm/5" />
+                    <p className="mt-4 text-xs tracking-widest text-text-muted uppercase">
+                      Photo Coming Soon
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </AnimateIn>
+          </div>
+
+          {/* Bottom row: Horizontal flow with arrow connectors */}
+          <div className="mt-8 hidden items-stretch gap-4 lg:flex">
+            {processSteps.map((step, i) => (
+              <div key={`flow-${step.step}`} className="flex flex-1 items-center gap-4">
+                <div className="flex-1 border border-border bg-background/40 p-5 backdrop-blur-sm transition-all duration-500 hover:border-warm/20">
+                  <h4 className="font-heading text-base font-medium leading-tight text-text-primary italic">
+                    {step.title}
+                  </h4>
+                  <p className="mt-2 text-xs leading-relaxed text-text-secondary">
+                    {step.description}
+                  </p>
+                  {i === processSteps.length - 1 && (
+                    <a
+                      href="#cma-form"
+                      className="mt-4 inline-block border border-warm bg-warm px-5 py-2.5 text-xs font-semibold tracking-wide text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-[0_0_15px_rgba(232,213,163,0.2)]"
+                    >
+                      Book Your Consultation
+                    </a>
+                  )}
+                </div>
+                {i < processSteps.length - 1 && (
+                  <ArrowRight className="h-4 w-4 shrink-0 text-text-muted/40" />
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile: Vertical steps with book consultation */}
+          <div className="mt-8 space-y-4 lg:hidden">
+            {processSteps.map((step) => (
+              <div
+                key={`mobile-${step.step}`}
+                className="border border-border bg-background/40 p-5 backdrop-blur-sm"
+              >
+                <h4 className="font-heading text-base font-medium text-text-primary italic">
+                  {step.title}
+                </h4>
+                <p className="mt-2 text-xs leading-relaxed text-text-secondary">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+            <div className="pt-2 text-center">
+              <a
+                href="#cma-form"
+                className="inline-block border border-warm bg-warm px-8 py-3.5 text-sm font-semibold tracking-wide text-background transition-all duration-300 hover:bg-warm-hover"
+              >
+                Book Your Consultation
+              </a>
             </div>
+          </div>
+
+          {/* Downward chevron */}
+          <div className="mt-12 flex justify-center">
+            <ChevronDown className="h-6 w-6 text-text-muted/40" />
           </div>
         </div>
       </section>

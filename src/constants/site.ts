@@ -28,7 +28,8 @@ export const NAV_LINKS: NavItem[] = [
       { label: "Marketing with KK", href: "/about/marketing" },
     ],
   },
-  { label: "Let's Talk", href: "/contact", isButton: true },
+  { label: "Blog", href: "/blog" },
+  { label: "Get in Touch", href: "/contact", isButton: true },
 ];
 
 export const SECONDARY_LINKS = [
