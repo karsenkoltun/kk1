@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Search, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { getAllPosts } from "@/lib/blog";
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 
 /* ─── Categories ─── */
 const categories = [
@@ -19,7 +20,17 @@ const categories = [
 /* ─── Blog posts data (single source of truth) ─── */
 const allPosts = getAllPosts();
 
-const POSTS_PER_PAGE = 3;
+const POSTS_PER_PAGE = 9;
+
+/* ─── Gradient combos for blog card headers ─── */
+const gradients = [
+  "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0c1220 100%)",
+  "linear-gradient(135deg, #111827 0%, #1a2744 50%, #0f172a 100%)",
+  "linear-gradient(135deg, #0c1220 0%, #1e293b 50%, #111827 100%)",
+  "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%)",
+  "linear-gradient(135deg, #0d1b2a 0%, #1b2838 50%, #0c1220 100%)",
+  "linear-gradient(135deg, #111827 0%, #0f2027 50%, #0a0a14 100%)",
+];
 
 export default function BlogPageClient() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,7 +50,10 @@ export default function BlogPageClient() {
     return matchesSearch && matchesCategory;
   });
 
-  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
+  );
   const paginatedPosts = filteredPosts.slice(
     (currentPage - 1) * POSTS_PER_PAGE,
     currentPage * POSTS_PER_PAGE
@@ -65,7 +79,7 @@ export default function BlogPageClient() {
   return (
     <>
       {/* ════════════════════════════════════════
-          HERO — Full-width with background image
+          HERO
           ════════════════════════════════════════ */}
       <section className="relative flex min-h-[520px] items-center justify-center overflow-hidden">
         {/* Background gradient */}
@@ -77,7 +91,6 @@ export default function BlogPageClient() {
                 "linear-gradient(135deg, #0C1220 0%, #111827 30%, #1a2744 50%, #1e293b 70%, #0f172a 100%)",
             }}
           />
-          {/* Ambient glow orbs for depth */}
           <div className="absolute top-1/3 right-1/4 h-[400px] w-[600px] rounded-full bg-accent/5 blur-[120px]" />
           <div className="absolute bottom-0 left-1/3 h-[300px] w-[400px] rounded-full bg-warm/4 blur-[100px]" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/70" />
@@ -111,7 +124,7 @@ export default function BlogPageClient() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="mx-auto mt-8 max-w-md"
           >
-            <div className="flex items-center border border-text-secondary/30 bg-background/30 backdrop-blur-sm">
+            <div className="flex items-center rounded-lg border border-text-secondary/30 bg-background/30 backdrop-blur-sm">
               <input
                 type="text"
                 placeholder="Search the blog..."
@@ -137,7 +150,10 @@ export default function BlogPageClient() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           {/* Breadcrumb */}
           <nav className="mb-8 text-sm text-text-muted">
-            <Link href="/" className="transition-colors hover:text-text-primary">
+            <Link
+              href="/"
+              className="transition-colors hover:text-text-primary"
+            >
               Home
             </Link>
             <span className="mx-2">&gt;</span>
@@ -154,7 +170,7 @@ export default function BlogPageClient() {
             <div className="relative">
               <button
                 onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
-                className="flex min-w-[200px] items-center justify-between border border-border bg-background-secondary px-5 py-3 text-sm text-text-primary transition-colors hover:border-accent/40"
+                className="flex min-w-[200px] items-center justify-between rounded-lg border border-border bg-background-secondary px-5 py-3 text-sm text-text-primary transition-colors hover:border-accent/40"
               >
                 <span>{selectedCategory}</span>
                 <ChevronDown
@@ -165,7 +181,7 @@ export default function BlogPageClient() {
               </button>
 
               {showCategoryDropdown && (
-                <div className="absolute right-0 z-20 mt-1 w-full min-w-[200px] border border-border bg-background-secondary shadow-xl">
+                <div className="absolute right-0 z-20 mt-1 w-full min-w-[200px] overflow-hidden rounded-lg border border-border bg-background-secondary shadow-xl">
                   {categories.map((cat) => (
                     <button
                       key={cat}
@@ -187,7 +203,7 @@ export default function BlogPageClient() {
       </section>
 
       {/* ════════════════════════════════════════
-          BLOG CARD GRID
+          BENTO GRID BLOG CARDS
           ════════════════════════════════════════ */}
       <section className="bg-background pb-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -198,55 +214,43 @@ export default function BlogPageClient() {
               </p>
             </div>
           ) : (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <BentoGrid>
               {paginatedPosts.map((post, i) => (
-                <motion.article
+                <BentoGridItem
                   key={post.slug}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="group overflow-hidden rounded-lg bg-background-secondary"
-                >
-                  {/* Image placeholder */}
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <div
-                      className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
-                      style={{
-                        background: `linear-gradient(135deg, #111827 0%, #1e293b 50%, #0f172a 100%)`,
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-
-                    {/* Category badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-accent/90 px-3 py-1.5 text-[11px] font-semibold tracking-[0.1em] text-background uppercase">
-                        {post.category}
-                      </span>
+                  title={post.title}
+                  description={post.excerpt}
+                  href={`/blog/${post.slug}`}
+                  category={post.category}
+                  date={post.date}
+                  className={
+                    i === 0 || i === 5 ? "md:col-span-2" : ""
+                  }
+                  header={
+                    <div className="relative flex w-full flex-1 overflow-hidden rounded-lg">
+                      <div
+                        className="absolute inset-0 transition-transform duration-700 group-hover/bento:scale-105"
+                        style={{
+                          background:
+                            gradients[i % gradients.length],
+                        }}
+                      />
+                      {/* Subtle accent glow on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-background-secondary/60 to-transparent opacity-0 transition-opacity duration-500 group-hover/bento:opacity-100" />
+                      {/* Grid pattern overlay */}
+                      <div
+                        className="absolute inset-0 opacity-[0.03]"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(rgba(126,200,227,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(126,200,227,0.3) 1px, transparent 1px)",
+                          backgroundSize: "40px 40px",
+                        }}
+                      />
                     </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <p className="text-xs text-text-muted">{post.date}</p>
-
-                    <h3 className="mt-3 font-heading text-xl font-medium leading-snug tracking-tight text-text-primary transition-colors group-hover:text-accent">
-                      {post.title}
-                    </h3>
-
-                    <p className="mt-3 text-sm leading-relaxed text-text-secondary line-clamp-2">
-                      {post.excerpt}
-                    </p>
-
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
-                    >
-                      Read More &gt;
-                    </Link>
-                  </div>
-                </motion.article>
+                  }
+                />
               ))}
-            </div>
+            </BentoGrid>
           )}
 
           {/* ════════════════════════════════════════
@@ -258,7 +262,7 @@ export default function BlogPageClient() {
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="flex h-10 w-10 items-center justify-center border border-border text-text-muted transition-colors hover:border-accent hover:text-accent disabled:opacity-30 disabled:hover:border-border disabled:hover:text-text-muted"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-text-muted transition-colors hover:border-accent hover:text-accent disabled:opacity-30 disabled:hover:border-border disabled:hover:text-text-muted"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -266,14 +270,17 @@ export default function BlogPageClient() {
               {/* Page numbers */}
               {getPageNumbers().map((page, idx) =>
                 page === "..." ? (
-                  <span key={`dots-${idx}`} className="px-2 text-text-muted">
+                  <span
+                    key={`dots-${idx}`}
+                    className="px-2 text-text-muted"
+                  >
                     ...
                   </span>
                 ) : (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page as number)}
-                    className={`flex h-10 w-10 items-center justify-center border text-sm font-medium transition-colors ${
+                    className={`flex h-10 w-10 items-center justify-center rounded-lg border text-sm font-medium transition-colors ${
                       currentPage === page
                         ? "border-accent bg-accent text-background"
                         : "border-border text-text-secondary hover:border-accent hover:text-accent"
@@ -286,9 +293,11 @@ export default function BlogPageClient() {
 
               {/* Next */}
               <button
-                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                onClick={() =>
+                  setCurrentPage((p) => Math.min(totalPages, p + 1))
+                }
                 disabled={currentPage === totalPages}
-                className="flex h-10 w-10 items-center justify-center border border-border text-text-muted transition-colors hover:border-accent hover:text-accent disabled:opacity-30 disabled:hover:border-border disabled:hover:text-text-muted"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-text-muted transition-colors hover:border-accent hover:text-accent disabled:opacity-30 disabled:hover:border-border disabled:hover:text-text-muted"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>

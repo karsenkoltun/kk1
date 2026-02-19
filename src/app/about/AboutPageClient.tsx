@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -9,51 +8,161 @@ import {
   Lightbulb,
   Users,
   Target,
-  Instagram,
-  Linkedin,
   Mail,
 } from "lucide-react";
 import AnimateIn from "@/components/ui/AnimateIn";
+import { Timeline } from "@/components/ui/timeline";
 
 /* ──────────────────────────────────────────────
    Data
    ────────────────────────────────────────────── */
 
-const journeyMilestones = [
+const timelineData = [
   {
-    label: "Born in Kelowna",
-    description:
-      "Raised around the business, I learned the value of real estate and hard work at a young age.",
+    title: "2024",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          KK Real Estate Brand
+        </p>
+        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
+          Brought together real estate, marketing, and community under one
+          premium brand. Launched karsenkoltun.ca as the digital home for a
+          new era of strategic, luxury-focused real estate in the Okanagan.
+        </p>
+        <div className="grid grid-cols-2 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className="flex h-20 items-center justify-center rounded-lg border border-warm/10 bg-background shadow-[0_0_24px_rgba(232,213,163,0.04)] md:h-44 lg:h-60"
+            >
+              <span className="text-[10px] tracking-widest text-text-muted/40 uppercase">
+                Photo {i}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
   },
   {
-    year: "2015",
-    label: "Entered Real Estate",
-    description:
-      "Started my career, sold over $10 million in home sales in my first year.",
+    title: "2023",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Kelowna Founders Club
+        </p>
+        <p className="mb-4 text-sm leading-relaxed text-text-secondary md:text-base">
+          Created a curated community for ambitious entrepreneurs, founders,
+          and professionals in the Okanagan. Built to connect people who are
+          building something meaningful — and want to do it together.
+        </p>
+        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
+          What started as an idea to bring together like-minded people became
+          one of the most talked-about private communities in the region.
+        </p>
+        <div className="grid grid-cols-2 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className="flex h-20 items-center justify-center rounded-lg border border-accent/10 bg-background shadow-[0_0_24px_rgba(126,200,227,0.04)] md:h-44 lg:h-60"
+            >
+              <span className="text-[10px] tracking-widest text-text-muted/40 uppercase">
+                Photo {i}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
   },
   {
-    year: "2018",
-    label: "Founded Marketing Agency",
-    description:
-      "Launched a full-service marketing agency, partnering with premium brands to create campaigns that drive real results.",
+    title: "2022",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Top Producer
+        </p>
+        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
+          Recognized as one of Kelowna&apos;s top-producing agents with over
+          $150M+ in career volume. Built on referrals, reputation, and a
+          marketing-first approach that sets listings apart.
+        </p>
+        <div className="mb-8">
+          <div className="flex items-center gap-2 text-sm text-text-secondary">
+            <span className="text-warm">&#10003;</span> $150M+ in career sales volume
+          </div>
+          <div className="flex items-center gap-2 text-sm text-text-secondary">
+            <span className="text-warm">&#10003;</span> 300+ families helped buy &amp; sell
+          </div>
+          <div className="flex items-center gap-2 text-sm text-text-secondary">
+            <span className="text-warm">&#10003;</span> 5.0 Google rating from real clients
+          </div>
+          <div className="flex items-center gap-2 text-sm text-text-secondary">
+            <span className="text-warm">&#10003;</span> Royal LePage top performer
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
-    year: "2022",
-    label: "Top Producer",
-    description:
-      "Recognized as one of Kelowna's top-producing agents with over $150M+ in career volume.",
+    title: "2018",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Founded Marketing Agency
+        </p>
+        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
+          Launched a full-service marketing agency, partnering with premium
+          brands to create campaigns that drive real results. Brought the
+          same strategic, design-forward approach from real estate into the
+          broader business world.
+        </p>
+        <div className="grid grid-cols-2 gap-4">
+          {[1, 2].map((i) => (
+            <div
+              key={i}
+              className="flex h-20 items-center justify-center rounded-lg border border-warm/10 bg-background shadow-[0_0_24px_rgba(232,213,163,0.04)] md:h-44 lg:h-60"
+            >
+              <span className="text-[10px] tracking-widest text-text-muted/40 uppercase">
+                Photo {i}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
   },
   {
-    year: "2023",
-    label: "Kelowna Founders Club",
-    description:
-      "Created a curated community for ambitious entrepreneurs, founders, and professionals in the Okanagan.",
+    title: "2015",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Entered Real Estate
+        </p>
+        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
+          Started my real estate career and sold over $10 million in home
+          sales in my first year. Knew from day one this was more than a
+          job — it was a calling.
+        </p>
+      </div>
+    ),
   },
   {
-    year: "2024",
-    label: "KK Real Estate Brand",
-    description:
-      "Brought together real estate, marketing, and community under one premium brand.",
+    title: "Roots",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Born &amp; Raised in Kelowna
+        </p>
+        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
+          Growing up around the business, I learned the value of real estate
+          and hard work at a young age. The Okanagan isn&apos;t just where I
+          work — it&apos;s home. That local knowledge and deep connection to
+          this community is what sets me apart.
+        </p>
+      </div>
+    ),
   },
 ];
 
@@ -120,8 +229,6 @@ const ventures = [
    ────────────────────────────────────────────── */
 
 export default function AboutPageClient() {
-  const [activeTimeline, setActiveTimeline] = useState<number | null>(null);
-
   return (
     <>
       {/* ───────── Hero — Full-width cinematic ───────── */}
@@ -214,83 +321,25 @@ export default function AboutPageClient() {
         </div>
       </section>
 
-      {/* ───────── Photo Grid + Journey Timeline ───────── */}
-      <section className="bg-background-secondary py-16 md:py-28 lg:py-36">
+      {/* ───────── Journey Timeline (Aceternity scroll-animated) ───────── */}
+      <section className="bg-background-secondary py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Left: Photo grid (2x2) */}
-            <AnimateIn direction="left">
-              <div className="grid grid-cols-2 gap-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="relative aspect-square overflow-hidden border border-warm/10 bg-background"
-                  >
-                    <div className="flex h-full items-center justify-center">
-                      <span className="text-xs tracking-widest text-text-muted/40 uppercase">
-                        Photo {i}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-8 text-base leading-[1.8] text-text-secondary">
-                Born and raised in Kelowna, I&apos;ve been immersed in the world
-                of real estate since I was young. Inspired by the landscape and
-                growth of this incredible area.
+          <AnimateIn>
+            <div className="mb-4 text-center">
+              <p className="text-xs font-medium tracking-[0.3em] text-warm uppercase">
+                From Kelowna, For Kelowna
               </p>
-            </AnimateIn>
-
-            {/* Right: Journey Timeline */}
-            <AnimateIn direction="right">
-              <div>
-                <p className="font-heading text-2xl font-light italic text-warm">
-                  From Kelowna, For Kelowna
-                </p>
-
-                <h3 className="mt-6 font-heading text-3xl font-light text-text-primary">
-                  My Journey
-                </h3>
-
-                {/* Timeline */}
-                <div className="relative mt-8 space-y-0">
-                  <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-warm/40 via-warm/20 to-warm/5" />
-
-                  {journeyMilestones.map((milestone, i) => (
-                    <div
-                      key={i}
-                      className="relative cursor-pointer pl-8 pb-8 last:pb-0"
-                      onMouseEnter={() => setActiveTimeline(i)}
-                      onMouseLeave={() => setActiveTimeline(null)}
-                      onClick={() => setActiveTimeline(activeTimeline === i ? null : i)}
-                    >
-                      {/* Dot */}
-                      <div
-                        className={`absolute left-0 top-1 h-2.5 w-2.5 -translate-x-1/2 rounded-full border transition-all duration-300 ${
-                          activeTimeline === i
-                            ? "border-warm bg-warm"
-                            : "border-warm/50 bg-background-secondary"
-                        }`}
-                      />
-
-                      {milestone.year && (
-                        <p className="mb-1 text-xs font-medium tracking-wider text-text-muted">
-                          {milestone.year}
-                        </p>
-                      )}
-                      <h4 className="font-heading text-lg font-medium text-text-primary">
-                        {milestone.label}
-                      </h4>
-                      <p className="mt-1 text-sm leading-relaxed text-text-secondary">
-                        {milestone.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </AnimateIn>
-          </div>
+              <h2 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary md:text-5xl">
+                My Journey
+              </h2>
+              <p className="mx-auto mt-6 max-w-xl text-text-secondary">
+                From growing up in the Okanagan to becoming one of Kelowna&apos;s
+                top-producing agents — here&apos;s the story so far.
+              </p>
+            </div>
+          </AnimateIn>
         </div>
+        <Timeline data={timelineData} />
       </section>
 
       {/* ───────── By The Numbers ───────── */}

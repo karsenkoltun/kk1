@@ -33,7 +33,11 @@
       "Bash(python:*)",
       "Bash(node -e:*)",
       "WebFetch(domain:karsenkoltun.ca)",
-      "WebFetch(domain:www.karsenkoltun.ca)"
+      "WebFetch(domain:www.karsenkoltun.ca)",
+      "WebFetch(domain:ui.aceternity.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(npx next dev:*)"
     ]
   }
 }

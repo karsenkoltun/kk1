@@ -2,9 +2,21 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Search, ChevronDown } from "lucide-react";
+import {
+  Search,
+  ChevronDown,
+  ArrowRight,
+  Phone,
+  Home,
+  TrendingUp,
+  User,
+  Star,
+  Award,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+import SplitText from "@/components/ui/SplitText";
 
 /* ------------------------------------------------
    Rotating taglines
@@ -17,13 +29,62 @@ const rotatingWords = [
 ];
 
 /* ------------------------------------------------
-   Value propositions
+   Tab definitions
    ------------------------------------------------ */
-const valueProps = [
-  "Helping You Buy Smarter",
-  "Sell For More",
-  "Move Strategically",
-  "Build Wealth through Real Estate",
+interface HeroTab {
+  id: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const heroTabs: HeroTab[] = [
+  { id: "buy", label: "Buy Smarter", icon: Home },
+  { id: "sell", label: "Sell For More", icon: TrendingUp },
+  { id: "move", label: "Move Strategically", icon: Phone },
+  { id: "karsen", label: "Meet Karsen", icon: User },
+];
+
+/* ------------------------------------------------
+   Sell tab — 3-step process
+   ------------------------------------------------ */
+const sellSteps = [
+  {
+    step: "01",
+    title: "Get Your Home Valuation",
+    description:
+      "Understand your home's true market value with a complimentary, data-driven analysis.",
+  },
+  {
+    step: "02",
+    title: "Custom Marketing Strategy",
+    description:
+      "A tailored plan combining professional media, digital campaigns, and targeted outreach.",
+  },
+  {
+    step: "03",
+    title: "Sell For Top Dollar",
+    description:
+      "Strategic pricing and negotiation to maximize your final sale price.",
+  },
+];
+
+/* ------------------------------------------------
+   Move tab — testimonial
+   ------------------------------------------------ */
+const heroTestimonial = {
+  quote:
+    "Karsen made the entire process seamless. His strategic approach gave us complete confidence.",
+  name: "Sarah & James M.",
+  role: "Lower Mission, Kelowna",
+};
+
+/* ------------------------------------------------
+   Karsen tab — credentials
+   ------------------------------------------------ */
+const karsenCredentials = [
+  { icon: Award, value: "300+", label: "Homes Marketed" },
+  { icon: Star, value: "5.0", label: "Google Rating" },
+  { icon: TrendingUp, value: "$150M+", label: "Career Volume" },
 ];
 
 /* ------------------------------------------------
@@ -128,11 +189,161 @@ function Dropdown({ label, value, options, onChange }: DropdownProps) {
 }
 
 /* ------------------------------------------------
+   Tab content — Sell
+   ------------------------------------------------ */
+function SellTabContent() {
+  return (
+    <div className="glass rounded-2xl p-6 sm:p-8">
+      {/* 3-step process */}
+      <div className="grid gap-6 sm:grid-cols-3 sm:gap-4">
+        {sellSteps.map((step, i) => (
+          <div
+            key={step.step}
+            className="relative flex flex-col items-center text-center"
+          >
+            {/* Step number badge */}
+            <div className="flex h-11 w-11 items-center justify-center rounded-full border border-accent/30 bg-accent/10">
+              <span className="text-sm font-semibold text-accent">
+                {step.step}
+              </span>
+            </div>
+            {/* Connector line (desktop only) */}
+            {i < sellSteps.length - 1 && (
+              <div className="absolute top-[22px] left-[calc(50%+28px)] hidden h-px w-[calc(100%-56px)] bg-gradient-to-r from-accent/30 to-accent/10 sm:block" />
+            )}
+            <h3 className="mt-4 text-sm font-medium tracking-wide text-text-primary">
+              {step.title}
+            </h3>
+            <p className="mt-2 text-xs leading-relaxed text-text-secondary">
+              {step.description}
+            </p>
+          </div>
+        ))}
+      </div>
+      {/* CTA */}
+      <div className="mt-8 text-center">
+        <Link
+          href="/home-value"
+          className="group inline-flex items-center gap-3 border border-warm bg-warm px-8 py-3.5 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover hover:shadow-lg hover:shadow-warm/10"
+        >
+          Get a Free Home Valuation
+          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------
+   Tab content — Move Strategically
+   ------------------------------------------------ */
+function MoveTabContent() {
+  return (
+    <div className="glass rounded-2xl p-6 sm:p-8">
+      <div className="flex flex-col items-center text-center">
+        {/* Icon */}
+        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-accent/20 bg-accent/5">
+          <Phone className="h-6 w-6 text-accent" />
+        </div>
+        {/* Copy */}
+        <h3 className="mt-5 font-heading text-2xl font-light tracking-tight text-text-primary sm:text-3xl">
+          Your Next Move,{" "}
+          <span className="italic text-accent">Strategically Planned</span>
+        </h3>
+        <p className="mt-3 max-w-lg text-sm leading-relaxed text-text-secondary">
+          Whether you&apos;re upsizing, downsizing, or relocating to the
+          Okanagan &mdash; I&apos;ll build a custom plan that aligns your
+          timeline, budget, and goals.
+        </p>
+        {/* Testimonial quote */}
+        <div className="mt-6 border-t border-border/50 pt-6">
+          <blockquote className="font-heading text-base font-light italic leading-relaxed text-text-secondary">
+            &ldquo;{heroTestimonial.quote}&rdquo;
+          </blockquote>
+          <p className="mt-2 text-xs tracking-[0.15em] text-accent uppercase">
+            {heroTestimonial.name} &middot;{" "}
+            <span className="text-text-muted">{heroTestimonial.role}</span>
+          </p>
+        </div>
+        {/* CTA */}
+        <div className="mt-6">
+          <Link
+            href="/contact"
+            className="group inline-flex items-center gap-3 border border-warm bg-warm px-8 py-3.5 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover hover:shadow-lg hover:shadow-warm/10"
+          >
+            Book a Strategy Call
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------
+   Tab content — Meet Karsen
+   ------------------------------------------------ */
+function KarsenTabContent() {
+  return (
+    <div className="glass rounded-2xl p-6 sm:p-8">
+      <div className="flex flex-col items-center text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left">
+        {/* Headshot placeholder */}
+        <div className="shrink-0">
+          <div className="relative h-24 w-24 overflow-hidden rounded-full border border-accent/20 bg-background-secondary sm:h-28 sm:w-28">
+            <div className="flex h-full w-full items-center justify-center">
+              <User className="h-8 w-8 text-text-muted/40" />
+            </div>
+          </div>
+        </div>
+        {/* Content */}
+        <div className="mt-5 sm:mt-0">
+          <h3 className="font-heading text-2xl font-light tracking-tight text-text-primary">
+            Karsen Koltun
+          </h3>
+          <p className="mt-1 text-xs tracking-[0.15em] text-accent uppercase">
+            Realtor &middot; Royal LePage
+          </p>
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-text-secondary">
+            8+ years of marketing across real estate, hospitality, and tech. I
+            bring a completely different approach &mdash; one rooted in strategy,
+            content, and digital marketing.
+          </p>
+          {/* Credential stats */}
+          <div className="mt-5 flex items-center justify-center gap-6 sm:justify-start">
+            {karsenCredentials.map((cred) => (
+              <div key={cred.label} className="text-center">
+                <p className="font-heading text-xl font-light text-warm">
+                  {cred.value}
+                </p>
+                <p className="mt-0.5 text-[10px] tracking-[0.15em] text-text-muted uppercase">
+                  {cred.label}
+                </p>
+              </div>
+            ))}
+          </div>
+          {/* CTA */}
+          <div className="mt-6 flex justify-center sm:justify-start">
+            <Link
+              href="/about"
+              className="group inline-flex items-center gap-3 border border-border px-8 py-3.5 text-xs font-medium tracking-[0.2em] text-text-primary uppercase transition-all duration-300 hover:border-warm hover:text-warm"
+            >
+              Learn More About Me
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------
    Hero Component
    ------------------------------------------------ */
 export default function Hero() {
   const router = useRouter();
   const [wordIndex, setWordIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState("buy");
   const sectionRef = useRef<HTMLElement>(null);
 
   /* Search state */
@@ -235,7 +446,7 @@ export default function Hero() {
           Kelowna &middot; Okanagan &middot; Real Estate
         </motion.p>
 
-        {/* Main headline with rotating word */}
+        {/* Main headline with SplitText rotating word */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -244,18 +455,30 @@ export default function Hero() {
           <h1 className="glow-text-warm font-heading text-5xl font-light leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-7xl lg:text-8xl">
             Kelowna Real Estate
           </h1>
-          <div className="relative mt-3 h-[48px] overflow-hidden sm:mt-4 sm:h-[60px] md:h-[75px] lg:h-[90px]">
+          <div className="relative mt-3 flex items-center justify-center sm:mt-4 min-h-[48px] sm:min-h-[60px] md:min-h-[75px] lg:min-h-[90px]">
             <AnimatePresence mode="wait">
-              <motion.span
+              <motion.div
                 key={wordIndex}
-                initial={{ y: 50, opacity: 0, filter: "blur(4px)" }}
-                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                exit={{ y: -50, opacity: 0, filter: "blur(4px)" }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-x-0 block font-heading text-4xl font-light italic tracking-tight text-warm sm:text-5xl md:text-6xl lg:text-7xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { duration: 0.25 } }}
+                transition={{ duration: 0.15 }}
               >
-                {rotatingWords[wordIndex]}
-              </motion.span>
+                <SplitText
+                  text={rotatingWords[wordIndex]}
+                  className="font-heading text-4xl font-light italic tracking-tight text-warm sm:text-5xl md:text-6xl lg:text-7xl"
+                  delay={40}
+                  duration={0.6}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 30, rotateX: -40 }}
+                  to={{ opacity: 1, y: 0, rotateX: 0 }}
+                  threshold={0}
+                  rootMargin="0px"
+                  textAlign="center"
+                  tag="span"
+                />
+              </motion.div>
             </AnimatePresence>
           </div>
         </motion.div>
@@ -268,83 +491,129 @@ export default function Hero() {
           className="mx-auto mt-8 h-px w-48 origin-center bg-gradient-to-r from-transparent via-accent/30 to-transparent"
         />
 
-        {/* Value propositions */}
+        {/* ---- Tab navigation ---- */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-8 flex flex-col items-center gap-1.5"
+          className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
         >
-          {valueProps.map((prop, i) => (
-            <p
-              key={i}
-              className={cn(
-                "text-sm font-light tracking-wide sm:text-base md:text-lg",
-                i === 0
-                  ? "text-text-secondary"
-                  : "text-text-muted"
-              )}
-            >
-              {prop}
-            </p>
-          ))}
+          {heroTabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={cn(
+                  "group relative flex items-center gap-2 rounded-full px-4 py-2.5 text-[11px] font-medium tracking-[0.12em] uppercase transition-all duration-300",
+                  "sm:px-6 sm:py-3 sm:text-xs sm:tracking-[0.15em]",
+                  isActive
+                    ? "border border-warm/40 bg-warm/10 text-warm shadow-[0_0_20px_rgba(232,213,163,0.08)]"
+                    : "border border-border/60 bg-transparent text-text-muted hover:border-text-muted/40 hover:text-text-secondary"
+                )}
+              >
+                <tab.icon
+                  className={cn(
+                    "h-3.5 w-3.5 transition-colors duration-300",
+                    isActive
+                      ? "text-warm"
+                      : "text-text-muted group-hover:text-text-secondary"
+                  )}
+                />
+                {tab.label}
+                {/* Animated indicator border */}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabGlow"
+                    className="absolute inset-0 rounded-full border border-warm/20"
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 30,
+                    }}
+                  />
+                )}
+              </button>
+            );
+          })}
         </motion.div>
 
-        {/* ---- Property search bar ---- */}
+        {/* ---- Tab content panel ---- */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="mx-auto mt-12 max-w-4xl"
+          className="mx-auto mt-10 max-w-4xl"
         >
-          <div className="glass rounded-2xl p-2">
-            <div className="flex flex-col items-stretch gap-0 md:flex-row md:items-center">
-              {/* Dropdowns */}
-              <div className="flex flex-1 flex-col divide-y divide-border/40 md:flex-row md:divide-y-0 md:divide-x">
-                <Dropdown
-                  label="Location"
-                  value={location}
-                  options={locationOptions}
-                  onChange={setLocation}
-                />
-                <Dropdown
-                  label="Price Min"
-                  value={priceMin}
-                  options={priceMinOptions}
-                  onChange={setPriceMin}
-                />
-                <Dropdown
-                  label="Price Max"
-                  value={priceMax}
-                  options={priceMaxOptions}
-                  onChange={setPriceMax}
-                />
-                <Dropdown
-                  label="Beds"
-                  value={beds}
-                  options={bedsOptions}
-                  onChange={setBeds}
-                />
-              </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {/* ---- Buy tab: search bar ---- */}
+              {activeTab === "buy" && (
+                <>
+                  <div className="glass rounded-2xl p-2">
+                    <div className="flex flex-col items-stretch gap-0 md:flex-row md:items-center">
+                      <div className="flex flex-1 flex-col divide-y divide-border/40 md:flex-row md:divide-y-0 md:divide-x">
+                        <Dropdown
+                          label="Location"
+                          value={location}
+                          options={locationOptions}
+                          onChange={setLocation}
+                        />
+                        <Dropdown
+                          label="Price Min"
+                          value={priceMin}
+                          options={priceMinOptions}
+                          onChange={setPriceMin}
+                        />
+                        <Dropdown
+                          label="Price Max"
+                          value={priceMax}
+                          options={priceMaxOptions}
+                          onChange={setPriceMax}
+                        />
+                        <Dropdown
+                          label="Beds"
+                          value={beds}
+                          options={bedsOptions}
+                          onChange={setBeds}
+                        />
+                      </div>
 
-              {/* Search button */}
-              <div className="p-2 md:pl-0">
-                <button
-                  onClick={handleSearch}
-                  className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-warm px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-lg hover:shadow-warm/10 sm:px-8 sm:py-3.5 md:w-auto"
-                  type="button"
-                >
-                  <Search className="h-4 w-4" />
-                  Search
-                </button>
-              </div>
-            </div>
-          </div>
+                      <div className="p-2 md:pl-0">
+                        <button
+                          onClick={handleSearch}
+                          className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-warm px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-lg hover:shadow-warm/10 sm:px-8 sm:py-3.5 md:w-auto"
+                          type="button"
+                        >
+                          <Search className="h-4 w-4" />
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-3 text-center text-xs tracking-wide text-text-muted/60">
+                    Search luxury properties across the Okanagan
+                  </p>
+                </>
+              )}
 
-          {/* Subtle hint below search bar */}
-          <p className="mt-3 text-center text-xs tracking-wide text-text-muted/60">
-            Search luxury properties across the Okanagan
-          </p>
+              {/* ---- Sell tab: stepper ---- */}
+              {activeTab === "sell" && <SellTabContent />}
+
+              {/* ---- Move tab: strategy call ---- */}
+              {activeTab === "move" && <MoveTabContent />}
+
+              {/* ---- Karsen tab: about ---- */}
+              {activeTab === "karsen" && <KarsenTabContent />}
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
       </motion.div>
 

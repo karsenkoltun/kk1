@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import BackToTop from "@/components/ui/BackToTop";
 import ScrollRestoration from "@/components/ui/ScrollRestoration";
+import PageBlurEdges from "@/components/ui/PageBlurEdges";
 import "./globals.css";
 
 /* ─── Fonts ─────────────────────────────────────────── */
@@ -162,6 +163,7 @@ export default function RootLayout({
         <ScrollRestoration />
         <ScrollProgress />
         <Navbar />
+        <PageBlurEdges />
         <main>{children}</main>
         <Footer />
         <BackToTop />

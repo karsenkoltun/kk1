@@ -186,6 +186,21 @@ video {
 }
 
 /* ========================================
+   Gradual Blur (edge fade effect)
+   ======================================== */
+
+.gradual-blur {
+  isolation: isolate;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .gradual-blur > div > div {
+    background: rgba(7, 11, 20, 0.4);
+    opacity: 0.6;
+  }
+}
+
+/* ========================================
    Global Keyframe Animations
    ======================================== */
 
