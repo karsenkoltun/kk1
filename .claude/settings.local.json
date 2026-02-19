@@ -15,7 +15,25 @@
       "Bash(git push:*)",
       "Bash(timeout:*)",
       "Bash(taskkill:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(dir /b \"C:\\\\Users\\\\Karsen\\\\Desktop\\\\kk1\\\\public\")",
+      "Bash(powershell:*)",
+      "Bash(npm run build:*)",
+      "Bash(ping:*)",
+      "Bash(npx --yes wait-on:*)",
+      "Bash(curl:*)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(netstat:*)",
+      "Bash(cmd /c \"taskkill /PID 23064 /F\")",
+      "Bash(cmd /c:*)",
+      "Bash(cmd.exe //c \"taskkill /F /PID 23064\")",
+      "Bash(cmd.exe //c \"taskkill /F /PID 26948\")",
+      "Bash(python -m json.tool:*)",
+      "Bash(python:*)",
+      "Bash(node -e:*)",
+      "WebFetch(domain:karsenkoltun.ca)",
+      "WebFetch(domain:www.karsenkoltun.ca)"
     ]
   }
 }
