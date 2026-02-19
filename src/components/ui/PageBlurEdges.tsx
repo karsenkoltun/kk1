@@ -22,7 +22,7 @@ export default function PageBlurEdges() {
         curve="bezier"
         exponential
         opacity={1}
-        zIndex={40}
+        zIndex={30}
       />
 
       {/* Bottom edge — above footer */}
@@ -35,7 +35,7 @@ export default function PageBlurEdges() {
         curve="bezier"
         exponential
         opacity={1}
-        zIndex={40}
+        zIndex={30}
       />
     </>
   );

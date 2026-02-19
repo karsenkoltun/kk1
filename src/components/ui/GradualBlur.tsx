@@ -127,7 +127,7 @@ function GradualBlur({
       pointerEvents: "none",
       opacity: mounted ? 1 : 0,
       transition: "opacity 0.3s ease-out",
-      zIndex: isPageTarget ? zIndex + 100 : zIndex,
+      zIndex,
       isolation: "isolate",
       ...style,
     };
