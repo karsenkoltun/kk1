@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/types";
+import blogImages from "./images";
 
 /* ─── Real blog posts (with full content) ─── */
 import lowerMission from "./lower-mission-kelowna-real-estate-neighbourhood-guide";
@@ -113,6 +114,12 @@ const skeletonPosts: BlogPost[] = [
  *  ALL POSTS — add new imports above and push here
  * ════════════════════════════════════════════════════
  */
-const posts: BlogPost[] = [lowerMission, upperMission, glenmore, rutland, lakeCountry, westKelowna, blackMountain, downtownCondos, mckinleyBeach, southEastKelowna, firstTimeBuyer, bcIncentives, affordability, condoVsTownhouse, hiddenCosts, newVsResale, homeInspection, strataFees, multipleOffers, movingFromVancouver, sellHomeFast, homeValue, bestTimeToSell, homeStaging, realtorFees, renovationsValue, basementReno, marketReport, buyersOrSellers, priceHistory, ...skeletonPosts];
+const rawPosts: BlogPost[] = [lowerMission, upperMission, glenmore, rutland, lakeCountry, westKelowna, blackMountain, downtownCondos, mckinleyBeach, southEastKelowna, firstTimeBuyer, bcIncentives, affordability, condoVsTownhouse, hiddenCosts, newVsResale, homeInspection, strataFees, multipleOffers, movingFromVancouver, sellHomeFast, homeValue, bestTimeToSell, homeStaging, realtorFees, renovationsValue, basementReno, marketReport, buyersOrSellers, priceHistory, ...skeletonPosts];
+
+/* Merge images from the central image map into each post */
+const posts: BlogPost[] = rawPosts.map((post) => {
+  const img = blogImages[post.slug];
+  return img ? { ...post, image: img.hero, cardImage: img.card, imageAlt: img.alt } : post;
+});
 
 export default posts;

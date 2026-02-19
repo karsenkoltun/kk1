@@ -34,6 +34,8 @@ export interface BlogPost {
   excerpt: string;
   date: string;
   image?: string;
+  cardImage?: string;
+  imageAlt?: string;
   category: string;
   /* Full blog post fields — optional so listing-only posts still work */
   metaDescription?: string;

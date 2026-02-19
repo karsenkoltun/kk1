@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { motion } from "framer-motion";
@@ -160,16 +161,32 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="relative aspect-[21/9] w-full overflow-hidden">
-            {/* Gradient placeholder — swap for Image when photos are added */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(135deg, #0C1220 0%, #1a2744 35%, #1e293b 55%, #111827 80%, #0C1220 100%)",
-              }}
-            />
-            <div className="absolute top-1/4 right-1/3 h-[300px] w-[400px] rounded-full bg-warm/5 blur-[120px]" />
-            <div className="absolute bottom-0 left-1/4 h-[200px] w-[350px] rounded-full bg-accent/4 blur-[100px]" />
+            {post.image ? (
+              <Image
+                src={post.image}
+                alt={post.imageAlt || post.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                priority
+              />
+            ) : (
+              <>
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #0C1220 0%, #1a2744 35%, #1e293b 55%, #111827 80%, #0C1220 100%)",
+                  }}
+                />
+                <div className="absolute top-1/4 right-1/3 h-[300px] w-[400px] rounded-full bg-warm/5 blur-[120px]" />
+                <div className="absolute bottom-0 left-1/4 h-[200px] w-[350px] rounded-full bg-accent/4 blur-[100px]" />
+              </>
+            )}
+            {/* Subtle dark overlay for text readability */}
+            {post.image && (
+              <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
+            )}
           </div>
         </div>
       </motion.section>
@@ -265,15 +282,25 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
                   worth in today&apos;s market.
                 </p>
 
-                {/* Image placeholder */}
-                <div className="mt-5 aspect-[4/3] w-full overflow-hidden">
-                  <div
-                    className="h-full w-full"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #111827 0%, #1e293b 50%, #0f172a 100%)",
-                    }}
-                  />
+                {/* Sidebar image */}
+                <div className="relative mt-5 aspect-[4/3] w-full overflow-hidden">
+                  {post.cardImage ? (
+                    <Image
+                      src={post.cardImage}
+                      alt="Kelowna home valuation"
+                      fill
+                      className="object-cover"
+                      sizes="380px"
+                    />
+                  ) : (
+                    <div
+                      className="h-full w-full"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #111827 0%, #1e293b 50%, #0f172a 100%)",
+                      }}
+                    />
+                  )}
                 </div>
 
                 <Link

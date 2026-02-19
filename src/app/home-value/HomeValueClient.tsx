@@ -1,31 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
 import AnimateIn from "@/components/ui/AnimateIn";
-
-const inputClasses =
-  "w-full border border-border bg-background-secondary/50 px-4 py-4 text-base text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-warm focus:bg-background-secondary/80 sm:px-5 sm:text-sm";
+import HomeValuationForm from "@/components/forms/HomeValuationForm";
 
 export default function HomeValueClient() {
-  const [formData, setFormData] = useState({
-    name: "",
-    address: "",
-    neighborhood: "",
-    phone: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
   return (
     <section className="relative min-h-screen overflow-hidden bg-background">
       {/* Background effects */}
@@ -65,7 +44,7 @@ export default function HomeValueClient() {
 
       {/* Main content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 pt-8 pb-16 sm:px-6 sm:pt-12 sm:pb-20 lg:px-10">
-        <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-start gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left column */}
           <div>
             {/* Headline */}
@@ -98,116 +77,21 @@ export default function HomeValueClient() {
               evaluate your home&apos;s value and selling potential.
             </motion.p>
 
-            {/* Form card */}
+            {/* Multi-step form card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7 }}
               className="mt-10"
             >
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="border border-warm/15 bg-background/70 p-10 text-center backdrop-blur-xl"
-                  >
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-accent/30 bg-accent/10">
-                      <CheckCircle className="h-8 w-8 text-accent" />
-                    </div>
-                    <h2 className="mt-6 font-heading text-3xl font-light text-text-primary">
-                      Thank You!
-                    </h2>
-                    <p className="mx-auto mt-4 max-w-md text-text-secondary">
-                      I&apos;ll review your property details and reach out
-                      within 24 hours to schedule your free evaluation.
-                    </p>
-                    <button
-                      onClick={() => {
-                        setSubmitted(false);
-                        setFormData({
-                          name: "",
-                          address: "",
-                          neighborhood: "",
-                          phone: "",
-                        });
-                      }}
-                      className="mt-8 text-xs font-medium tracking-[0.15em] text-warm uppercase transition-colors hover:text-warm-hover"
-                    >
-                      Submit Another Request
-                    </button>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="form"
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="border border-warm/15 bg-background/70 p-8 backdrop-blur-xl sm:p-10"
-                  >
-                    <h3 className="font-heading text-2xl font-light text-text-primary">
-                      Get a Free Home Valuation
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                      Book a no-obligation visit with me and I&apos;ll
-                      personally evaluate your home&apos;s value and selling
-                      potential.
-                    </p>
+              <div className="border border-warm/15 bg-background/70 p-8 backdrop-blur-xl sm:p-10">
+                <HomeValuationForm />
 
-                    <form onSubmit={handleSubmit} className="mt-8 space-y-1">
-                      <input
-                        name="name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Full Name"
-                        className={inputClasses}
-                      />
-                      <input
-                        name="address"
-                        type="text"
-                        required
-                        value={formData.address}
-                        onChange={handleChange}
-                        placeholder="Address"
-                        className={inputClasses}
-                      />
-                      <input
-                        name="neighborhood"
-                        type="text"
-                        value={formData.neighborhood}
-                        onChange={handleChange}
-                        placeholder="Neighborhood"
-                        className={inputClasses}
-                      />
-                      <input
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="Phone Number"
-                        className={inputClasses}
-                      />
-
-                      <div className="pt-4">
-                        <button
-                          type="submit"
-                          className="w-full border border-warm bg-warm py-4 text-sm font-semibold tracking-wide text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-[0_0_20px_rgba(232,213,163,0.2)]"
-                        >
-                          Schedule My Free Evaluation
-                        </button>
-                      </div>
-
-                      <p className="pt-3 text-center text-xs text-text-muted">
-                        100% confidential. No pressure. Let&apos;s see what your
-                        property is worth.
-                      </p>
-                    </form>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                <p className="mt-5 text-center text-xs text-text-muted">
+                  100% confidential. No pressure. Let&apos;s see what your
+                  property is worth.
+                </p>
+              </div>
             </motion.div>
           </div>
 

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Search, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { getAllPosts } from "@/lib/blog";
@@ -228,24 +229,25 @@ export default function BlogPageClient() {
                   }
                   header={
                     <div className="relative flex w-full flex-1 overflow-hidden rounded-lg">
-                      <div
-                        className="absolute inset-0 transition-transform duration-700 group-hover/bento:scale-105"
-                        style={{
-                          background:
-                            gradients[i % gradients.length],
-                        }}
-                      />
-                      {/* Subtle accent glow on hover */}
+                      {post.cardImage ? (
+                        <Image
+                          src={post.cardImage}
+                          alt={post.imageAlt || post.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover/bento:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
+                        />
+                      ) : (
+                        <div
+                          className="absolute inset-0 transition-transform duration-700 group-hover/bento:scale-105"
+                          style={{
+                            background:
+                              gradients[i % gradients.length],
+                          }}
+                        />
+                      )}
+                      {/* Subtle dark overlay for card readability */}
                       <div className="absolute inset-0 bg-gradient-to-t from-background-secondary/60 to-transparent opacity-0 transition-opacity duration-500 group-hover/bento:opacity-100" />
-                      {/* Grid pattern overlay */}
-                      <div
-                        className="absolute inset-0 opacity-[0.03]"
-                        style={{
-                          backgroundImage:
-                            "linear-gradient(rgba(126,200,227,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(126,200,227,0.3) 1px, transparent 1px)",
-                          backgroundSize: "40px 40px",
-                        }}
-                      />
                     </div>
                   }
                 />
