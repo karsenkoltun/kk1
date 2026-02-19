@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Terms of service for karsenkoltun.com.",
+  description: "Terms of service for karsenkoltun.ca.",
 };
 
 export default function TermsPage() {
@@ -26,7 +26,7 @@ export default function TermsPage() {
               Use of This Website
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-              By accessing and using karsenkoltun.com, you agree to these terms
+              By accessing and using karsenkoltun.ca, you agree to these terms
               of service. This website is provided for informational purposes
               and to facilitate real estate services in the Kelowna and Okanagan
               area.

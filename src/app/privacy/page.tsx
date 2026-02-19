@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for karsenkoltun.com.",
+  description: "Privacy policy for karsenkoltun.ca.",
 };
 
 export default function PrivacyPage() {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://karsenkoltun.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://karsenkoltun.ca";
 
 interface CreateMetadataOptions {
   title?: string;

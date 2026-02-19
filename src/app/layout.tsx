@@ -26,7 +26,7 @@ const inter = Inter({
 /* ─── Constants ─────────────────────────────────────── */
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://karsenkoltun.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://karsenkoltun.ca";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 

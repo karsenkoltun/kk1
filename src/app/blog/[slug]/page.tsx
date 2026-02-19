@@ -4,7 +4,7 @@ import { getPostBySlug, getAllSlugs } from "@/lib/blog";
 import BlogPostClient from "./BlogPostClient";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://karsenkoltun.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://karsenkoltun.ca";
 
 interface PageProps {
   params: Promise<{ slug: string }>;

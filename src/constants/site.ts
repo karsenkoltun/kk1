@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   title: "Karsen Koltun | Kelowna Real Estate",
   description:
     "Premium real estate services in Kelowna, BC. Buy, sell, or get your home value with Karsen Koltun.",
-  url: "https://karsenkoltun.com",
+  url: "https://karsenkoltun.ca",
   location: "Kelowna, BC",
   brokerage: "Royal LePage",
 };
