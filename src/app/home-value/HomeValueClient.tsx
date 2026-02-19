@@ -6,7 +6,7 @@ import { CheckCircle } from "lucide-react";
 import AnimateIn from "@/components/ui/AnimateIn";
 
 const inputClasses =
-  "w-full border border-border bg-background-secondary/50 px-5 py-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-warm focus:bg-background-secondary/80";
+  "w-full border border-border bg-background-secondary/50 px-4 py-4 text-base text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-warm focus:bg-background-secondary/80 sm:px-5 sm:text-sm";
 
 export default function HomeValueClient() {
   const [formData, setFormData] = useState({
@@ -64,8 +64,8 @@ export default function HomeValueClient() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-12 pb-20 lg:px-10">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-8 pb-16 sm:px-6 sm:pt-12 sm:pb-20 lg:px-10">
+        <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left column */}
           <div>
             {/* Headline */}

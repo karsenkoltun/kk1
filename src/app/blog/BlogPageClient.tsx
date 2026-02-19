@@ -83,7 +83,7 @@ export default function BlogPageClient() {
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/70" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-3xl px-6 pt-28 pb-16 text-center">
+        <div className="relative z-10 mx-auto max-w-3xl px-4 pt-24 pb-12 text-center sm:px-6 sm:pt-28 sm:pb-16">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

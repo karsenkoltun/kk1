@@ -240,7 +240,7 @@ export default function ContactPageClient() {
 
   const getFieldClass = (name: string) =>
     cn(
-      "w-full border bg-background-secondary px-5 py-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-300",
+      "w-full border bg-background-secondary px-4 py-4 text-base text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 sm:px-5 sm:text-sm",
       fields[name].touched && fields[name].error
         ? "border-error focus:border-error"
         : fields[name].touched && !fields[name].error && fields[name].value
@@ -256,7 +256,7 @@ export default function ContactPageClient() {
         <div className="absolute top-1/3 left-1/4 h-[500px] w-[500px] rounded-full bg-accent/5 blur-[120px]" />
         <div className="absolute right-1/3 bottom-1/3 h-[300px] w-[300px] rounded-full bg-accent/3 blur-[80px]" />
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 pt-32 pb-16 text-center">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 pt-28 pb-12 text-center sm:px-6 sm:pt-32 sm:pb-16">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -361,7 +361,7 @@ export default function ContactPageClient() {
                   <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
                     Follow Along
                   </p>
-                  <div className="mt-4 flex gap-3">
+                  <div className="mt-4 flex flex-col gap-3 sm:flex-row">
                     {socialLinks.map((social) => (
                       <a
                         key={social.label}

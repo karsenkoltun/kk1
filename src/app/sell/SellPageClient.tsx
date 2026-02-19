@@ -131,7 +131,7 @@ const sellerTestimonial = {
 
 /* ─── Input style constant ─── */
 const inputClasses =
-  "w-full border-b border-text-secondary/30 bg-transparent px-1 py-3.5 text-sm text-text-primary placeholder:text-text-secondary/50 outline-none transition-colors duration-300 focus:border-accent";
+  "w-full border-b border-text-secondary/30 bg-transparent px-1 py-4 text-base text-text-primary placeholder:text-text-secondary/50 outline-none transition-colors duration-300 focus:border-accent sm:py-3.5 sm:text-sm";
 
 export default function SellPageClient() {
   /* ─── Parallax hero ─── */
@@ -195,7 +195,7 @@ export default function SellPageClient() {
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-28 pb-20 lg:px-10"
+          className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-24 pb-16 sm:px-6 sm:pt-28 sm:pb-20 lg:px-10"
         >
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left column — copy */}

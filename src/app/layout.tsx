@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import BackToTop from "@/components/ui/BackToTop";
+import ScrollRestoration from "@/components/ui/ScrollRestoration";
 import "./globals.css";
 
 /* ─── Fonts ─────────────────────────────────────────── */
@@ -158,6 +159,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${cormorant.variable} ${inter.variable} antialiased`}>
+        <ScrollRestoration />
         <ScrollProgress />
         <Navbar />
         <main>{children}</main>

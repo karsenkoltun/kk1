@@ -74,15 +74,37 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* Lock body scroll when overlay is open */
+  /* Lock body scroll when overlay is open — handles iOS overscroll */
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      }
+    }
     return () => {
       document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
     };
   }, [menuOpen]);
 
-  /* Close overlay on route change */
+  /* Auto-close overlay on route change */
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  /* Close overlay callback */
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   return (
@@ -108,16 +130,16 @@ export default function Navbar() {
           }}
         />
 
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-10">
           {/* Logo */}
           <Link href="/" className="group relative z-10" onClick={closeMenu}>
-            <span className="font-heading text-2xl font-semibold tracking-[0.3em] text-text-primary uppercase transition-colors duration-300 group-hover:text-warm">
+            <span className="font-heading text-xl font-semibold tracking-[0.25em] text-text-primary uppercase transition-colors duration-300 group-hover:text-warm sm:text-2xl sm:tracking-[0.3em]">
               Karsen Koltun
             </span>
           </Link>
 
           {/* Desktop Nav — hidden below lg */}
-          <div className="hidden items-center gap-1 lg:flex">
+          <div className="hidden items-center gap-0 lg:flex">
             {NAV_LINKS.map((link) => {
               const active = isActive(
                 pathname,
@@ -132,7 +154,7 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "ml-4 rounded-sm border px-6 py-2.5 text-xs font-medium tracking-[0.2em] uppercase transition-all duration-300",
+                      "ml-3 whitespace-nowrap rounded-sm border px-5 py-2.5 text-xs font-medium tracking-[0.15em] uppercase transition-all duration-300",
                       active
                         ? "border-warm bg-warm text-background shadow-[0_0_15px_rgba(232,213,163,0.2)]"
                         : "border-warm/60 bg-transparent text-warm hover:border-warm hover:bg-warm hover:text-background hover:shadow-[0_0_15px_rgba(232,213,163,0.2)]"
@@ -154,7 +176,7 @@ export default function Navbar() {
                   >
                     <button
                       className={cn(
-                        "flex items-center gap-1.5 px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300",
+                        "flex items-center gap-1.5 whitespace-nowrap px-3 py-2 text-xs font-medium tracking-[0.12em] uppercase transition-colors duration-300",
                         active
                           ? "text-warm"
                           : "text-text-secondary hover:text-warm"
@@ -208,7 +230,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300",
+                    "whitespace-nowrap px-3 py-2 text-xs font-medium tracking-[0.12em] uppercase transition-colors duration-300",
                     active
                       ? "text-warm"
                       : "text-text-secondary hover:text-warm"
@@ -222,17 +244,17 @@ export default function Navbar() {
             {/* Desktop phone number */}
             <a
               href="tel:+12501234567"
-              className="ml-5 flex items-center gap-2 text-xs tracking-[0.1em] text-text-muted transition-colors duration-300 hover:text-warm"
+              className="ml-3 flex shrink-0 items-center gap-2 whitespace-nowrap text-xs tracking-[0.1em] text-text-muted transition-colors duration-300 hover:text-warm"
             >
               <Phone className="h-3.5 w-3.5" />
               <span>(250) 123-4567</span>
             </a>
           </div>
 
-          {/* Hamburger — visible only below lg */}
+          {/* Hamburger — visible only below lg, larger touch target */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="relative z-[60] p-2 text-text-primary transition-colors hover:text-warm lg:hidden"
+            className="relative z-[60] -mr-2 flex h-11 w-11 items-center justify-center text-text-primary transition-colors hover:text-warm lg:hidden"
             aria-label="Toggle menu"
           >
             {menuOpen ? (
@@ -252,14 +274,14 @@ export default function Navbar() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-[55] bg-background/[0.97] backdrop-blur-2xl"
+            className="fixed inset-0 z-[55] overflow-y-auto overscroll-contain bg-background/[0.97] backdrop-blur-2xl"
           >
             {/* Subtle background glow orbs in overlay */}
             <div className="absolute top-[20%] left-[10%] h-[300px] w-[300px] rounded-full bg-warm/[0.04] blur-[100px]" />
             <div className="absolute bottom-[20%] right-[10%] h-[250px] w-[250px] rounded-full bg-accent/[0.03] blur-[100px]" />
 
-            <div className="flex h-full flex-col items-center justify-center overflow-y-auto py-24">
-              <nav className="flex flex-col items-center gap-2">
+            <div className="flex min-h-full flex-col items-center justify-center px-6 py-28">
+              <nav className="flex flex-col items-center gap-1">
                 {/* Primary Links with staggered animation */}
                 {NAV_LINKS.map((link) => {
                   const active = isActive(
@@ -279,13 +301,13 @@ export default function Navbar() {
                           href={link.href}
                           onClick={closeMenu}
                           className={cn(
-                            "py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-warm md:text-5xl",
+                            "py-3 font-heading text-3xl font-light tracking-wider transition-colors active:opacity-70 hover:text-warm sm:text-4xl md:text-5xl",
                             active ? "text-warm" : "text-text-primary"
                           )}
                         >
                           {link.label}
                         </Link>
-                        <div className="mt-1 mb-2 flex flex-col items-center gap-1">
+                        <div className="mt-1 mb-3 flex flex-col items-center gap-0.5">
                           {link.children.map((child) => {
                             const childActive = pathname === child.href;
                             return (
@@ -294,7 +316,7 @@ export default function Navbar() {
                                 href={child.href}
                                 onClick={closeMenu}
                                 className={cn(
-                                  "py-1 text-sm tracking-[0.15em] uppercase transition-colors hover:text-warm",
+                                  "px-4 py-2 text-sm tracking-[0.15em] uppercase transition-colors active:opacity-70 hover:text-warm",
                                   childActive
                                     ? "text-warm"
                                     : "text-text-muted"
@@ -315,7 +337,7 @@ export default function Navbar() {
                         href={link.href}
                         onClick={closeMenu}
                         className={cn(
-                          "block py-3 font-heading text-4xl font-light tracking-wider transition-colors hover:text-warm md:text-5xl",
+                          "block py-3 font-heading text-3xl font-light tracking-wider transition-colors active:opacity-70 hover:text-warm sm:text-4xl md:text-5xl",
                           link.isButton
                             ? "text-warm"
                             : active
@@ -332,7 +354,7 @@ export default function Navbar() {
                 {/* Divider */}
                 <motion.div
                   variants={menuItemVariants}
-                  className="my-6 h-px w-16 bg-gradient-to-r from-transparent via-warm/40 to-transparent"
+                  className="my-5 h-px w-16 bg-gradient-to-r from-transparent via-warm/40 to-transparent"
                 />
 
                 {/* Secondary Links */}
@@ -342,7 +364,7 @@ export default function Navbar() {
                       href={link.href}
                       onClick={closeMenu}
                       className={cn(
-                        "block py-2 text-sm tracking-[0.2em] uppercase transition-colors hover:text-warm",
+                        "block px-4 py-2.5 text-sm tracking-[0.2em] uppercase transition-colors active:opacity-70 hover:text-warm",
                         pathname === link.href
                           ? "text-warm"
                           : "text-text-muted"
@@ -354,10 +376,10 @@ export default function Navbar() {
                 ))}
 
                 {/* Phone in overlay */}
-                <motion.div variants={menuItemVariants} className="mt-8">
+                <motion.div variants={menuItemVariants} className="mt-6">
                   <a
                     href="tel:+12501234567"
-                    className="flex items-center gap-2 text-sm tracking-[0.1em] text-text-muted transition-colors hover:text-warm"
+                    className="flex items-center gap-2 px-4 py-3 text-sm tracking-[0.1em] text-text-muted transition-colors active:opacity-70 hover:text-warm"
                   >
                     <Phone className="h-4 w-4" />
                     (250) 123-4567

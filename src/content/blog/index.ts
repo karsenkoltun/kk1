@@ -7,6 +7,30 @@ import glenmore from "./glenmore-kelowna-real-estate-family-neighbourhood-guide"
 import rutland from "./rutland-kelowna-homes-for-sale-affordable-neighbourhood";
 import lakeCountry from "./living-in-lake-country-bc-everything-you-need-to-know";
 import westKelowna from "./west-kelowna-vs-kelowna";
+import blackMountain from "./black-mountain-kelowna-real-estate-pros-cons-home-prices";
+import downtownCondos from "./downtown-kelowna-condos-for-sale-buyers-guide";
+import mckinleyBeach from "./mckinley-beach-kelowna-master-planned-community";
+import southEastKelowna from "./south-east-kelowna-real-estate-acreages-country-living";
+import firstTimeBuyer from "./first-time-home-buyer-kelowna-guide";
+import bcIncentives from "./bc-first-time-home-buyer-grants-incentives";
+import affordability from "./how-much-house-can-you-afford-kelowna";
+import condoVsTownhouse from "./condo-vs-townhouse-vs-house-kelowna";
+import hiddenCosts from "./hidden-costs-buying-home-bc";
+import newVsResale from "./new-build-vs-resale-home-kelowna";
+import homeInspection from "./home-inspection-kelowna-what-to-look-for";
+import strataFees from "./strata-fees-bc-explained";
+import multipleOffers from "./how-to-win-multiple-offer-situation-kelowna-real-estate";
+import movingFromVancouver from "./moving-to-kelowna-from-vancouver";
+import sellHomeFast from "./sell-home-fast-kelowna";
+import homeValue from "./home-value-kelowna-free-valuation-guide";
+import bestTimeToSell from "./best-time-to-sell-home-kelowna";
+import homeStaging from "./home-staging-tips-kelowna";
+import realtorFees from "./realtor-fees-bc-transparent-breakdown";
+import renovationsValue from "./renovations-that-add-value-kelowna-home";
+import basementReno from "./basement-renovation-cost-kelowna";
+import marketReport from "./kelowna-real-estate-market-report";
+import buyersOrSellers from "./kelowna-buyers-market-or-sellers-market-2025";
+import priceHistory from "./kelowna-home-prices-history-10-year-look";
 
 /* ─── Skeleton posts (listing-only, no content yet) ─── */
 const skeletonPosts: BlogPost[] = [
@@ -89,6 +113,6 @@ const skeletonPosts: BlogPost[] = [
  *  ALL POSTS — add new imports above and push here
  * ════════════════════════════════════════════════════
  */
-const posts: BlogPost[] = [lowerMission, upperMission, glenmore, rutland, lakeCountry, westKelowna, ...skeletonPosts];
+const posts: BlogPost[] = [lowerMission, upperMission, glenmore, rutland, lakeCountry, westKelowna, blackMountain, downtownCondos, mckinleyBeach, southEastKelowna, firstTimeBuyer, bcIncentives, affordability, condoVsTownhouse, hiddenCosts, newVsResale, homeInspection, strataFees, multipleOffers, movingFromVancouver, sellHomeFast, homeValue, bestTimeToSell, homeStaging, realtorFees, renovationsValue, basementReno, marketReport, buyersOrSellers, priceHistory, ...skeletonPosts];
 
 export default posts;

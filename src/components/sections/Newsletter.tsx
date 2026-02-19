@@ -169,13 +169,13 @@ export default function Newsletter() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Your Email Address"
-                        className="w-full border border-border bg-background px-5 py-3.5 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-warm sm:w-auto sm:flex-1"
+                        className="w-full border border-border bg-background px-4 py-4 text-base text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-warm sm:w-auto sm:flex-1 sm:px-5 sm:py-3.5 sm:text-sm"
                         required
                       />
                       <select
                         value={interest}
                         onChange={(e) => setInterest(e.target.value)}
-                        className="w-full border border-border bg-background px-5 py-3.5 text-sm text-text-muted outline-none transition-colors focus:border-warm appearance-none cursor-pointer sm:w-48"
+                        className="w-full border border-border bg-background px-4 py-4 text-base text-text-muted outline-none transition-colors focus:border-warm appearance-none cursor-pointer sm:w-48 sm:px-5 sm:py-3.5 sm:text-sm"
                       >
                         <option value="">Buying or Selling?</option>
                         <option value="buying">Buying</option>

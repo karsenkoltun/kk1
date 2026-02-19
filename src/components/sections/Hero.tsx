@@ -68,11 +68,11 @@ function Dropdown({ label, value, options, onChange }: DropdownProps) {
   }, []);
 
   return (
-    <div ref={ref} className="relative flex-1 min-w-[130px]">
+    <div ref={ref} className="relative flex-1 min-w-0 sm:min-w-[130px]">
       <button
         onClick={() => setOpen((prev) => !prev)}
         className={cn(
-          "flex w-full items-center justify-between gap-2 px-4 py-3 text-left",
+          "flex w-full items-center justify-between gap-2 px-3 py-3 text-left sm:px-4",
           "text-sm text-text-secondary transition-colors duration-200",
           "hover:text-text-primary focus:outline-none",
           open && "text-text-primary"
@@ -223,7 +223,7 @@ export default function Hero() {
       {/* ---- Main content ---- */}
       <motion.div
         style={{ y: headingY }}
-        className="relative z-10 mx-auto max-w-5xl px-6 pt-20 text-center"
+        className="relative z-10 mx-auto max-w-5xl px-4 pt-20 text-center sm:px-6"
       >
         {/* Subtle top label */}
         <motion.p
@@ -331,7 +331,7 @@ export default function Hero() {
               <div className="p-2 md:pl-0">
                 <button
                   onClick={handleSearch}
-                  className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-warm px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-lg hover:shadow-warm/10 md:w-auto"
+                  className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-warm px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-lg hover:shadow-warm/10 sm:px-8 sm:py-3.5 md:w-auto"
                   type="button"
                 >
                   <Search className="h-4 w-4" />

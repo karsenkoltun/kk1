@@ -154,7 +154,7 @@ const buyerResources = [
 
 /* ─── Input style constant ─── */
 const inputClasses =
-  "w-full border border-border bg-background px-5 py-4 text-sm text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none transition-colors duration-300";
+  "w-full border border-border bg-background px-4 py-4 text-base text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none transition-colors duration-300 sm:px-5 sm:text-sm";
 
 export default function BuyPageClient() {
   /* ─── Rotating text ─── */
@@ -242,7 +242,7 @@ export default function BuyPageClient() {
           />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 text-center lg:px-10">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 pt-24 text-center sm:px-6 lg:px-10">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

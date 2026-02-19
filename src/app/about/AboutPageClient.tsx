@@ -160,7 +160,7 @@ export default function AboutPageClient() {
         </div>
 
         {/* Text content */}
-        <div className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-10">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 pt-28 pb-16 sm:px-6 sm:pt-32 sm:pb-20 lg:px-10">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -259,9 +259,10 @@ export default function AboutPageClient() {
                   {journeyMilestones.map((milestone, i) => (
                     <div
                       key={i}
-                      className="relative pl-8 pb-8 last:pb-0"
+                      className="relative cursor-pointer pl-8 pb-8 last:pb-0"
                       onMouseEnter={() => setActiveTimeline(i)}
                       onMouseLeave={() => setActiveTimeline(null)}
+                      onClick={() => setActiveTimeline(activeTimeline === i ? null : i)}
                     >
                       {/* Dot */}
                       <div

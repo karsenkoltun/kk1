@@ -144,8 +144,8 @@ export default function SearchPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-background pt-32 pb-16">
-        <div className="mx-auto max-w-7xl px-6 text-center lg:px-10">
+      <section className="bg-background pt-28 pb-12 sm:pt-32 sm:pb-16">
+        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-10">
           <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
             MLS Listings
           </p>
@@ -161,16 +161,18 @@ export default function SearchPage() {
 
       {/* Search Interface */}
       <section className="bg-background pb-6">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           {/* Property Type Tabs */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div
+            className="-mx-4 flex items-center gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 scrollbar-hide"
+          >
             {propertyTabs.map((tab, i) => (
               <span
                 key={tab.label}
                 className={
                   i === 0
-                    ? "flex items-center gap-2 border border-warm bg-warm px-5 py-3 text-xs font-medium tracking-[0.15em] text-background uppercase"
-                    : "flex items-center gap-2 border border-border bg-background-secondary px-5 py-3 text-xs font-medium tracking-[0.15em] text-text-muted uppercase transition-colors duration-300 hover:border-accent/40 hover:text-text-primary cursor-pointer"
+                    ? "flex shrink-0 items-center gap-2 border border-warm bg-warm px-5 py-3 text-xs font-medium tracking-[0.15em] text-background uppercase"
+                    : "flex shrink-0 items-center gap-2 border border-border bg-background-secondary px-5 py-3 text-xs font-medium tracking-[0.15em] text-text-muted uppercase transition-colors duration-300 hover:border-accent/40 hover:text-text-primary cursor-pointer"
                 }
               >
                 <tab.icon className="h-3.5 w-3.5" />
@@ -241,8 +243,8 @@ export default function SearchPage() {
 
       {/* Listing Cards Grid */}
       <section className="bg-background pb-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+          <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {placeholderListings.map((listing) => (
               <div
                 key={listing.id}
@@ -319,8 +321,8 @@ export default function SearchPage() {
 
       {/* IDX Notice */}
       <section className="bg-background pb-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="border border-accent/20 bg-accent/5 p-8 md:p-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+          <div className="border border-accent/20 bg-accent/5 p-5 sm:p-8 md:p-10">
             <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-accent/30 bg-accent/10">
                 <Info className="h-5 w-5 text-accent" />

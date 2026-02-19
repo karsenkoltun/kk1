@@ -71,7 +71,7 @@ export default function Footer() {
     <footer className="border-t border-border bg-background">
       {/* ---- Newsletter Row ---- */}
       <div className="border-b border-border">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 py-10 md:flex-row md:justify-between lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 py-8 sm:px-6 sm:py-10 md:flex-row md:justify-between lg:px-10">
           <div className="text-center md:text-left">
             <h3 className="font-heading text-xl font-semibold tracking-wide text-text-primary">
               Stay in the Loop
@@ -83,7 +83,7 @@ export default function Footer() {
 
           <form
             onSubmit={handleNewsletter}
-            className="flex w-full max-w-md items-stretch gap-0"
+            className="flex w-full max-w-md flex-col items-stretch gap-2 sm:flex-row sm:gap-0"
           >
             <input
               type="email"
@@ -91,12 +91,12 @@ export default function Footer() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className="flex-1 border border-border bg-background-secondary px-4 py-3 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors duration-300 focus:border-accent"
+              className="flex-1 border border-border bg-background-secondary px-4 py-3 text-base text-text-primary placeholder:text-text-muted outline-none transition-colors duration-300 focus:border-accent sm:text-sm"
             />
             <button
               type="submit"
               className={cn(
-                "flex items-center gap-2 border border-l-0 border-warm bg-warm px-5 py-3 text-xs font-medium tracking-[0.15em] text-background uppercase transition-all duration-300 hover:bg-warm-hover",
+                "flex items-center justify-center gap-2 border border-warm bg-warm px-5 py-3 text-xs font-medium tracking-[0.15em] text-background uppercase transition-all duration-300 hover:bg-warm-hover sm:border-l-0",
                 submitted && "bg-green-600 border-green-600 hover:bg-green-600"
               )}
             >
