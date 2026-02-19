@@ -8,6 +8,7 @@ import BackToTop from "@/components/ui/BackToTop";
 import ScrollRestoration from "@/components/ui/ScrollRestoration";
 import PageBlurEdges from "@/components/ui/PageBlurEdges";
 import ChatWidget from "@/components/chat/ChatWidget";
+import AuthProvider from "@/components/providers/AuthProvider";
 import "./globals.css";
 
 /* ─── Fonts ─────────────────────────────────────────── */
@@ -161,14 +162,16 @@ export default function RootLayout({
         />
       </head>
       <body className={`${cormorant.variable} ${inter.variable} antialiased`}>
-        <ScrollRestoration />
-        <ScrollProgress />
-        <Navbar />
-        <PageBlurEdges />
-        <main>{children}</main>
-        <Footer />
-        <BackToTop />
-        <ChatWidget />
+        <AuthProvider>
+          <ScrollRestoration />
+          <ScrollProgress />
+          <Navbar />
+          <PageBlurEdges />
+          <main>{children}</main>
+          <Footer />
+          <BackToTop />
+          <ChatWidget />
+        </AuthProvider>
 
         {/* Google Analytics — only loads when NEXT_PUBLIC_GA_ID is set */}
         {GA_ID && (
