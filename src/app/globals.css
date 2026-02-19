@@ -204,6 +204,16 @@ video {
    Global Keyframe Animations
    ======================================== */
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--gap))); }
+}
+
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--gap))); }
+}
+
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
@@ -280,6 +290,14 @@ video {
    ======================================== */
 
 @layer utilities {
+  .animate-marquee {
+    animation: marquee var(--duration) linear infinite;
+  }
+
+  .animate-marquee-vertical {
+    animation: marquee-vertical var(--duration) linear infinite;
+  }
+
   .animate-shimmer {
     animation: shimmer 2s ease-in-out infinite;
     background-size: 200% 100%;

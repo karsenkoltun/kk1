@@ -140,7 +140,7 @@ const buyerResources = [
     description:
       "Estimate your monthly payments, compare rates, and understand your buying power. Plan with confidence before you start your search.",
     cta: "Calculate Now",
-    href: "/contact",
+    href: "/calculator",
   },
   {
     icon: TrendingUp,

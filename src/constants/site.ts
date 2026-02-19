@@ -19,6 +19,7 @@ export const NAV_LINKS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Search Listings", href: "/search" },
   { label: "List Your Home", href: "/sell" },
+  { label: "Mortgage Calculator", href: "/calculator" },
   {
     label: "About Karsen",
     href: "/about",
