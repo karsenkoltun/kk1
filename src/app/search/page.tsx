@@ -19,6 +19,16 @@ export const metadata: Metadata = {
   title: "Search Listings",
   description:
     "Search all available properties in Kelowna and the Okanagan. Filter by price, location, bedrooms, and more.",
+  keywords: [
+    "Kelowna MLS listings",
+    "search homes Kelowna",
+    "Okanagan property search",
+    "Kelowna condos for sale",
+    "Kelowna townhomes",
+    "Lake Country real estate",
+    "West Kelowna homes",
+  ],
+  alternates: { canonical: "https://karsenkoltun.ca/search" },
 };
 
 type ListingStatus = "Active" | "Pending" | "Sold";

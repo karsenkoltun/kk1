@@ -11,6 +11,13 @@ export const metadata: Metadata = {
   title: "Marketing with Karsen Koltun",
   description:
     "Helping brands grow through digital marketing. Strategy, content, and results across real estate, hospitality, fitness, and tech.",
+  keywords: [
+    "Kelowna digital marketing",
+    "real estate marketing Kelowna",
+    "Okanagan brand strategy",
+    "social media marketing Kelowna",
+  ],
+  alternates: { canonical: "https://karsenkoltun.ca/about/marketing" },
 };
 
 const services = [

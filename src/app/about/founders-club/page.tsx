@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   title: "Kelowna Founders Club",
   description:
     "Connecting Kelowna's next generation of entrepreneurs. Monthly events, guest speakers, and a community built on growth.",
+  keywords: [
+    "Kelowna entrepreneurs",
+    "Kelowna founders club",
+    "Okanagan business community",
+    "Kelowna networking events",
+  ],
+  alternates: { canonical: "https://karsenkoltun.ca/about/founders-club" },
 };
 
 const pastSpeakers = [
