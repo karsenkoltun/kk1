@@ -174,7 +174,7 @@ export default function HomeValuationForm() {
     const res = await fetch("/api/lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ ...payload, _honey: "" }),
     });
 
     if (!res.ok) {

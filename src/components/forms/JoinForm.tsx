@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import Honeypot from "@/components/forms/Honeypot";
 
 export default function JoinForm() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [honey, setHoney] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ export default function JoinForm() {
           email,
           source: "Founders Club - Join Form",
           tags: ["founders-club", "community-interest", "kelowna"],
+          _honey: honey,
         }),
       });
 
@@ -61,6 +64,7 @@ export default function JoinForm() {
       onSubmit={handleSubmit}
       className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-0"
     >
+      <Honeypot value={honey} onChange={setHoney} />
       <input
         type="email"
         value={email}

@@ -14,6 +14,7 @@ import {
   Star,
 } from "lucide-react";
 import AnimateIn from "@/components/ui/AnimateIn";
+import Honeypot from "@/components/forms/Honeypot";
 
 /* ─── Rotating hero phrases ─── */
 const rotatingPhrases = [
@@ -196,6 +197,7 @@ export default function BuyPageClient() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
+  const [honey, setHoney] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -225,6 +227,7 @@ export default function BuyPageClient() {
             purchase_timeline: form.timeline,
             buyer_message: form.message,
           },
+          _honey: honey,
         }),
       });
 
@@ -673,6 +676,7 @@ export default function BuyPageClient() {
                 ) : (
                   /* ─── Form ─── */
                   <form onSubmit={handleSubmit} className="space-y-5">
+                    <Honeypot value={honey} onChange={setHoney} />
                     {/* Name */}
                     <div>
                       <label

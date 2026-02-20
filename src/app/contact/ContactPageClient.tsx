@@ -16,6 +16,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import AnimateIn from "@/components/ui/AnimateIn";
+import Honeypot from "@/components/forms/Honeypot";
 import { cn } from "@/lib/utils";
 
 /* ──────────────────────────────────────────────
@@ -191,6 +192,7 @@ export default function ContactPageClient() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [honey, setHoney] = useState("");
 
   /* FAQ state */
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
@@ -255,6 +257,7 @@ export default function ContactPageClient() {
             inquiry_type: inquiryLabel,
             message: fields.message.value,
           },
+          _honey: honey,
         }),
       });
 
@@ -552,6 +555,8 @@ export default function ContactPageClient() {
                       className="mt-10 space-y-5"
                       noValidate
                     >
+                      <Honeypot value={honey} onChange={setHoney} />
+
                       {/* Name & Email */}
                       <div className="grid gap-5 sm:grid-cols-2">
                         <div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import Honeypot from "@/components/forms/Honeypot";
 
 export default function MarketingForm() {
   const [form, setForm] = useState({
@@ -13,6 +14,7 @@ export default function MarketingForm() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [honey, setHoney] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,6 +39,7 @@ export default function MarketingForm() {
             business_name: form.business,
             project_details: form.message,
           },
+          _honey: honey,
         }),
       });
 
@@ -82,6 +85,7 @@ export default function MarketingForm() {
       onSubmit={handleSubmit}
       className="mt-8 space-y-4 text-left"
     >
+      <Honeypot value={honey} onChange={setHoney} />
       <div className="grid gap-4 sm:grid-cols-2">
         <input
           type="text"

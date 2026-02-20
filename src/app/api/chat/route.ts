@@ -6,8 +6,13 @@
 
 import { anthropic } from "@ai-sdk/anthropic";
 import { streamText } from "ai";
+import { NextResponse } from "next/server";
+import { rateLimit, getIP } from "@/lib/rate-limit";
 
 export const maxDuration = 30;
+
+/* ── Rate-limit config: 20 messages per 60 seconds per IP ─── */
+const RATE_LIMIT = { limit: 20, windowSeconds: 60 };
 
 /* ── System prompt ─── */
 
@@ -136,6 +141,22 @@ Response Formatting Rules:
 /* ── POST handler ─── */
 
 export async function POST(req: Request) {
+  /* ── Rate limiting ─── */
+  const ip = getIP(req);
+  const { success: withinLimit, resetAt } = rateLimit(ip, RATE_LIMIT);
+
+  if (!withinLimit) {
+    return NextResponse.json(
+      { error: "Too many requests. Please slow down." },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(Math.ceil((resetAt - Date.now()) / 1000)),
+        },
+      }
+    );
+  }
+
   const { messages } = await req.json();
 
   const result = streamText({

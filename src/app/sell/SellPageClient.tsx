@@ -17,6 +17,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import AnimateIn from "@/components/ui/AnimateIn";
+import Honeypot from "@/components/forms/Honeypot";
 
 /* ─── Stats row data ─── */
 const sellerStats = [
@@ -152,6 +153,7 @@ export default function SellPageClient() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
+  const [honey, setHoney] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -176,6 +178,7 @@ export default function SellPageClient() {
           customFields: {
             property_address: formData.address,
           },
+          _honey: honey,
         }),
       });
 
@@ -316,6 +319,7 @@ export default function SellPageClient() {
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit}>
+                    <Honeypot value={honey} onChange={setHoney} />
                     <h3 className="text-sm font-semibold tracking-[0.15em] text-text-primary uppercase">
                       Ready for a Successful Sale?
                     </h3>

@@ -25,6 +25,7 @@ import {
   Phone,
 } from "lucide-react";
 import AnimateIn from "@/components/ui/AnimateIn";
+import Honeypot from "@/components/forms/Honeypot";
 import {
   calculateMortgage,
   generateAmortization,
@@ -232,6 +233,7 @@ export default function MortgageCalculatorClient() {
   const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [leadError, setLeadError] = useState("");
+  const [honey, setHoney] = useState("");
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -266,6 +268,7 @@ export default function MortgageCalculatorClient() {
             purchase_timeline: leadForm.timeline || "Not specified",
             source_url: typeof window !== "undefined" ? window.location.href : "",
           },
+          _honey: honey,
         }),
       });
 
@@ -1075,6 +1078,7 @@ export default function MortgageCalculatorClient() {
                       </div>
 
                       <form onSubmit={handleLeadSubmit} className="space-y-4">
+                        <Honeypot value={honey} onChange={setHoney} />
                         {/* Name */}
                         <div>
                           <label className={labelClass}>

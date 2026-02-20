@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CheckCircle, Check, Lock, Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimateIn from "@/components/ui/AnimateIn";
+import Honeypot from "@/components/forms/Honeypot";
 
 const bulletPoints = [
   "Insider Market Reports",
@@ -19,6 +20,7 @@ export default function Newsletter() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [honey, setHoney] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,6 +43,7 @@ export default function Newsletter() {
           customFields: {
             interest: interest || "Not specified",
           },
+          _honey: honey,
         }),
       });
 
@@ -179,6 +182,8 @@ export default function Newsletter() {
                     onSubmit={handleSubmit}
                     className="flex flex-col items-center gap-4 p-6 md:flex-row md:gap-5 md:p-8"
                   >
+                    <Honeypot value={honey} onChange={setHoney} />
+
                     {/* Label */}
                     <div className="shrink-0 text-center md:text-left">
                       <h3 className="font-heading text-lg font-light text-text-primary md:text-xl">

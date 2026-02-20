@@ -5,10 +5,14 @@
    ═══════════════════════════════════════════════════════════════ */
 
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit, getIP } from "@/lib/rate-limit";
 
 const GHL_TOKEN = process.env.GHL_PRIVATE_INTEGRATION_TOKEN ?? "";
 const GHL_LOCATION_ID = process.env.NEXT_PUBLIC_GHL_LOCATION_ID ?? "";
 const GHL_BASE_URL = "https://services.leadconnectorhq.com";
+
+/* ── Rate-limit config: 5 submissions per 60 seconds per IP ─── */
+const RATE_LIMIT = { limit: 5, windowSeconds: 60 };
 
 /* ── Payload type from the client ─── */
 interface LeadPayload {
@@ -18,12 +22,37 @@ interface LeadPayload {
   source: string;
   tags?: string[];
   customFields?: Record<string, string>;
+  /** Honeypot field — should always be empty */
+  _honey?: string;
 }
 
 /* ── POST handler ─── */
 export async function POST(request: NextRequest) {
   try {
+    /* ── Rate limiting ─── */
+    const ip = getIP(request);
+    const { success: withinLimit, remaining, resetAt } = rateLimit(ip, RATE_LIMIT);
+
+    if (!withinLimit) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again shortly." },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(Math.ceil((resetAt - Date.now()) / 1000)),
+            "X-RateLimit-Remaining": "0",
+          },
+        }
+      );
+    }
+
     const body: LeadPayload = await request.json();
+
+    /* ── Honeypot check — bots fill hidden fields ─── */
+    if (body._honey) {
+      // Silently reject but return 200 so bots think it worked
+      return NextResponse.json({ success: true, ghl: false });
+    }
 
     // Validation
     if (!body.name || !body.email) {
