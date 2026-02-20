@@ -37,14 +37,14 @@ const contactDetails = [
   {
     icon: Mail,
     label: "Email",
-    value: "karsen@karsenkoltun.com",
-    href: "mailto:karsen@karsenkoltun.com",
+    value: "karsen@royallepage.ca",
+    href: "mailto:karsen@royallepage.ca",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "(250) 123-4567",
-    href: "tel:+12501234567",
+    value: "(250) 421-8260",
+    href: "tel:+12504218260",
   },
   {
     icon: MapPin,
@@ -190,6 +190,7 @@ export default function ContactPageClient() {
     message: { ...initialField },
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   /* FAQ state */
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
@@ -217,7 +218,7 @@ export default function ContactPageClient() {
     }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     /* Touch all required fields */
@@ -234,8 +235,36 @@ export default function ContactPageClient() {
     setFields(updated);
     if (hasErrors) return;
 
-    /* Simulate submit */
-    setSubmitted(true);
+    /* Submit to GHL via /api/lead */
+    setSubmitting(true);
+    try {
+      const inquiryLabel = inquiryOptions.find(
+        (o) => o.value === fields.inquiry.value
+      )?.label || fields.inquiry.value;
+
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fields.name.value,
+          email: fields.email.value,
+          phone: fields.phone.value || undefined,
+          source: "Contact Form",
+          tags: ["contact-form", `inquiry-${fields.inquiry.value}`],
+          customFields: {
+            inquiry_type: inquiryLabel,
+            message: fields.message.value,
+          },
+        }),
+      });
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Contact form submission error:", err);
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const getFieldClass = (name: string) =>
@@ -291,18 +320,18 @@ export default function ContactPageClient() {
             className="mt-8 flex flex-wrap items-center justify-center gap-3"
           >
             <a
-              href="mailto:karsen@karsenkoltun.com"
+              href="mailto:karsen@royallepage.ca"
               className="inline-flex items-center gap-2 border border-border bg-background-secondary/50 px-5 py-2.5 text-xs font-medium tracking-wider text-text-secondary transition-all duration-300 hover:border-accent hover:text-accent"
             >
               <Mail className="h-3.5 w-3.5" />
-              karsen@karsenkoltun.com
+              karsen@royallepage.ca
             </a>
             <a
-              href="tel:+12501234567"
+              href="tel:+12504218260"
               className="inline-flex items-center gap-2 border border-border bg-background-secondary/50 px-5 py-2.5 text-xs font-medium tracking-wider text-text-secondary transition-all duration-300 hover:border-accent hover:text-accent"
             >
               <Phone className="h-3.5 w-3.5" />
-              (250) 123-4567
+              (250) 421-8260
             </a>
           </motion.div>
         </div>
@@ -630,10 +659,13 @@ export default function ContactPageClient() {
                       {/* Submit */}
                       <button
                         type="submit"
-                        className="group flex w-full items-center justify-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover"
+                        disabled={submitting}
+                        className="group flex w-full items-center justify-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover disabled:opacity-60"
                       >
-                        Send Message
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                        {submitting ? "Sending..." : "Send Message"}
+                        {!submitting && (
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                        )}
                       </button>
 
                       <p className="text-center text-xs text-text-muted">
@@ -687,7 +719,7 @@ export default function ContactPageClient() {
               <p className="text-sm text-text-secondary">
                 Don&apos;t see your question here?{" "}
                 <a
-                  href="mailto:karsen@karsenkoltun.com"
+                  href="mailto:karsen@royallepage.ca"
                   className="font-medium text-accent transition-opacity hover:opacity-80"
                 >
                   Email me directly

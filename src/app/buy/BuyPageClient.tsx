@@ -195,6 +195,7 @@ export default function BuyPageClient() {
     message: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitting, setFormSubmitting] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -204,11 +205,36 @@ export default function BuyPageClient() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: wire up form submission
-    console.log("Buyer consultation form submitted:", form);
-    setFormSubmitted(true);
+    setFormSubmitting(true);
+
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone || undefined,
+          source: "Buy Page - Consultation Request",
+          tags: ["buyer-lead", "consultation-request", "kelowna"],
+          customFields: {
+            budget_range: form.budget,
+            preferred_neighborhoods: form.neighborhoods,
+            purchase_timeline: form.timeline,
+            buyer_message: form.message,
+          },
+        }),
+      });
+
+      setFormSubmitted(true);
+    } catch (err) {
+      console.error("Buy form submission error:", err);
+      setFormSubmitted(true);
+    } finally {
+      setFormSubmitting(false);
+    }
   };
 
   return (
@@ -796,10 +822,13 @@ export default function BuyPageClient() {
                     {/* Submit */}
                     <button
                       type="submit"
-                      className="group inline-flex w-full items-center justify-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-warm-hover"
+                      disabled={formSubmitting}
+                      className="group inline-flex w-full items-center justify-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-warm-hover disabled:opacity-60"
                     >
-                      Request Consultation
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                      {formSubmitting ? "Submitting..." : "Request Consultation"}
+                      {!formSubmitting && (
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                      )}
                     </button>
                   </form>
                 )}

@@ -151,6 +151,7 @@ export default function SellPageClient() {
     email: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitting, setFormSubmitting] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -158,10 +159,33 @@ export default function SellPageClient() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Valuation form submitted:", formData);
-    setFormSubmitted(true);
+    setFormSubmitting(true);
+
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          source: "Sell Page - CMA Request",
+          tags: ["seller-lead", "cma-request", "kelowna"],
+          customFields: {
+            property_address: formData.address,
+          },
+        }),
+      });
+
+      setFormSubmitted(true);
+    } catch (err) {
+      console.error("Sell form submission error:", err);
+      setFormSubmitted(true);
+    } finally {
+      setFormSubmitting(false);
+    }
   };
 
   return (
@@ -340,9 +364,10 @@ export default function SellPageClient() {
 
                     <button
                       type="submit"
-                      className="mt-8 w-full border-2 border-warm bg-warm py-4 text-sm font-semibold tracking-wide text-background transition-all duration-300 hover:bg-warm-hover"
+                      disabled={formSubmitting}
+                      className="mt-8 w-full border-2 border-warm bg-warm py-4 text-sm font-semibold tracking-wide text-background transition-all duration-300 hover:bg-warm-hover disabled:opacity-60"
                     >
-                      Request Your Valuation
+                      {formSubmitting ? "Submitting..." : "Request Your Valuation"}
                     </button>
 
                     <p className="mt-4 text-center text-xs text-text-muted">

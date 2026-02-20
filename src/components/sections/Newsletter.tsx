@@ -18,10 +18,39 @@ export default function Newsletter() {
   const [interest, setInterest] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: email.split("@")[0],
+          email,
+          source: "Newsletter Signup",
+          tags: [
+            "newsletter",
+            "market-report",
+            ...(interest ? [`interest-${interest}`] : []),
+          ],
+          customFields: {
+            interest: interest || "Not specified",
+          },
+        }),
+      });
+
+      setIsSubmitted(true);
+    } catch (err) {
+      console.error("Newsletter submission error:", err);
+      setIsSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -193,9 +222,10 @@ export default function Newsletter() {
                       </p>
                       <button
                         type="submit"
-                        className="w-full whitespace-nowrap border border-warm bg-warm px-8 py-3.5 text-sm font-semibold tracking-wide text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-[0_0_20px_rgba(232,213,163,0.2)] sm:w-auto"
+                        disabled={isSubmitting}
+                        className="w-full whitespace-nowrap border border-warm bg-warm px-8 py-3.5 text-sm font-semibold tracking-wide text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-[0_0_20px_rgba(232,213,163,0.2)] disabled:opacity-60 sm:w-auto"
                       >
-                        Send Me the Report
+                        {isSubmitting ? "Sending..." : "Send Me the Report"}
                       </button>
                     </div>
                   </form>

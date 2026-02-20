@@ -116,12 +116,14 @@ const jsonLd = {
   url: BASE_URL,
   logo: `${BASE_URL}/logo.png`,
   image: `${BASE_URL}/og-image.jpg`,
-  telephone: "",
-  email: "",
+  telephone: "+1-250-421-8260",
+  email: "karsen@royallepage.ca",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "5-10058 Highway 97",
     addressLocality: "Kelowna",
     addressRegion: "BC",
+    postalCode: "V4V 1P8",
     addressCountry: "CA",
   },
   geo: {
@@ -142,7 +144,12 @@ const jsonLd = {
     "@type": "Organization",
     name: "Royal LePage",
   },
-  sameAs: [],
+  sameAs: [
+    "https://www.instagram.com/karsenkoltun/",
+    "https://www.linkedin.com/in/karsenkoltun/",
+    "https://www.youtube.com/@karsenkoltun",
+    "https://www.tiktok.com/@karsenkoltun",
+  ],
 };
 
 /* ─── Root Layout ───────────────────────────────────── */
