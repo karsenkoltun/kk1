@@ -5,7 +5,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 import { anthropic } from "@ai-sdk/anthropic";
-import { streamText } from "ai";
+import { streamText, convertToModelMessages } from "ai";
 import { NextResponse } from "next/server";
 import { rateLimit, getIP } from "@/lib/rate-limit";
 
@@ -159,10 +159,15 @@ export async function POST(req: Request) {
 
   const { messages } = await req.json();
 
+  /* AI SDK v6: useChat sends UIMessages (parts array).
+     streamText expects ModelMessages (content string).
+     Convert before passing to the model. */
+  const modelMessages = await convertToModelMessages(messages);
+
   const result = streamText({
     model: anthropic("claude-sonnet-4-20250514"),
     system: SYSTEM_PROMPT,
-    messages,
+    messages: modelMessages,
     maxOutputTokens: 1024,
   });
 
