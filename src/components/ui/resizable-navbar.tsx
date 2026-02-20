@@ -97,7 +97,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         boxShadow: visible
           ? "0 0 30px rgba(232, 213, 163, 0.06), 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(232, 213, 163, 0.05)"
           : "none",
-        width: visible ? "55%" : "100%",
+        width: visible ? "70%" : "100%",
         y: visible ? 12 : 0,
       }}
       transition={{
@@ -106,7 +106,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         damping: 50,
       }}
       style={{
-        minWidth: "680px",
+        minWidth: "800px",
       }}
       className={cn(
         "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full px-4 py-2 lg:flex",
@@ -146,7 +146,7 @@ export const NavItems = ({
         setDropdownOpen(null);
       }}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-1 lg:flex",
+        "absolute inset-y-0 left-0 right-[220px] hidden flex-1 flex-row items-center justify-center space-x-1 lg:flex",
         className
       )}
     >
