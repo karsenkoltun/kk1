@@ -10,17 +10,17 @@ const ventures = [
     title: "Kelowna Founders Club",
     description:
       "Connecting Kelowna's next generation of entrepreneurs. Monthly events, guest speakers, and a community built on growth.",
-    href: "/about/founders-club",
+    href: "/about",
     cta: "Learn More",
     imagePlaceholder: "Founders Club Event",
   },
   {
     icon: Megaphone,
-    title: "Marketing with KK",
+    title: "Marketing Agency",
     description:
-      "Helping brands grow through digital marketing. Strategy, content, and paid media across real estate, hospitality, fitness, and tech.",
-    href: "/about/marketing",
-    cta: "Work Together",
+      "Founded a full-service marketing agency working with 30+ companies. From small startups to large corporations, scaling brands to profitability.",
+    href: "/about",
+    cta: "My Story",
     imagePlaceholder: "Marketing Campaign",
   },
   {
@@ -28,7 +28,7 @@ const ventures = [
     title: "Content & Social Media",
     description:
       "Building brands through storytelling. From property walkthroughs to lifestyle content, creating media that connects and converts.",
-    href: "/about/marketing",
+    href: "/about",
     cta: "See the Work",
     imagePlaceholder: "Content Creation",
   },

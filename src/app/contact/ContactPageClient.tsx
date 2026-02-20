@@ -28,8 +28,6 @@ const inquiryOptions = [
   { value: "buying", label: "Buying a Home" },
   { value: "selling", label: "Selling a Home" },
   { value: "valuation", label: "Home Valuation" },
-  { value: "marketing", label: "Marketing Services" },
-  { value: "founders-club", label: "Founders Club" },
   { value: "general", label: "General Inquiry" },
   { value: "other", label: "Other" },
 ];

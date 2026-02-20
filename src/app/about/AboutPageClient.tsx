@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -9,155 +10,269 @@ import {
   Users,
   Target,
   Mail,
+  ExternalLink,
 } from "lucide-react";
 import AnimateIn from "@/components/ui/AnimateIn";
 import { Timeline } from "@/components/ui/timeline";
 
 /* ──────────────────────────────────────────────
-   Data
+   Reusable image grid component for timeline
+   ────────────────────────────────────────────── */
+
+function TimelineImage({
+  src,
+  alt,
+  className = "",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`relative overflow-hidden rounded-lg border border-warm/10 bg-background shadow-[0_0_24px_rgba(232,213,163,0.04)] ${className}`}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+      />
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   Timeline Data — My Story
    ────────────────────────────────────────────── */
 
 const timelineData = [
   {
-    title: "2024",
+    title: "Now",
     content: (
       <div>
         <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
-          KK Real Estate Brand
+          A Prominent Brand in Kelowna
         </p>
         <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
-          Brought together real estate, marketing, and community under one
-          premium brand. Launched karsenkoltun.ca as the digital home for a
-          new era of strategic, luxury-focused real estate in the Okanagan.
+          Grown my real estate brand to be a prominent name in Kelowna — known
+          for real estate and marketing. Combining strategic marketing expertise
+          with deep local knowledge to deliver an experience that stands apart
+          in the Okanagan market.
         </p>
         <div className="grid grid-cols-2 gap-4">
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className="flex h-28 items-center justify-center rounded-lg border border-warm/10 bg-background shadow-[0_0_24px_rgba(232,213,163,0.04)] sm:h-36 md:h-44 lg:h-60"
-            >
-              <span className="text-[10px] tracking-widest text-text-muted/40 uppercase">
-                Photo {i}
-              </span>
-            </div>
-          ))}
+          <TimelineImage
+            src="/images/about/karsen-portrait-blue.jpg"
+            alt="Karsen Koltun professional portrait"
+            className="aspect-[3/4] sm:aspect-[3/4]"
+          />
+          <TimelineImage
+            src="/images/about/karsen-portrait-peace.jpg"
+            alt="Karsen Koltun portrait"
+            className="aspect-[3/4] sm:aspect-[3/4]"
+          />
         </div>
       </div>
     ),
   },
   {
-    title: "2023",
+    title: "Feb 2026",
     content: (
       <div>
         <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
-          Kelowna Founders Club
+          Rookie of the Year
         </p>
         <p className="mb-4 text-sm leading-relaxed text-text-secondary md:text-base">
-          Created a curated community for ambitious entrepreneurs, founders,
-          and professionals in the Okanagan. Built to connect people who are
-          building something meaningful — and want to do it together.
+          Won Rookie of the Year at Royal LePage Kelowna — a recognition of
+          the hustle, strategy, and results delivered since day one.
+        </p>
+        <a
+          href="https://www.instagram.com/p/DUZHe1RkpNJ/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-8 inline-flex items-center gap-2 text-xs font-medium tracking-[0.15em] text-warm uppercase transition-colors hover:text-warm-hover"
+        >
+          View on Instagram
+          <ExternalLink className="h-3 w-3" />
+        </a>
+        <div className="mt-4">
+          <TimelineImage
+            src="/images/about/karsen-portrait-lights.jpg"
+            alt="Karsen Koltun at Royal LePage awards"
+            className="aspect-[3/4] max-w-xs"
+          />
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Jan 2026",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Founders Club Event 2
+        </p>
+        <p className="mb-4 text-sm leading-relaxed text-text-secondary md:text-base">
+          Hosted the second Kelowna Founders Club event — New Year 2026
+          Kickoff. Continued building momentum for the entrepreneurial
+          community in the Okanagan.
+        </p>
+        <a
+          href="https://www.kelownafounders.club/event-details/new-year-2026-kickoff"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-8 inline-flex items-center gap-2 text-xs font-medium tracking-[0.15em] text-warm uppercase transition-colors hover:text-warm-hover"
+        >
+          View Event Details
+          <ExternalLink className="h-3 w-3" />
+        </a>
+        <div className="mt-4 grid grid-cols-2 gap-4">
+          <TimelineImage
+            src="/images/about/event2-crowd.jpg"
+            alt="Kelowna Founders Club Event 2 — audience"
+            className="aspect-[4/3]"
+          />
+          <TimelineImage
+            src="/images/about/event2-speaking.jpg"
+            alt="Karsen speaking at Founders Club Event 2"
+            className="aspect-[4/3]"
+          />
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Oct 2025",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Founders Club Event 1
+        </p>
+        <p className="mb-4 text-sm leading-relaxed text-text-secondary md:text-base">
+          Launched the first ever Kelowna Founders Club event — a Halloween
+          2025 Mastermind. Brought together driven entrepreneurs for an evening
+          of connection and collaboration.
+        </p>
+        <a
+          href="https://www.kelownafounders.club/event-details/halloween-2025-mastermind"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-8 inline-flex items-center gap-2 text-xs font-medium tracking-[0.15em] text-warm uppercase transition-colors hover:text-warm-hover"
+        >
+          View Event Details
+          <ExternalLink className="h-3 w-3" />
+        </a>
+        <div className="mt-4 space-y-4">
+          <TimelineImage
+            src="/images/about/event1-crowd.jpg"
+            alt="Karsen presenting to a packed lecture hall at Founders Club Event 1"
+            className="aspect-[16/9]"
+          />
+          <div className="grid grid-cols-2 gap-4">
+            <TimelineImage
+              src="/images/about/event1-audience.jpg"
+              alt="Audience at Kelowna Founders Club Event 1"
+              className="aspect-[4/3]"
+            />
+            <TimelineImage
+              src="/images/about/event1-speaking.jpg"
+              alt="Karsen speaking at Founders Club Event 1"
+              className="aspect-[4/3]"
+            />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Aug 2025",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Founded the Kelowna Founders Club
         </p>
         <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
-          What started as an idea to bring together like-minded people became
-          one of the most talked-about private communities in the region.
+          Began putting together a community of driven individuals to inspire
+          the youth and grow businesses and entrepreneurs in the Okanagan.
+          What started as an idea to connect like-minded people became one of
+          the most talked-about communities in the region.
         </p>
         <div className="grid grid-cols-2 gap-4">
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className="flex h-28 items-center justify-center rounded-lg border border-accent/10 bg-background shadow-[0_0_24px_rgba(126,200,227,0.04)] sm:h-36 md:h-44 lg:h-60"
-            >
-              <span className="text-[10px] tracking-widest text-text-muted/40 uppercase">
-                Photo {i}
-              </span>
-            </div>
-          ))}
+          <TimelineImage
+            src="/images/about/stage-speaking-1.jpg"
+            alt="Karsen on stage speaking to audience"
+            className="aspect-[3/4]"
+          />
+          <TimelineImage
+            src="/images/about/stage-speaking-2.jpg"
+            alt="Karsen speaking on stage"
+            className="aspect-[3/4]"
+          />
         </div>
       </div>
     ),
   },
   {
-    title: "2022",
+    title: "Dec 2024",
     content: (
       <div>
         <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
-          Top Producer
+          Founded a Marketing Agency
         </p>
         <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
-          Recognized as one of Kelowna&apos;s top-producing agents with over
-          $150M+ in career volume. Built on referrals, reputation, and a
-          marketing-first approach that sets listings apart.
-        </p>
-        <div className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-text-secondary">
-            <span className="text-warm">&#10003;</span> $150M+ in career sales volume
-          </div>
-          <div className="flex items-center gap-2 text-sm text-text-secondary">
-            <span className="text-warm">&#10003;</span> 300+ families helped buy &amp; sell
-          </div>
-          <div className="flex items-center gap-2 text-sm text-text-secondary">
-            <span className="text-warm">&#10003;</span> 5.0 Google rating from real clients
-          </div>
-          <div className="flex items-center gap-2 text-sm text-text-secondary">
-            <span className="text-warm">&#10003;</span> Royal LePage top performer
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "2018",
-    content: (
-      <div>
-        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
-          Founded Marketing Agency
-        </p>
-        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
-          Launched a full-service marketing agency, partnering with premium
-          brands to create campaigns that drive real results. Brought the
-          same strategic, design-forward approach from real estate into the
-          broader business world.
-        </p>
-        <div className="grid grid-cols-2 gap-4">
-          {[1, 2].map((i) => (
-            <div
-              key={i}
-              className="flex h-28 items-center justify-center rounded-lg border border-warm/10 bg-background shadow-[0_0_24px_rgba(232,213,163,0.04)] sm:h-36 md:h-44 lg:h-60"
-            >
-              <span className="text-[10px] tracking-widest text-text-muted/40 uppercase">
-                Photo {i}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "2015",
-    content: (
-      <div>
-        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
-          Entered Real Estate
-        </p>
-        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
-          Started my real estate career and sold over $10 million in home
-          sales in my first year. Knew from day one this was more than a
-          job — it was a calling.
+          Launched a marketing agency working with over 30 companies — from
+          small startups to large corporations — scaling marketing initiatives
+          and launching businesses to profitability through ads, social media,
+          online presence, and other tactics. Grew the agency to a full-time
+          team of 12.
         </p>
       </div>
     ),
   },
   {
-    title: "Roots",
+    title: "Jul 2024",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Got My Real Estate License
+        </p>
+        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
+          Became one of the youngest realtors in BC. After years of learning
+          the industry from the inside, it was time to step into the role I
+          was built for — helping people buy and sell homes with a
+          marketing-first approach.
+        </p>
+      </div>
+    ),
+  },
+  {
+    title: "Aug 2018",
+    content: (
+      <div>
+        <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
+          Joined Royal LePage Kelowna
+        </p>
+        <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
+          Got hired at Royal LePage Kelowna as an administrative assistant.
+          Started learning the real estate business from the ground up —
+          understanding the systems, the clients, and the strategies that make
+          a brokerage run.
+        </p>
+      </div>
+    ),
+  },
+  {
+    title: "Jun 2005",
     content: (
       <div>
         <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
           Born &amp; Raised in Kelowna
         </p>
         <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
-          Growing up around the business, I learned the value of real estate
-          and hard work at a young age. The Okanagan isn&apos;t just where I
+          Grew up in a family of real estate agents and was molded by the
+          knowledge and culture of my mom Petrina Owen, a prominent real
+          estate agent in Lake Country. The Okanagan isn&apos;t just where I
           work — it&apos;s home. That local knowledge and deep connection to
           this community is what sets me apart.
         </p>
@@ -167,9 +282,9 @@ const timelineData = [
 ];
 
 const stats = [
-  { value: "300+", label: "Homes" },
-  { value: "8+", label: "Years" },
-  { value: "$150M+", label: "Volume" },
+  { value: "30+", label: "Companies Served" },
+  { value: "12", label: "Agency Team" },
+  { value: "20", label: "Years Old" },
   { value: "5.0", label: "Google Rating" },
 ];
 
@@ -197,30 +312,6 @@ const values = [
     title: "Excellence",
     description:
       "Every listing, every campaign, every interaction is held to the highest standard. Good enough is never good enough.",
-  },
-];
-
-const ventures = [
-  {
-    title: "Real Estate",
-    description:
-      "Helping buyers and sellers across the Okanagan with a marketing-first approach that gets results.",
-    href: "/sell",
-    tag: "Core",
-  },
-  {
-    title: "Kelowna Founders Club",
-    description:
-      "A curated community for ambitious entrepreneurs, founders, and professionals building in the Okanagan.",
-    href: "/about/founders-club",
-    tag: "Community",
-  },
-  {
-    title: "Marketing Agency",
-    description:
-      "Full-service content and digital marketing for premium brands and businesses that want to stand out.",
-    href: "/about/marketing",
-    tag: "Agency",
   },
 ];
 
@@ -254,16 +345,19 @@ export default function AboutPageClient() {
           }}
         />
 
-        {/* Right side: Photo placeholder */}
+        {/* Right side: Karsen portrait */}
         <div className="absolute top-0 right-0 hidden h-full w-1/2 lg:block">
-          <div className="flex h-full items-center justify-center">
-            <div className="text-center">
-              <div className="mx-auto h-32 w-32 rounded-full border border-warm/15 bg-warm/5" />
-              <p className="mt-4 text-xs tracking-widest text-text-muted uppercase">
-                Photo Coming Soon
-              </p>
-            </div>
-          </div>
+          <Image
+            src="/images/about/karsen-portrait-arms.jpg"
+            alt="Karsen Koltun"
+            fill
+            className="object-cover object-top"
+            sizes="50vw"
+            priority
+          />
+          {/* Gradient overlay to blend into dark bg */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111827] via-[#111827]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-[#0C1220]/40" />
         </div>
 
         {/* Text content */}
@@ -311,17 +405,17 @@ export default function AboutPageClient() {
             <div className="mx-auto mt-10 max-w-3xl space-y-6">
               <p className="text-base leading-[1.9] text-text-secondary">
                 I&apos;m Karsen Koltun, and I live and breathe Kelowna. As a
-                top-producing real estate broker and entrepreneur, I help clients
-                and investors successfully navigate the competitive Okanagan
-                market with a level of strategy you won&apos;t find anywhere
-                else.
+                real estate agent, marketing agency founder, and community
+                builder, I help clients and investors successfully navigate the
+                competitive Okanagan market with a level of strategy you
+                won&apos;t find anywhere else.
               </p>
             </div>
           </AnimateIn>
         </div>
       </section>
 
-      {/* ───────── Journey Timeline (Aceternity scroll-animated) ───────── */}
+      {/* ───────── My Story Timeline ───────── */}
       <section className="bg-background-secondary py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <AnimateIn>
@@ -330,11 +424,11 @@ export default function AboutPageClient() {
                 From Kelowna, For Kelowna
               </p>
               <h2 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary md:text-5xl">
-                My Journey
+                My Story
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-text-secondary">
-                From growing up in the Okanagan to becoming one of Kelowna&apos;s
-                top-producing agents — here&apos;s the story so far.
+                From growing up in a family of real estate agents to building a
+                brand in Kelowna — here&apos;s the journey so far.
               </p>
             </div>
           </AnimateIn>
@@ -440,60 +534,6 @@ export default function AboutPageClient() {
         </div>
       </section>
 
-      {/* ───────── Ventures ───────── */}
-      <section className="bg-background py-16 md:py-28 lg:py-36">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <AnimateIn>
-            <div className="text-center">
-              <p className="text-xs font-medium tracking-[0.3em] text-accent uppercase">
-                The Ventures
-              </p>
-              <h2 className="mt-4 font-heading text-4xl font-light tracking-tight text-text-primary md:text-5xl">
-                What I&apos;m Working On
-              </h2>
-              <p className="mx-auto mt-6 max-w-xl text-text-secondary">
-                Three interconnected ventures, one mission — to build
-                something meaningful in the Okanagan.
-              </p>
-            </div>
-          </AnimateIn>
-
-          <div className="mt-16 grid gap-8 lg:grid-cols-3">
-            {ventures.map((venture, i) => (
-              <AnimateIn key={venture.title} delay={i * 0.12}>
-                <Link href={venture.href} className="group block h-full">
-                  <div className="flex h-full flex-col overflow-hidden border border-border bg-background-secondary transition-all duration-500 hover:border-warm/30">
-                    {/* Image Placeholder */}
-                    <div className="relative flex h-56 items-center justify-center bg-background">
-                      <span className="text-xs tracking-widest text-text-muted uppercase">
-                        Image Coming Soon
-                      </span>
-                      {/* Tag */}
-                      <div className="absolute top-4 left-4 border border-warm/30 bg-background/80 px-3 py-1 text-[10px] font-medium tracking-[0.2em] text-warm uppercase backdrop-blur-sm">
-                        {venture.tag}
-                      </div>
-                    </div>
-                    {/* Content */}
-                    <div className="flex flex-1 flex-col p-8">
-                      <h3 className="font-heading text-2xl font-medium text-text-primary">
-                        {venture.title}
-                      </h3>
-                      <p className="mt-4 flex-1 text-sm leading-relaxed text-text-secondary">
-                        {venture.description}
-                      </p>
-                      <div className="mt-8 inline-flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-warm uppercase">
-                        Learn More
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </AnimateIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ───────── Let's Connect CTA ───────── */}
       <section className="relative overflow-hidden bg-background-secondary py-16 md:py-28 lg:py-36">
         {/* Ambient warm glow */}
@@ -521,7 +561,7 @@ export default function AboutPageClient() {
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <a
-                href="mailto:karsen@karsenkoltun.com"
+                href="mailto:karsen@royallepage.ca"
                 className="group inline-flex items-center gap-3 border border-border px-10 py-4 text-xs font-medium tracking-[0.2em] text-text-primary uppercase transition-all duration-300 hover:border-warm hover:text-warm"
               >
                 <Mail className="h-3.5 w-3.5" />

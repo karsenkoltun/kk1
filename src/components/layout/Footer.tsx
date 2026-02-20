@@ -29,8 +29,7 @@ const serviceLinks = [
   { label: "List Your Home", href: "/sell" },
   { label: "Buy a Home", href: "/buy" },
   { label: "Home Valuation", href: "/home-value" },
-  { label: "Founders Club", href: "/about/founders-club" },
-  { label: "Marketing with KK", href: "/about/marketing" },
+  { label: "My Story", href: "/about" },
 ];
 
 const socialLinks = [

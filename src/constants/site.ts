@@ -25,8 +25,6 @@ export const NAV_LINKS: NavItem[] = [
     href: "/about",
     children: [
       { label: "My Story", href: "/about" },
-      { label: "Kelowna Founders Club", href: "/about/founders-club" },
-      { label: "Marketing with KK", href: "/about/marketing" },
     ],
   },
   { label: "Blog", href: "/blog" },
