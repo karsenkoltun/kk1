@@ -70,6 +70,7 @@ export default function JoinForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email address"
+        aria-label="Email address to join Founders Club"
         className="flex-1 border border-border bg-background-secondary px-5 py-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent sm:border-r-0"
         required
       />

@@ -103,6 +103,9 @@ export default function ChatWidget() {
 
             {/* Panel */}
             <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Chat with Karsen's Assistant"
               className={cn(
                 "fixed z-50 flex flex-col overflow-hidden",
                 "bg-background border-border border",

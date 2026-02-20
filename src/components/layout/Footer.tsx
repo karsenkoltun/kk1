@@ -58,10 +58,23 @@ export default function Footer() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleNewsletter = (e: React.FormEvent) => {
+  const handleNewsletter = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
-    // TODO: Connect to newsletter API (Mailchimp, ConvertKit, etc.)
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: email.split("@")[0],
+          email,
+          source: "Footer Newsletter",
+          tags: ["newsletter", "footer-signup"],
+        }),
+      });
+    } catch {
+      // Silently fail — still show success to user
+    }
     setSubmitted(true);
     setEmail("");
     setTimeout(() => setSubmitted(false), 4000);
@@ -90,6 +103,7 @@ export default function Footer() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
+              aria-label="Email address for newsletter"
               required
               className="flex-1 border border-border bg-background-secondary px-4 py-3 text-base text-text-primary placeholder:text-text-muted outline-none transition-colors duration-300 focus:border-accent sm:text-sm"
             />
@@ -188,18 +202,18 @@ export default function Footer() {
             </h3>
             <div className="mt-4 flex flex-col gap-4">
               <a
-                href="mailto:karsen@karsenkoltun.com"
+                href="mailto:karsen@royallepage.ca"
                 className="flex items-center gap-3 text-sm text-text-muted transition-colors hover:text-accent"
               >
                 <Mail className="h-4 w-4 shrink-0" />
-                karsen@karsenkoltun.com
+                karsen@royallepage.ca
               </a>
               <a
-                href="tel:+12501234567"
+                href="tel:+12504218260"
                 className="flex items-center gap-3 text-sm text-text-muted transition-colors hover:text-accent"
               >
                 <Phone className="h-4 w-4 shrink-0" />
-                (250) 123-4567
+                (250) 421-8260
               </a>
               <div className="flex items-center gap-3 text-sm text-text-muted">
                 <MapPin className="h-4 w-4 shrink-0" />

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle, Check, Lock, Star } from "lucide-react";
+import { CheckCircle, Check, Lock, Star, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimateIn from "@/components/ui/AnimateIn";
 import Honeypot from "@/components/forms/Honeypot";
@@ -203,12 +203,14 @@ export default function Newsletter() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Your Email Address"
+                        aria-label="Email address for market report"
                         className="w-full border border-border bg-background px-4 py-4 text-base text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-warm sm:w-auto sm:flex-1 sm:px-5 sm:py-3.5 sm:text-sm"
                         required
                       />
                       <select
                         value={interest}
                         onChange={(e) => setInterest(e.target.value)}
+                        aria-label="Buying or selling interest"
                         className="w-full border border-border bg-background px-4 py-4 text-base text-text-muted outline-none transition-colors focus:border-warm appearance-none cursor-pointer sm:w-48 sm:px-5 sm:py-3.5 sm:text-sm"
                       >
                         <option value="">Buying or Selling?</option>
@@ -230,7 +232,12 @@ export default function Newsletter() {
                         disabled={isSubmitting}
                         className="w-full whitespace-nowrap border border-warm bg-warm px-8 py-3.5 text-sm font-semibold tracking-wide text-background transition-all duration-300 hover:bg-warm-hover hover:shadow-[0_0_20px_rgba(232,213,163,0.2)] disabled:opacity-60 sm:w-auto"
                       >
-                        {isSubmitting ? "Sending..." : "Send Me the Report"}
+                        {isSubmitting ? (
+                          <span className="flex items-center gap-2">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            Sending...
+                          </span>
+                        ) : "Send Me the Report"}
                       </button>
                     </div>
                   </form>

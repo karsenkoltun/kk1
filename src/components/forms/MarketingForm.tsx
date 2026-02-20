@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import Honeypot from "@/components/forms/Honeypot";
 
@@ -93,6 +93,7 @@ export default function MarketingForm() {
           value={form.name}
           onChange={handleChange}
           placeholder="Your Name"
+          aria-label="Your name"
           className="border border-border bg-background-secondary px-5 py-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent"
           required
         />
@@ -102,6 +103,7 @@ export default function MarketingForm() {
           value={form.email}
           onChange={handleChange}
           placeholder="Email Address"
+          aria-label="Email address"
           className="border border-border bg-background-secondary px-5 py-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent"
           required
         />
@@ -112,6 +114,7 @@ export default function MarketingForm() {
         value={form.business}
         onChange={handleChange}
         placeholder="Business / Brand Name"
+        aria-label="Business or brand name"
         className="w-full border border-border bg-background-secondary px-5 py-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent"
       />
       <textarea
@@ -119,6 +122,7 @@ export default function MarketingForm() {
         value={form.message}
         onChange={handleChange}
         placeholder="Tell me about your project and goals..."
+        aria-label="Project details"
         rows={4}
         className="w-full border border-border bg-background-secondary px-5 py-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent resize-none"
       />
@@ -127,9 +131,16 @@ export default function MarketingForm() {
         disabled={submitting}
         className="group flex w-full items-center justify-center gap-3 border border-warm bg-warm px-8 py-4 text-xs font-medium tracking-[0.2em] text-background uppercase transition-all duration-300 hover:bg-warm-hover disabled:opacity-60"
       >
-        {submitting ? "Submitting..." : "Submit Application"}
-        {!submitting && (
-          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+        {submitting ? (
+          <>
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            Submitting...
+          </>
+        ) : (
+          <>
+            Submit Application
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+          </>
         )}
       </button>
     </form>
