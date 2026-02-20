@@ -63,7 +63,7 @@ const timelineData = [
         </p>
         <div className="grid grid-cols-2 gap-4">
           <TimelineImage
-            src="/images/about/karsen-portrait-blue.jpg"
+            src="/images/about/karsen-portrait-lights.jpg"
             alt="Karsen Koltun professional portrait"
             className="aspect-[3/4] sm:aspect-[3/4]"
           />
@@ -98,9 +98,9 @@ const timelineData = [
         </a>
         <div className="mt-4">
           <TimelineImage
-            src="/images/about/karsen-portrait-lights.jpg"
-            alt="Karsen Koltun at Royal LePage awards"
-            className="aspect-[3/4] max-w-xs"
+            src="/images/about/rookie-of-the-year.jpg"
+            alt="Karsen Koltun holding Royal LePage Rookie of the Year award"
+            className="aspect-[4/3] max-w-md"
           />
         </div>
       </div>
