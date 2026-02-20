@@ -20,13 +20,7 @@ export const NAV_LINKS: NavItem[] = [
   { label: "Search Listings", href: "/search" },
   { label: "List Your Home", href: "/sell" },
   { label: "Mortgage Calculator", href: "/calculator" },
-  {
-    label: "About Karsen",
-    href: "/about",
-    children: [
-      { label: "My Story", href: "/about" },
-    ],
-  },
+  { label: "About Karsen", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Get in Touch", href: "/contact", isButton: true },
 ];

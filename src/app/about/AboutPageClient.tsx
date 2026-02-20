@@ -53,10 +53,20 @@ const timelineData = [
     content: (
       <div>
         <p className="mb-4 font-heading text-xl font-medium text-text-primary md:text-2xl">
-          A Prominent Brand in Kelowna
+          Meet Karsen Koltun
+        </p>
+        <p className="mb-4 text-sm italic text-text-secondary md:text-base">
+          A blend of luxury real estate expertise &amp; entrepreneurial drive
+        </p>
+        <p className="mb-4 text-sm leading-relaxed text-text-secondary md:text-base">
+          I&apos;m Karsen Koltun, and I live and breathe Kelowna. As a
+          real estate agent, marketing agency founder, and community
+          builder, I help clients and investors successfully navigate the
+          competitive Okanagan market with a level of strategy you
+          won&apos;t find anywhere else.
         </p>
         <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
-          Grown my real estate brand to be a prominent name in Kelowna — known
+          Grown my real estate brand to be a prominent name in Kelowna, known
           for real estate and marketing. Combining strategic marketing expertise
           with deep local knowledge to deliver an experience that stands apart
           in the Okanagan market.
@@ -84,7 +94,7 @@ const timelineData = [
           Rookie of the Year
         </p>
         <p className="mb-4 text-sm leading-relaxed text-text-secondary md:text-base">
-          Won Rookie of the Year at Royal LePage Kelowna — a recognition of
+          Won Rookie of the Year at Royal LePage Kelowna. A recognition of
           the hustle, strategy, and results delivered since day one.
         </p>
         <a
@@ -114,7 +124,7 @@ const timelineData = [
           Founders Club Event 2
         </p>
         <p className="mb-4 text-sm leading-relaxed text-text-secondary md:text-base">
-          Hosted the second Kelowna Founders Club event — New Year 2026
+          Hosted the second Kelowna Founders Club event, the New Year 2026
           Kickoff. Continued building momentum for the entrepreneurial
           community in the Okanagan.
         </p>
@@ -130,7 +140,7 @@ const timelineData = [
         <div className="mt-4 grid grid-cols-2 gap-4">
           <TimelineImage
             src="/images/about/event2-crowd.jpg"
-            alt="Kelowna Founders Club Event 2 — audience"
+            alt="Kelowna Founders Club Event 2 audience"
             className="aspect-[4/3]"
           />
           <TimelineImage
@@ -150,7 +160,7 @@ const timelineData = [
           Founders Club Event 1
         </p>
         <p className="mb-4 text-sm leading-relaxed text-text-secondary md:text-base">
-          Launched the first ever Kelowna Founders Club event — a Halloween
+          Launched the first ever Kelowna Founders Club event, a Halloween
           2025 Mastermind. Brought together driven entrepreneurs for an evening
           of connection and collaboration.
         </p>
@@ -221,8 +231,8 @@ const timelineData = [
           Founded a Marketing Agency
         </p>
         <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
-          Launched a marketing agency working with over 30 companies — from
-          small startups to large corporations — scaling marketing initiatives
+          Launched a marketing agency working with over 30 companies, from
+          small startups to large corporations, scaling marketing initiatives
           and launching businesses to profitability through ads, social media,
           online presence, and other tactics. Grew the agency to a full-time
           team of 12.
@@ -240,7 +250,7 @@ const timelineData = [
         <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
           Became one of the youngest realtors in BC. After years of learning
           the industry from the inside, it was time to step into the role I
-          was built for — helping people buy and sell homes with a
+          was built for, helping people buy and sell homes with a
           marketing-first approach.
         </p>
       </div>
@@ -255,7 +265,7 @@ const timelineData = [
         </p>
         <p className="mb-8 text-sm leading-relaxed text-text-secondary md:text-base">
           Got hired at Royal LePage Kelowna as an administrative assistant.
-          Started learning the real estate business from the ground up —
+          Started learning the real estate business from the ground up,
           understanding the systems, the clients, and the strategies that make
           a brokerage run.
         </p>
@@ -273,7 +283,7 @@ const timelineData = [
           Grew up in a family of real estate agents and was molded by the
           knowledge and culture of my mom Petrina Owen, a prominent real
           estate agent in Lake Country. The Okanagan isn&apos;t just where I
-          work — it&apos;s home. That local knowledge and deep connection to
+          work. It&apos;s home. That local knowledge and deep connection to
           this community is what sets me apart.
         </p>
       </div>
@@ -392,29 +402,6 @@ export default function AboutPageClient() {
         </div>
       </section>
 
-      {/* ───────── Meet Karsen Koltun ───────── */}
-      <section className="bg-background py-16 md:py-28 lg:py-36">
-        <div className="mx-auto max-w-4xl px-6 text-center lg:px-10">
-          <AnimateIn>
-            <h2 className="font-heading text-4xl font-light tracking-tight text-text-primary md:text-5xl">
-              Meet Karsen Koltun
-            </h2>
-            <p className="mt-4 text-text-secondary italic">
-              A blend of luxury real estate expertise &amp; entrepreneurial drive
-            </p>
-            <div className="mx-auto mt-10 max-w-3xl space-y-6">
-              <p className="text-base leading-[1.9] text-text-secondary">
-                I&apos;m Karsen Koltun, and I live and breathe Kelowna. As a
-                real estate agent, marketing agency founder, and community
-                builder, I help clients and investors successfully navigate the
-                competitive Okanagan market with a level of strategy you
-                won&apos;t find anywhere else.
-              </p>
-            </div>
-          </AnimateIn>
-        </div>
-      </section>
-
       {/* ───────── My Story Timeline ───────── */}
       <section className="bg-background-secondary py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -428,7 +415,7 @@ export default function AboutPageClient() {
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-text-secondary">
                 From growing up in a family of real estate agents to building a
-                brand in Kelowna — here&apos;s the journey so far.
+                brand in Kelowna. Here&apos;s the journey so far.
               </p>
             </div>
           </AnimateIn>
@@ -474,19 +461,19 @@ export default function AboutPageClient() {
                 started the Kelowna Founders Club because I believe the
                 Okanagan is one of the most underrated ecosystems for ambitious
                 people. The club brings together entrepreneurs, creators, and
-                professionals who are building something meaningful — and who
+                professionals who are building something meaningful, and who
                 want to do it alongside others on the same path.
               </p>
               <p className="text-center text-lg leading-[1.9] text-text-secondary">
                 When I&apos;m not working, you&apos;ll find me exploring
-                everything the Okanagan has to offer — hiking the trails, out
+                everything the Okanagan has to offer: hiking the trails, out
                 on the lake, or checking out a new restaurant in town. I
                 believe in building a life you don&apos;t need a vacation from,
                 and Kelowna makes that easy.
               </p>
               <p className="text-center text-lg leading-[1.9] text-text-secondary">
-                Everything I build — in real estate, in marketing, in
-                community — comes back to the same idea: do it with intention,
+                Everything I build, in real estate, in marketing, in
+                community, comes back to the same idea: do it with intention,
                 do it at a high level, and make it mean something.
               </p>
             </div>
@@ -549,7 +536,7 @@ export default function AboutPageClient() {
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
               Whether you&apos;re looking to buy, sell, or just want to
-              connect — I&apos;m always happy to chat. Reach out and
+              connect, I&apos;m always happy to chat. Reach out and
               let&apos;s see how I can help.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
