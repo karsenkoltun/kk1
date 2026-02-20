@@ -34,7 +34,7 @@ const timelineData = [
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
-              className="flex h-20 items-center justify-center rounded-lg border border-warm/10 bg-background shadow-[0_0_24px_rgba(232,213,163,0.04)] md:h-44 lg:h-60"
+              className="flex h-28 items-center justify-center rounded-lg border border-warm/10 bg-background shadow-[0_0_24px_rgba(232,213,163,0.04)] sm:h-36 md:h-44 lg:h-60"
             >
               <span className="text-[10px] tracking-widest text-text-muted/40 uppercase">
                 Photo {i}
@@ -65,7 +65,7 @@ const timelineData = [
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
-              className="flex h-20 items-center justify-center rounded-lg border border-accent/10 bg-background shadow-[0_0_24px_rgba(126,200,227,0.04)] md:h-44 lg:h-60"
+              className="flex h-28 items-center justify-center rounded-lg border border-accent/10 bg-background shadow-[0_0_24px_rgba(126,200,227,0.04)] sm:h-36 md:h-44 lg:h-60"
             >
               <span className="text-[10px] tracking-widest text-text-muted/40 uppercase">
                 Photo {i}
@@ -122,7 +122,7 @@ const timelineData = [
           {[1, 2].map((i) => (
             <div
               key={i}
-              className="flex h-20 items-center justify-center rounded-lg border border-warm/10 bg-background shadow-[0_0_24px_rgba(232,213,163,0.04)] md:h-44 lg:h-60"
+              className="flex h-28 items-center justify-center rounded-lg border border-warm/10 bg-background shadow-[0_0_24px_rgba(232,213,163,0.04)] sm:h-36 md:h-44 lg:h-60"
             >
               <span className="text-[10px] tracking-widest text-text-muted/40 uppercase">
                 Photo {i}

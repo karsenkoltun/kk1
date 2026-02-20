@@ -506,8 +506,8 @@ export default function Hero() {
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  "group relative flex items-center gap-2 rounded-full px-4 py-2.5 text-[11px] font-medium tracking-[0.12em] uppercase transition-all duration-300",
-                  "sm:px-6 sm:py-3 sm:text-xs sm:tracking-[0.15em]",
+                  "group relative flex items-center gap-1.5 rounded-full px-3 py-3 text-[10px] font-medium tracking-[0.1em] uppercase transition-all duration-300",
+                  "sm:gap-2 sm:px-6 sm:py-3 sm:text-xs sm:tracking-[0.15em]",
                   isActive
                     ? "border border-warm/40 bg-warm/10 text-warm shadow-[0_0_20px_rgba(232,213,163,0.08)]"
                     : "border border-border/60 bg-transparent text-text-muted hover:border-text-muted/40 hover:text-text-secondary"

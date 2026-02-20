@@ -260,7 +260,7 @@ export default function BuyPageClient() {
             <h1 className="font-heading text-4xl font-light leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               Buy a Home
             </h1>
-            <div className="relative mt-2 h-[45px] overflow-hidden sm:mt-3 sm:h-[55px] md:h-[70px] lg:h-[85px]">
+            <div className="relative mt-2 h-[50px] overflow-hidden sm:mt-3 sm:h-[55px] md:h-[70px] lg:h-[85px]">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={rotatingPhrases[phraseIndex]}

@@ -240,7 +240,7 @@ export default function ContactPageClient() {
 
   const getFieldClass = (name: string) =>
     cn(
-      "w-full border bg-background-secondary px-4 py-4 text-base text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 sm:px-5 sm:text-sm",
+      "w-full border bg-background-secondary px-4 py-3 text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 sm:px-5 sm:py-4 sm:text-sm",
       fields[name].touched && fields[name].error
         ? "border-error focus:border-error"
         : fields[name].touched && !fields[name].error && fields[name].value

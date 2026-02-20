@@ -125,7 +125,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={closeMenu}
                 className={cn(
-                  "block py-2 font-heading text-2xl font-light tracking-wider transition-colors",
+                  "block py-2 font-heading text-xl font-light tracking-wider transition-colors sm:text-2xl",
                   isLinkActive(link.href)
                     ? "text-warm"
                     : "text-text-primary hover:text-warm"
